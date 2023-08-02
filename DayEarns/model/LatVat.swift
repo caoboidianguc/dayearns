@@ -47,3 +47,4 @@ enum QuaTuan: String, CaseIterable, Identifiable {
     var id: String {self.rawValue}
     var name: String {self.rawValue}
 }
+

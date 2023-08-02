@@ -39,11 +39,16 @@ struct ClientDetail: View {
                     } else {
                         Link(destination: URL(string: "tel:\(khach.sdt)")!, label: {Text(khach.sdt)})
                     }
-                    
                 }
+                
+                if let email = khach.email {
+                    Link(destination: URL(string: "mailto:\(email)")!, label: {Text(email)})
+                }
+                
                 HStack{
                     DanhGiaView(danhGia: $khach.danhGia)
                 }
+                
                 
             }.padding(8)
             Section(header: Text("Service:")) {
@@ -114,3 +119,4 @@ struct ClientDetail: View {
 //        }
 //    }
 //}
+

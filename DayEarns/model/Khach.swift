@@ -23,6 +23,7 @@ struct Khach: Codable, Identifiable, Equatable {
     var dvDone: [Service] = []
     var ngay: Date
     var danhGia: Int
+    var email: String?
     
     init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0){
         self.id = id
@@ -81,10 +82,15 @@ extension Khach {
         var dvDone: [Service] = []
         var diem: Int = 1
         var ngay: Date = Date()
+        var email: String = ""
     }
     //mau: ThemKhach la de khi update custommer, load this
     var mau: ThemKhach {
-        return ThemKhach(name: name, sdt: sdt, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
+        var khach = ThemKhach(name: name, sdt: sdt, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
+        if let mail = email {
+            khach.email = mail
+        }
+        return khach
         
     }
     
@@ -97,14 +103,11 @@ extension Khach {
         dvDone = data.dvDone
         diem = data.diem
         ngay = data.ngay
+        email = data.email
     }
     mutating func updateDiem(tu data: ThemKhach){
-        name = data.name
-        sdt = data.sdt
-        desc = data.desc
-        dvDone = data.dvDone
+        update(tu: data)
         diem = data.diem + 1
-        ngay = data.ngay
     }
     
   
