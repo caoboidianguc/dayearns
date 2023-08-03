@@ -16,6 +16,8 @@ struct ClientDetail: View {
     @State private var updatesdt = false
     @State private var sdt = ""
     @State private var hinhTrong = false
+    @State private var updateEmail = false
+    @State private var email = ""
     
     var body: some View {
         List {
@@ -47,6 +49,16 @@ struct ClientDetail: View {
                 
                 HStack{
                     DanhGiaView(danhGia: $khach.danhGia)
+                    Spacer()
+                    Button(action: {updateEmail = true} , label: {
+                        Label("Email", systemImage: "mail.fill")
+                            .alert("\(khach.name)'s Email", isPresented: $updateEmail, actions: {
+                            TextField("Email", text: $email)
+                                .keyboardType(.emailAddress)
+                                Button("Dismiss", role: .cancel){updateEmail = false}
+                            Button("Done"){khach.email = email}
+                        })
+                    })
                 }
                 
                 

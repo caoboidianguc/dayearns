@@ -66,7 +66,7 @@ struct ClientList: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             trangMoi = false
                         }, trailing: Button("Add"){
-                            var newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone)
+                            let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone)
                             if worker.clientExisted(newClient) {
                                 warning = "Client existed!"
                                 existed = true

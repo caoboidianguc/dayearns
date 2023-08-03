@@ -86,12 +86,7 @@ extension Khach {
     }
     //mau: ThemKhach la de khi update custommer, load this
     var mau: ThemKhach {
-        var khach = ThemKhach(name: name, sdt: sdt, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
-        if let mail = email {
-            khach.email = mail
-        }
-        return khach
-        
+        return ThemKhach(name: name, sdt: sdt, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
     }
     
     static var dvmau = [Service(dichVu: "Full set", gia: 60)]

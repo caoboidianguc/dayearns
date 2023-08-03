@@ -18,8 +18,6 @@ struct ClientEdit: View {
             VStack {
                 TextField("Name:", text: $client.name).textInputAutocapitalization(.words)
                 TextField("Phone Option", text: $client.sdt).keyboardType(.numberPad)
-                TextField("Email?", text: $client.email)
-                    .keyboardType(.emailAddress)
 //                TextField("Note :", text: $client.desc)
                 Label("Notes", systemImage: "hand.point.down")
                 TextEditor(text: $client.desc)
