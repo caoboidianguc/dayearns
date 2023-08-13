@@ -70,6 +70,7 @@ struct Khach: Codable, Identifiable, Equatable {
     var nam: Bool {
         !schedule && ngay.nam < Date.now
     }
+    
 }
 
 let khachmau = [Khach(name: "Jubi", sdt: "8775", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21))]
@@ -82,7 +83,6 @@ extension Khach {
         var dvDone: [Service] = []
         var diem: Int = 1
         var ngay: Date = Date()
-        var email: String = ""
     }
     //mau: ThemKhach la de khi update custommer, load this
     var mau: ThemKhach {
@@ -98,7 +98,6 @@ extension Khach {
         dvDone = data.dvDone
         diem = data.diem
         ngay = data.ngay
-        email = data.email
     }
     mutating func updateDiem(tu data: ThemKhach){
         update(tu: data)

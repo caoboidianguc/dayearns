@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct WeekEarn: Codable, Identifiable {
     var id: UUID
     var tuan: String
@@ -18,3 +19,4 @@ struct WeekEarn: Codable, Identifiable {
     }
     
 }
+

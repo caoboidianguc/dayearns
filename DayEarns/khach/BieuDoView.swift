@@ -80,7 +80,7 @@ struct BieuDoChung: View {
     @Binding var worker: Technician
     
     var body: some View {
-        VStack {
+        ScrollView {
             BieuDoThang(worker: $worker)
                 .frame(height: 300)
             BieuDoNam(worker: $worker)

@@ -14,7 +14,7 @@ struct ScheduleView: View {
     @State private var daCo = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(QuaTuan.allCases){ quatuan in
                     if !worker.tuan(quaTuan: quatuan).isEmpty {
@@ -30,12 +30,9 @@ struct ScheduleView: View {
             }
             
             .listStyle(.plain)
-            .navigationTitle("Schedule")
+            .navigationTitle(tuaDe())
                 .navigationBarItems(trailing:
-                    Button("Add"){
-                        addClient = true
-                    }
-                )
+                    Button("Add"){ addClient = true })
                 .sheet(isPresented: $addClient){
                     NavigationView {
                         ChonNgay(client: $khachHen)
@@ -43,13 +40,8 @@ struct ScheduleView: View {
                             .navigationBarItems(leading: Button("Cancel") {
                                 addClient = false
                             }, trailing: Button("Add"){
-                                let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay)
-                                if worker.clientExisted(newApp) {
-                                    daCo = true
-                                } else {
-                                    worker.khach.append(newApp)
-                                    addClient = false }
-                            })
+                                layHen()
+                            }.disabled(khachHen.ngay < Date.now))
                             .onAppear {
                                 khachHen.dvDone.removeAll()
                                 khachHen.name.removeAll()
@@ -61,10 +53,29 @@ struct ScheduleView: View {
         }//navi
         
     }
+    private func tuaDe() -> String {
+        var tua = ""
+        let khach = worker.khach.filter {$0.haiNgay}.count
+        if khach == 0 {
+            tua = "No Schedules"
+        } else {
+            tua = "\(khach) UpComming"
+        }
+        return tua
+    }
     private func binding(for khachIndex: Khach) -> Binding<Khach> {
         guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
         return $worker.khach[clientIndex]
     }
+    private func layHen(){
+        let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay)
+        if worker.clientExisted(newApp) {
+            daCo = true
+        } else {
+            worker.khach.append(newApp)
+            addClient = false }
+    }
+    
 }
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {

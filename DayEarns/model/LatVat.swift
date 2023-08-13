@@ -48,3 +48,14 @@ enum QuaTuan: String, CaseIterable, Identifiable {
     var name: String {self.rawValue}
 }
 
+extension Khach {
+    func layTen() -> String {
+        var tendau = name
+        if let doanCuoi = name.firstIndex(of: " "){
+            let dau = name[...doanCuoi]
+            tendau = String(dau)
+            return tendau
+        } else {
+            return tendau}
+    }
+}

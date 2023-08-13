@@ -18,6 +18,9 @@ struct DayEarnsApp: App {
                 .onAppear {
                     ledger.load()
                 }
+                .refreshable {
+                    ledger.load()
+                }
         }
     }
 }

@@ -11,11 +11,9 @@ struct XapSep: View {
     @Binding var worker: Technician
     @State private var khong: Bool = false
     @State private var resetWarning = false
-    @State private var anNut = "an"
     @State private var hienProfile = false
-    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section(content: {
                     HStack {
@@ -47,14 +45,12 @@ struct XapSep: View {
                         Label("\(worker.tongNgay())", systemImage: "dollarsign")
                         Spacer()
                         Button(action: {
-                            let newWeek = WeekEarn(tuan: "\(Date.now.formatted(.dateTime.month().day().weekday(.wide)))", earn: worker.tongNgay())
-                            worker.weekEarn.insert(newWeek, at: 0)
-                            khong = true
-                            anNut = ""
-                        }, label:{Image(systemName: "tray.and.arrow.down")})
-                        .disabled(anNut.isEmpty)
+                            luuNgayLam()
+                        }, label:{
+                            Image(systemName: "tray.and.arrow.down")
+                                .opacity(khong ? 0 : 1)
+                        })
                     }
-                    .foregroundColor(anNut.isEmpty ? .gray : .green)
                     .alert("Today have saved", isPresented: $khong, actions: {})
                 }
                 
@@ -72,19 +68,18 @@ struct XapSep: View {
                 
             }//list
             .navigationTitle("Summary!")
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarTrailing){
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading){
                     Button("Reset"){
                         resetWarning = true
-                        anNut = "an"
                     }
                 }
-                ToolbarItem(placement: .topBarLeading){
-                    Button("Profile", systemImage: "person.crop.rectangle.fill", action: {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
                         hienProfile = true
-                    })
+                    }, label: {Image(systemName: "person.crop.rectangle.fill")})
                 }
-            })
+            }
             .confirmationDialog("Delete", isPresented: $resetWarning) {
                 Button("Erase All Days Saved!", role: .destructive){ worker.weekEarn.removeAll()}
                 Button("Cancel", role: .cancel){ resetWarning = false }}
@@ -94,14 +89,18 @@ struct XapSep: View {
                         .navigationTitle("Info")
                 }
             }
-            
+
         }
     }//body
     private func binding(for khachIndex: Khach) -> Binding<Khach> {
         guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
         return $worker.khach[clientIndex]
     }
-    
+    private func luuNgayLam() {
+        let newWeek = WeekEarn(tuan: "\(Date.now.formatted(.dateTime.month().day().weekday(.wide)))", earn: worker.tongNgay())
+        worker.weekEarn.insert(newWeek, at: 0)
+        khong = true
+    }
 }
 
 //struct XapSep_Previews: PreviewProvider {

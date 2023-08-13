@@ -1,10 +1,7 @@
-//
 //  ClientList.swift
 //  DayEarns
 //
 //  Created by Jubi on 8/1/23.
-//
-
 import SwiftUI
 
 struct ClientList: View {
@@ -13,21 +10,15 @@ struct ClientList: View {
     @State private var trangMoi = false
     @State private var existed = false
     @State private var warning = ""
-    var khachList: [Khach] {
-        worker.khach
-            .filter{$0.trongTuan}
-            .sorted(by: {$0.ngay > $1.ngay})
-    }
     @State private var text = ""
-//    @State private var listTim: [Khach] = []
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach(text == "" ? khachList : worker.listDaTim(ten: text)) { khach in
+                ForEach(text == "" ? worker.motTuan : worker.listDaTim(ten: text)) { khach in
                     if !khach.schedule {
                         NavigationLink(destination: ClientDetail(worker: $worker, khach: binding(for: khach))){
-                            KhachRow(khach: khach)
-                        }
+                            KhachRow(khach: khach) }
                         .swipeActions {
                             Button(role: .destructive, action: {
                                 worker.delete(khach)
@@ -35,11 +26,9 @@ struct ClientList: View {
                                 Label("Xoa", systemImage: "trash")
                             })
                         }
-
                     }
                 }
-                
-                
+                .listRowSeparator(.hidden)
             }//list
             .overlay {
                 if worker.khach.isEmpty {
@@ -53,9 +42,9 @@ struct ClientList: View {
                 }
             }
             .listStyle(.plain)
-            .searchable(text: $text, placement: .automatic, prompt: "Name in \(khachList.count)")
+            .searchable(text: $text, placement: .automatic, prompt: "Name in \(worker.motTuan.count)")
           
-            .navigationTitle("Clients")
+            .navigationTitle(title.formatted(.dateTime.day().weekday()))
             
             .navigationBarItems(trailing: Button(action: {trangMoi = true },
                                                  label: {Image(systemName: "person.badge.plus")}))
@@ -66,30 +55,41 @@ struct ClientList: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             trangMoi = false
                         }, trailing: Button("Add"){
-                            let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone)
-                            if worker.clientExisted(newClient) {
-                                warning = "Client existed!"
-                                existed = true
-                            } else {
-                                worker.khach.insert(newClient, at: 0)
-                                trangMoi = false}
-                            }.disabled(newCus.name.isEmpty)
-                        )
-                        
-                        
+                            themKhach()
+                            }.disabled(newCus.name.isEmpty))
                         .onAppear{
                             newCus.name.removeAll()
                             newCus.sdt.removeAll()
                             newCus.desc.removeAll()
                         }
                 }
-        }
+            }
+            
         }
         
     }//body
+    var title: Date {
+        get {
+            return Date.now
+        }
+        set (newValue){
+            if newValue < Date.now {
+                self.title = newValue
+            }
+        }
+    }
     private func binding(for khachIndex: Khach) -> Binding<Khach> {
         guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
         return $worker.khach[clientIndex]
+    }
+    private func themKhach() {
+        let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone)
+        if worker.clientExisted(newClient) {
+            warning = "Client existed!"
+            existed = true
+        } else {
+            worker.khach.insert(newClient, at: 0)
+            trangMoi = false}
     }
 }
 

@@ -75,7 +75,7 @@ extension Technician {
 
 extension Technician {
     var motTuan: [Khach] {
-        self.khach.filter {$0.trongTuan}
+        self.khach.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
     }
     var thangTech: [Khach] {
         self.khach.filter {$0.thang}
@@ -83,4 +83,6 @@ extension Technician {
     var namTech: [Khach] {
         self.khach.filter {$0.nam}
     }
+    
 }
+

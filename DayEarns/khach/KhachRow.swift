@@ -38,14 +38,14 @@ struct KhachRow: View {
                     Text(khach.sdt)
                 }
                 
-                Text(khach.honTuan ? khach.ngay.formatted(.dateTime.month().day().weekday(.wide)) : khach.ngay.formatted(.dateTime.day().weekday(.wide)))
-                    .font(khach.schedule ? .title3 : .footnote)
+                Text(khach.today ? khach.ngay.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute()) : khach.ngay.formatted(.dateTime.day().weekday(.wide)))
+                    .font(khach.schedule ? .title2 : .footnote)
                     .foregroundColor(khach.schedule ? .purple : .secondary)
             }
         }.foregroundColor(khach.today ? mauChon.randomElement() : .gray)
            
     }
-   
+    
 }
 
 struct KhachRow_Previews: PreviewProvider {

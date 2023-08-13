@@ -13,7 +13,7 @@ struct ServiceView: View {
     @State private var nutThem = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(worker.services) { dv in
                     HStack {
@@ -30,9 +30,7 @@ struct ServiceView: View {
                 HStack {
                     NewService(newSer: $themdv)
                     Button("Add", action: {
-                        let newSer = Service(dichVu: themdv.dichVu, gia: themdv.gia)
-                        worker.services.append(newSer)
-                        themdv.dichVu.removeAll()
+                        themService()
                     }).disabled(themdv.dichVu.isEmpty)
                 }
                 .onSubmit() {
@@ -60,6 +58,11 @@ struct ServiceView: View {
         withAnimation(.default){
             worker.services.move(fromOffsets: from, toOffset: to)
         }
+    }
+    private func themService() {
+        let newSer = Service(dichVu: themdv.dichVu, gia: themdv.gia)
+        worker.services.append(newSer)
+        themdv.dichVu.removeAll()
     }
 }
 

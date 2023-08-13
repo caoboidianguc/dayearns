@@ -24,7 +24,7 @@ class KhachData: ObservableObject {
     
     @Published var worker: Technician = Technician(name: "", phone: "")
     
-    func load(){
+    func load() {
         DispatchQueue.global(qos: .background).async {
             [weak self] in
             guard let data = try? Data(contentsOf: Self.fileURL) else {

@@ -51,7 +51,7 @@ struct ClientDetail: View {
                     DanhGiaView(danhGia: $khach.danhGia)
                     Spacer()
                     Button(action: {updateEmail = true} , label: {
-                        Label("Email", systemImage: "mail.fill")
+                        Label("", systemImage: "mail.fill")
                             .alert("\(khach.name)'s Email", isPresented: $updateEmail, actions: {
                             TextField("Email", text: $email)
                                 .keyboardType(.emailAddress)
@@ -99,7 +99,7 @@ struct ClientDetail: View {
                 EmptyView()
             }
         }
-        .navigationTitle(Text("\(khach.name) visited"))
+        .navigationTitle(Text("\(khach.layTen()) visited"))
             .navigationBarItems(trailing: Button("Edit"){
                 suadoi = true
                 updateKhach = khach.mau
@@ -110,18 +110,19 @@ struct ClientDetail: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             suadoi = false
                         }, trailing: Button("Update"){
-                            if khach.dvDone.isEmpty {
-                                khach.update(tu: updateKhach)
-                            } else {
-                                khach.updateDiem(tu: updateKhach)
-                            }
-                            
-                            suadoi = false
+                            suaDoi()
                         })
                 }
             }
     }//body
-    
+    private func suaDoi(){
+        if khach.dvDone.isEmpty {
+            khach.update(tu: updateKhach)
+        } else {
+            khach.updateDiem(tu: updateKhach)
+        }
+        suadoi = false
+    }
 }
 
 //struct ClientDetail_Previews: PreviewProvider {
