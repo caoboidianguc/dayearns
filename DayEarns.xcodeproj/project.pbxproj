@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B5F2D0A2A8864C2006E4876 /* DayEarns.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DayEarns.entitlements; sourceTree = "<group>"; };
 		8BE96A672A79FE7400CAEDBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BFAAF5C2A79F38100B14AB5 /* DayEarns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayEarns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEarnsApp.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		8BFAAF5E2A79F38100B14AB5 /* DayEarns */ = {
 			isa = PBXGroup;
 			children = (
+				8B5F2D0A2A8864C2006E4876 /* DayEarns.entitlements */,
 				8BE96A672A79FE7400CAEDBC /* Info.plist */,
 				8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */,
 				8BFAAF6F2A79F5A800B14AB5 /* view */,
@@ -385,6 +387,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
@@ -403,7 +406,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -422,6 +425,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
@@ -440,7 +444,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
