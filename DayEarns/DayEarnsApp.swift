@@ -13,13 +13,33 @@ struct DayEarnsApp: App {
     var body: some Scene {
         WindowGroup {
                 ContentView(worker: $ledger.worker) {
-                    ledger.save()
-                }.environmentObject(ledger)
-                .onAppear {
-                    ledger.load()
+                    Task {
+                        do{
+                            try await ledger.save(tech: ledger.worker)
+                        } catch {
+                            fatalError("Can't save")
+                        }
+                    }
                 }
+                .environmentObject(ledger)
+                .onAppear {
+                    Task {
+                        do{
+                            try await ledger.load()
+                        } catch {
+                            fatalError("Can't load")
+                        }
+                    }
+                }
+            
                 .refreshable {
-                    ledger.load()
+                    Task {
+                        do{
+                            try await ledger.load()
+                        } catch {
+                            fatalError("Can't load")
+                        }
+                    }
                 }
         }
     }

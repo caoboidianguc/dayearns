@@ -68,7 +68,7 @@ struct ScheduleView: View {
         return $worker.khach[clientIndex]
     }
     private func layHen(){
-        let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay)
+        let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
         if worker.clientExisted(newApp) {
             daCo = true
         } else {

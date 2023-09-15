@@ -9,7 +9,6 @@ import SwiftUI
 
 struct KhachRow: View {
     var khach: Khach
-    
     var mauChon: [Color] = [
         .green,.purple,.accentColor,.blue,.brown,.cyan,.indigo,.mint,.orange,.pink,.red,.teal,.yellow]
 //    var mauNgau: Color {
@@ -37,8 +36,7 @@ struct KhachRow: View {
                     Spacer()
                     Text(khach.sdt)
                 }
-                
-                Text(khach.today ? khach.ngay.formatted(.dateTime.hour(.twoDigits(amPM: .abbreviated)).minute()) : khach.ngay.formatted(.dateTime.day().weekday(.wide)))
+                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
                     .font(khach.schedule ? .title2 : .footnote)
                     .foregroundColor(khach.schedule ? .purple : .secondary)
             }

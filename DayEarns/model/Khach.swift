@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct Khach: Codable, Identifiable, Equatable {
-    static func == (lhs: Khach, rhs: Khach) -> Bool {
+struct Khach: Codable, Identifiable, Equatable, Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(sdt)
+    }
+     static func == (lhs: Khach, rhs: Khach) -> Bool {
         if lhs.name == rhs.name && lhs.sdt == rhs.sdt {
             return true
         }
@@ -19,13 +23,15 @@ struct Khach: Codable, Identifiable, Equatable {
     var name: String
     var sdt: String
     var desc: String
-    var diem: Int = 1
+    var diem: Int  = 0
     var dvDone: [Service] = []
     var ngay: Date
     var danhGia: Int
-    var email: String?
+    var email: String = ""
+    var firstCome: Date
+    var isNew: Bool = true
     
-    init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0){
+    init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0, diem: Int, firstCome: Date = .now){
         self.id = id
         self.name = name
         self.sdt = sdt
@@ -33,6 +39,8 @@ struct Khach: Codable, Identifiable, Equatable {
         self.dvDone = dvDone
         self.ngay = ngay
         self.danhGia = danhGia
+        self.diem = diem
+        self.firstCome = firstCome
     }
     
     func khachTra() -> Int {
@@ -60,29 +68,35 @@ struct Khach: Codable, Identifiable, Equatable {
     var honTuan: Bool {
         ngay.qua7Ngay < Date.now
     }
-    
     var trongTuan: Bool {
         !honTuan && !schedule
     }
-    var thang: Bool {
-        !schedule && ngay.thang < Date.now
-    }
-    var nam: Bool {
-        !schedule && ngay.nam < Date.now
-    }
+//    var thang: Bool {
+//        !schedule && ngay.thang < Date.now
+//    }
+//    var nam: Bool {
+//        !schedule && ngay.nam < Date.now
+//    }
     
 }
 
-let khachmau = [Khach(name: "Jubi", sdt: "8775", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21))]
+let khachmau = [Khach(name: "Jubi", sdt: "8775", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21), diem: 42)]
 
 extension Khach {
     struct ThemKhach {
         var name: String = ""
         var sdt: String = ""
-        var desc: String = "Take note here\n \n"
+        var desc: String = ""
         var dvDone: [Service] = []
-        var diem: Int = 1
+        var diem: Int = 0
         var ngay: Date = Date()
+        func pointsKhach() -> Int {
+            var tongChi = 0
+            for dvu in self.dvDone {
+                tongChi += dvu.gia
+            }
+            return tongChi
+        }
     }
     //mau: ThemKhach la de khi update custommer, load this
     var mau: ThemKhach {
@@ -96,13 +110,9 @@ extension Khach {
         sdt = data.sdt
         desc = data.desc
         dvDone = data.dvDone
-        diem = data.diem
+        diem = data.diem + self.khachTra()
         ngay = data.ngay
+        isNew = false
     }
-    mutating func updateDiem(tu data: ThemKhach){
-        update(tu: data)
-        diem = data.diem + 1
-    }
-    
   
 }

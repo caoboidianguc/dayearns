@@ -15,7 +15,7 @@ struct ClientList: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(text == "" ? worker.motTuan : worker.listDaTim(ten: text)) { khach in
+                ForEach(text == "" ? worker.tuan : worker.listDaTim(ten: text)) { khach in
                     if !khach.schedule {
                         NavigationLink(destination: ClientDetail(worker: $worker, khach: binding(for: khach))){
                             KhachRow(khach: khach) }
@@ -42,7 +42,7 @@ struct ClientList: View {
                 }
             }
             .listStyle(.plain)
-            .searchable(text: $text, placement: .automatic, prompt: "Name in \(worker.motTuan.count)")
+            .searchable(text: $text, placement: .automatic, prompt: "Name or Phone")
           
             .navigationTitle(title.formatted(.dateTime.day().weekday()))
             
@@ -83,7 +83,7 @@ struct ClientList: View {
         return $worker.khach[clientIndex]
     }
     private func themKhach() {
-        let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone)
+        let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
         if worker.clientExisted(newClient) {
             warning = "Client existed!"
             existed = true

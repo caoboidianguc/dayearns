@@ -15,7 +15,7 @@ struct BieuDoView: View {
     var body: some View {
         Chart {
             ForEach(worker.motTuan){ kha in
-                BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.khachTra()))
+                BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.earn))
                     .foregroundStyle(.yellow)
                     .cornerRadius(3)
             }
@@ -34,13 +34,13 @@ struct BieuDoThang: View {
         VStack {
             Chart {
                 ForEach(worker.thangTech){
-                    BarMark(x: .value("Day", $0.ngay, unit: .weekOfMonth), y: .value("Thu", $0.khachTra()))
+                    BarMark(x: .value("Day", $0.ngay, unit: .weekOfMonth), y: .value("Thu", $0.earn))
                         .foregroundStyle(.yellow)
                 }
             }
             .chartXAxis(.visible)
             .chartYAxis(.automatic)
-            Label("Week Earns", systemImage: "chart.line.uptrend.xyaxis")
+            Label("Weekly Earns", systemImage: "chart.line.uptrend.xyaxis")
                 .font(.title)
         }.overlay {
             if worker.thangTech.isEmpty {
@@ -58,13 +58,13 @@ struct BieuDoNam: View {
         VStack {
             Chart {
                 ForEach(worker.namTech){
-                    BarMark(x: .value("Ngay", $0.ngay, unit: .month), y: .value("Thu", $0.khachTra()))
+                    BarMark(x: .value("Ngay", $0.ngay, unit: .month), y: .value("Thu", $0.earn))
                         .foregroundStyle(.yellow)
                 }
             }
             .chartXAxis(.visible)
             .chartYAxis(.automatic)
-            Label("Month Earns", systemImage: "chart.pie.fill")
+            Label("Monthly Earns", systemImage: "chart.pie.fill")
                 .font(.title)
                 
         }.overlay {

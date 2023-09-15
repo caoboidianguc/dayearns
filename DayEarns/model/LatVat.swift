@@ -4,9 +4,8 @@
 //
 //  Created by Jubi on 8/1/23.
 //
-
 import Foundation
-
+import SwiftUI
 
 enum Chon {
     case schedule
@@ -18,6 +17,9 @@ enum Chon {
 extension Date {
     var quaNgay: Date {
         Calendar.autoupdatingCurrent.date(byAdding: .day, value: 2, to: self) ?? self
+    }
+    var qua3Ngay: Date {
+        Calendar.autoupdatingCurrent.date(byAdding: .day, value: -3, to: self) ?? self
     }
     var qua7Ngay: Date {
         Calendar.autoupdatingCurrent.date(byAdding: .day, value: 7, to: self) ?? self
@@ -58,4 +60,21 @@ extension Khach {
         } else {
             return tendau}
     }
+    
+      mutating func redeemPoints(points: Int) throws {
+          guard diem >= points else {
+              throw BiLoi.khongDuDiem
+          }
+          diem = diem - points
+      }
+}
+
+enum BiLoi: Error {
+    case khongDuDiem
+}
+
+enum NhapThongTin: Hashable {
+    case name
+    case phone
+    case note
 }

@@ -5,60 +5,42 @@
 //  Created by Jubi on 8/1/23.
 //
 
-import Foundation
+//import Foundation
 import SwiftUI
 
-
+@MainActor
 class KhachData: ObservableObject {
-    private static var documentFolder: URL {
-        do {
-            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        } catch {
-            fatalError("khong thay duong dan thu muc.")
-        }
-    }
     
-    private static var fileURL: URL {
-        return documentFolder.appendingPathComponent("khach.data")
+    private static func fileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask,
+                                    appropriateFor: nil,
+                                    create: false)
+        .appendingPathComponent("khach.data")
     }
-    
+        
     @Published var worker: Technician = Technician(name: "", phone: "")
     
-    func load() {
-        DispatchQueue.global(qos: .background).async {
-            [weak self] in
-            guard let data = try? Data(contentsOf: Self.fileURL) else {
-                #if DEBUG
-                DispatchQueue.main.async {
-                    self?.worker = quang
-                }
-                #endif
-                return
-            }
-            guard let nguoiMoi = try? JSONDecoder().decode(Technician.self, from: data) else {
-                fatalError("khong the decode")
-            }
-            DispatchQueue.main.async {
-                self?.worker = nguoiMoi
-            }
+    func load() async throws {
+        let task = Task<Technician, Error>{
+            let fileURL = try Self.fileURL()
+            guard let data = try? Data(contentsOf: fileURL) else { return worker}
+            let newTech = try JSONDecoder().decode(Technician.self, from: data)
+            return newTech
         }
+        let tech = try await task.value
+        self.worker = tech
     }
     
-    func save() {
-        DispatchQueue.global(qos: .background).async {
-            [weak self] in
-            guard let ngaycong = self?.worker else {fatalError("khong the luu")}
-            guard let data = try? JSONEncoder().encode(ngaycong) else {fatalError("khong the encode")}
-            
-            do {
-                let outfile = Self.fileURL
-                try data.write(to: outfile)
-            } catch {
-                fatalError("khong the ghi vao tap tin")
-            }
-        }
-    }
     
+    func save(tech: Technician) async throws {
+        let task = Task {
+            let data = try JSONEncoder().encode(tech)
+            let outfile = try Self.fileURL()
+            try data.write(to: outfile)
+        }
+        _ = try await task.value
+    }
     func delete(_ client: Khach){
         worker.khach.removeAll(where: { $0.id == client.id})
     }

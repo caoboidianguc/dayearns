@@ -13,6 +13,7 @@ struct AddTech: View {
     @State private var phone = ""
     @State private var email = ""
     @Binding var tech: Technician
+    @FocusState private var focusNhap: NhapThongTin?
     
     var body: some View {
         NavigationView {
@@ -22,6 +23,7 @@ struct AddTech: View {
                 Form(content: {
                     TextField("Your Name", text: $ten)
                         .textInputAutocapitalization(.words)
+                        .focused($focusNhap, equals: .name)
                     TextField("Phone", text: $phone)
                         .keyboardType(.phonePad)
                     TextField("someOne @vidu.com", text: $email)
@@ -39,6 +41,9 @@ struct AddTech: View {
 
                     }.disabled(ten.isEmpty)
                 }
+            }
+            .onAppear{
+                focusNhap = .name
             }
         }
     }

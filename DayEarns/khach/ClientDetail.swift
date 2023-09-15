@@ -12,12 +12,14 @@ struct ClientDetail: View {
     @Binding var khach: Khach
     @State private var updateKhach: Khach.ThemKhach = Khach.ThemKhach()
     @State private var suadoi = false
-    @State private var xoa = false
     @State private var updatesdt = false
     @State private var sdt = ""
-    @State private var hinhTrong = false
     @State private var updateEmail = false
-    @State private var email = ""
+    @State private var email: String = ""
+    @State private var checkEmail = true
+    @State private var claim = false
+    @State private var loiRedeem: Loi?
+    @State private var redeem = ""
     
     var body: some View {
         List {
@@ -32,9 +34,9 @@ struct ClientDetail: View {
                                 .foregroundStyle(.red)
                                 .font(.title)
                                 .alert("\(khach.name)'s Number", isPresented: $updatesdt, actions: {
-                                    TextField("phone", text: $sdt)
+                                    TextField("Phone", text: $sdt)
                                         .keyboardType(.numberPad)
-                                    Button("Xong"){khach.sdt = sdt}
+                                    Button("Done"){khach.sdt = sdt}
                                 })
                         })
                         
@@ -42,26 +44,30 @@ struct ClientDetail: View {
                         Link(destination: URL(string: "tel:\(khach.sdt)")!, label: {Text(khach.sdt)})
                     }
                 }
-                
-                if let email = khach.email {
-                    Link(destination: URL(string: "mailto:\(email)")!, label: {Text(email)})
+//                replace tel to sms for message
+                if !khach.email.isEmpty {
+                    Link(destination: URL(string: "mailto:\(khach.email)")!, label: {Text(khach.email)})
                 }
                 
                 HStack{
                     DanhGiaView(danhGia: $khach.danhGia)
                     Spacer()
-                    Button(action: {updateEmail = true} , label: {
-                        Label("", systemImage: "mail.fill")
-                            .alert("\(khach.name)'s Email", isPresented: $updateEmail, actions: {
-                            TextField("Email", text: $email)
-                                .keyboardType(.emailAddress)
-                                Button("Dismiss", role: .cancel){updateEmail = false}
-                            Button("Done"){khach.email = email}
+                    if khach.email.isEmpty {
+                        Button(action: {updateEmail = true} , label: {
+                            Label("", systemImage: "mail.fill")
+                                .alert("\(khach.name)'s Email", isPresented: $updateEmail, actions: {
+                                TextField("Email", text: $email)
+                                        .onChange(of: email, perform: { chu in
+                                            checkEmail = checkEmail(email: chu)
+                                        })
+                                        
+                                    .keyboardType(.emailAddress)
+                                    Button("Dismiss", role: .cancel){updateEmail = false}
+                                    Button("Done"){khach.email = email}.disabled(checkEmail)
+                            })
                         })
-                    })
+                    }
                 }
-                
-                
             }.padding(8)
             Section(header: Text("Service:")) {
                 ForEach(khach.dvDone){dv in
@@ -72,33 +78,34 @@ struct ClientDetail: View {
                     }
                 }
             }
-           
             Section(header: Text("Detail")){
-                Text("Latest Visit: \(khach.ngay.formatted(.dateTime))")
+                Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
                 Text("Note: \(khach.desc)")
-                Text("Time visited: \(khach.diem)")
+                HStack {
+                    Text("Points Earn: \(khach.diem)")
+                    Spacer()
+                    Button(action: {
+                        claim = true
+                    }, label: {
+                        Text("Claim")
+                    })
+                }
                 Text("Total: $\(khach.khachTra())")
+                if !khach.isNew {
+                    Text("Latest Visits: \(khach.ngay.formatted(.dateTime))")
+                }
                 
             }.padding(5)
             
-            Button("Delete This Client"){
-                xoa = true
-            }.foregroundColor(.red)
-                .alert("You can't undo this!", isPresented: $xoa, actions: {
-                    Button{worker.delete(khach)
-                        hinhTrong = true
-                    } label: {
-                        Text("Delete")
-                    }
-                    Button("Cancel", role: .cancel) { xoa = false}
-                }, message: {Text("\(khach.name) will be remove")})
-            
         }
-        .overlay {
-            if hinhTrong {
-                EmptyView()
+        .alert("Redeem points", isPresented: $claim, actions: {
+            TextField("Points", text: $redeem)
+            Button("Dismiss", role: .cancel){ claim = false }
+            Button("Redeem"){
+                redeemPoint()
             }
-        }
+        })
+        
         .navigationTitle(Text("\(khach.layTen()) visited"))
             .navigationBarItems(trailing: Button("Edit"){
                 suadoi = true
@@ -110,26 +117,40 @@ struct ClientDetail: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             suadoi = false
                         }, trailing: Button("Update"){
-                            suaDoi()
+                            khach.update(tu: updateKhach)
+                            suadoi = false
                         })
                 }
             }
+            .sheet(item: $loiRedeem){ coloi in
+                LoiView(loi: coloi)
+            }
     }//body
-    private func suaDoi(){
-        if khach.dvDone.isEmpty {
-            khach.update(tu: updateKhach)
-        } else {
-            khach.updateDiem(tu: updateKhach)
-        }
-        suadoi = false
+   
+    private func checkEmail(email: String) -> Bool {
+        guard let doan = try? Regex(".+@.+") else {return true}
+        if email.contains(doan){
+            return false
+        } else {return true}
     }
+    
+    private func redeemPoint(){
+        do {
+            if let diem = Int(redeem){
+            try khach.redeemPoints(points: diem)}
+        } catch {
+            loiRedeem = Loi(error: BiLoi.khongDuDiem, chiTiet: "The amounts enter larger than \(khach.name) earn")
+        }
+        claim = false
+    }
+    
 }
 
-//struct ClientDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            ClientDetail(worker: .constant(quang),khach: .constant(khachmau[0]))
-//        }
-//    }
-//}
+struct ClientDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            ClientDetail(worker: .constant(quang),khach: .constant(khachmau[0]))
+        }
+    }
+}
 

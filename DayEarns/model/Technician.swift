@@ -7,14 +7,17 @@
 
 import Foundation
 
+
 struct Technician: Codable {
+    let id: UUID
     let name: String
     var phone: String
     var email: String?
     var services: [Service]
     var khach: [Khach]
     var weekEarn: [WeekEarn] = []
-    init(name: String, phone: String,services:[Service] = [] , khach:[Khach] = []){
+    init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = []){
+        self.id = id
         self.name = name
         self.phone = phone
         self.services = services
@@ -28,7 +31,7 @@ extension Technician {
                                     Service(dichVu: "Hair cut", gia: 35)]
     
     
-     mutating func delete(_ client: Khach){
+    mutating func delete(_ client: Khach){
         self.khach.removeAll(where: {$0.id == client.id })
     }
     
@@ -69,19 +72,22 @@ extension Technician {
     }
     
     func listDaTim(ten: String) -> [Khach] {
-        self.khach.filter { $0.name.contains(ten)}
+        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) }
     }
 }
 
 extension Technician {
-    var motTuan: [Khach] {
+    var tuan: [Khach] {
         self.khach.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
     }
-    var thangTech: [Khach] {
-        self.khach.filter {$0.thang}
+    var motTuan: [WeekEarn] {
+        self.weekEarn.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
     }
-    var namTech: [Khach] {
-        self.khach.filter {$0.nam}
+    var thangTech: [WeekEarn] {
+        self.weekEarn.filter {$0.thang}
+    }
+    var namTech: [WeekEarn] {
+        self.weekEarn.filter {$0.nam}
     }
     
 }
