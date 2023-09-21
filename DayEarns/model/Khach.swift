@@ -80,7 +80,7 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     
 }
 
-let khachmau = [Khach(name: "Jubi", sdt: "8775", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21), diem: 42)]
+let khachmau = [Khach(name: "Jubi", sdt: "7373", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21), diem: 42)]
 
 extension Khach {
     struct ThemKhach {

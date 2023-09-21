@@ -14,6 +14,16 @@ enum Chon {
     case xep
 }
 
+enum BiLoi: Error {
+    case khongDuDiem
+}
+
+enum NhapThongTin: Hashable {
+    case name
+    case phone
+    case note
+}
+
 extension Date {
     var quaNgay: Date {
         Calendar.autoupdatingCurrent.date(byAdding: .day, value: 2, to: self) ?? self
@@ -69,12 +79,3 @@ extension Khach {
       }
 }
 
-enum BiLoi: Error {
-    case khongDuDiem
-}
-
-enum NhapThongTin: Hashable {
-    case name
-    case phone
-    case note
-}

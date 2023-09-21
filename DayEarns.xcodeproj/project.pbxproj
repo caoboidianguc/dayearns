@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8B39F6822AAABC3C00417807 /* Loi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39F6812AAABC3C00417807 /* Loi.swift */; };
 		8B39F6842AAABCE400417807 /* LoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39F6832AAABCE400417807 /* LoiView.swift */; };
+		8B624AEF2ABA8A1F002C8B51 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B624AEE2ABA8A1F002C8B51 /* Button.swift */; };
+		8B9012962ABB49060005B50D /* HoaDon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9012952ABB49060005B50D /* HoaDon.swift */; };
 		8BFAAF602A79F38100B14AB5 /* DayEarnsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */; };
 		8BFAAF622A79F38100B14AB5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF612A79F38100B14AB5 /* ContentView.swift */; };
 		8BFAAF642A79F38200B14AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFAAF632A79F38200B14AB5 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 		8B39F6812AAABC3C00417807 /* Loi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loi.swift; sourceTree = "<group>"; };
 		8B39F6832AAABCE400417807 /* LoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoiView.swift; sourceTree = "<group>"; };
 		8B5F2D0A2A8864C2006E4876 /* DayEarns.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DayEarns.entitlements; sourceTree = "<group>"; };
+		8B624AEE2ABA8A1F002C8B51 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		8B9012952ABB49060005B50D /* HoaDon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDon.swift; sourceTree = "<group>"; };
 		8BE96A672A79FE7400CAEDBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BFAAF5C2A79F38100B14AB5 /* DayEarns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayEarns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEarnsApp.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				8BFAAF8F2A79F7CD00B14AB5 /* ClientDetail.swift */,
 				8BFAAF912A79F7D900B14AB5 /* AddClient.swift */,
 				8BFAAF932A79F7E500B14AB5 /* ClientList.swift */,
+				8B9012952ABB49060005B50D /* HoaDon.swift */,
 			);
 			path = khach;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				8BFAAF872A79F70100B14AB5 /* DanhGiaView.swift */,
 				8B39F6832AAABCE400417807 /* LoiView.swift */,
 				8BFAAF952A79F7EE00B14AB5 /* BieuDoView.swift */,
+				8B624AEE2ABA8A1F002C8B51 /* Button.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				8B39F6822AAABC3C00417807 /* Loi.swift in Sources */,
 				8BFAAF7A2A79F61000B14AB5 /* Service.swift in Sources */,
 				8BFAAF622A79F38100B14AB5 /* ContentView.swift in Sources */,
+				8B624AEF2ABA8A1F002C8B51 /* Button.swift in Sources */,
 				8BFAAF842A79F6D300B14AB5 /* ChonNgay.swift in Sources */,
 				8BFAAF8A2A79F7AA00B14AB5 /* ScheduleView.swift in Sources */,
 				8BFAAF7C2A79F61B00B14AB5 /* LatVat.swift in Sources */,
@@ -274,6 +281,7 @@
 				8B39F6842AAABCE400417807 /* LoiView.swift in Sources */,
 				8BFAAF922A79F7D900B14AB5 /* AddClient.swift in Sources */,
 				8BFAAF862A79F6EA00B14AB5 /* ChonDichVu.swift in Sources */,
+				8B9012962ABB49060005B50D /* HoaDon.swift in Sources */,
 				8BFAAF782A79F60700B14AB5 /* WeekEarn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,7 +430,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -460,7 +468,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

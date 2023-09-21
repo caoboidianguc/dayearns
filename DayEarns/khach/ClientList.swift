@@ -47,7 +47,8 @@ struct ClientList: View {
             .navigationTitle(title.formatted(.dateTime.day().weekday()))
             
             .navigationBarItems(trailing: Button(action: {trangMoi = true },
-                                                 label: {Image(systemName: "person.badge.plus")}))
+                                                 label: {Image(systemName: "person.badge.plus")})
+                .help(Text("Add Client")))
             .sheet(isPresented: $trangMoi) {
                 NavigationView {
                     AddClient(worker: $worker, client: $newCus)

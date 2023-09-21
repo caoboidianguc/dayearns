@@ -28,23 +28,18 @@ struct ClientDetail: View {
                     Text(khach.name)
                     Spacer()
                     if khach.sdt.isEmpty {
-                        Button(action: {updatesdt = true
-                        }, label: {
-                            Image(systemName: "phone.badge.plus")
-                                .foregroundStyle(.red)
-                                .font(.title)
+                        PhoneButton(action: {updatesdt = true})
                                 .alert("\(khach.name)'s Number", isPresented: $updatesdt, actions: {
                                     TextField("Phone", text: $sdt)
                                         .keyboardType(.numberPad)
                                     Button("Done"){khach.sdt = sdt}
                                 })
-                        })
                         
                     } else {
-                        Link(destination: URL(string: "tel:\(khach.sdt)")!, label: {Text(khach.sdt)})
+                        Link(destination: URL(string: "sms:\(khach.sdt)")!, label: {Text(khach.sdt)})
                     }
                 }
-//                replace tel to sms for message
+//                replace "tel" to "sms" for message
                 if !khach.email.isEmpty {
                     Link(destination: URL(string: "mailto:\(khach.email)")!, label: {Text(khach.email)})
                 }
@@ -69,7 +64,7 @@ struct ClientDetail: View {
                     }
                 }
             }.padding(8)
-            Section(header: Text("Service:")) {
+            Section(header: Text("Services:")) {
                 ForEach(khach.dvDone){dv in
                     HStack {
                         Text(dv.dichVu)
@@ -78,7 +73,7 @@ struct ClientDetail: View {
                     }
                 }
             }
-            Section(header: Text("Detail")){
+            Section(header: Text("Detail:")){
                 Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
                 Text("Note: \(khach.desc)")
                 HStack {
@@ -97,6 +92,9 @@ struct ClientDetail: View {
                 
             }.padding(5)
             
+            NavigationLink("Receipt", destination: {
+                HoaDon(worker: worker, khach: khach)
+            })
         }
         .alert("Redeem points", isPresented: $claim, actions: {
             TextField("Points", text: $redeem)
@@ -125,6 +123,8 @@ struct ClientDetail: View {
             .sheet(item: $loiRedeem){ coloi in
                 LoiView(loi: coloi)
             }
+        
+        
     }//body
    
     private func checkEmail(email: String) -> Bool {
@@ -143,7 +143,7 @@ struct ClientDetail: View {
         }
         claim = false
     }
-    
+    var renderURL = URL.documentsDirectory.appending(path: "hoadon.pdf")
 }
 
 struct ClientDetail_Previews: PreviewProvider {

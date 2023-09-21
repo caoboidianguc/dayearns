@@ -12,7 +12,7 @@ struct Technician: Codable {
     let id: UUID
     let name: String
     var phone: String
-    var email: String?
+    var email: String = ""
     var services: [Service]
     var khach: [Khach]
     var weekEarn: [WeekEarn] = []
@@ -24,7 +24,7 @@ struct Technician: Codable {
         self.khach = khach
     }
 }
-let quang = Technician(name: "", phone: "")
+let quang = Technician(name: "Linh", phone: "803")
 
 extension Technician {
     static var dvTech: [Service] = [Service(dichVu: "Full set", gia: 60),

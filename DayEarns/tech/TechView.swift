@@ -17,8 +17,8 @@ struct TechView: View {
                 if !tech.phone.isEmpty {
                     Text(tech.phone)
                 }
-                if let email = tech.email {
-                    Text(email)
+                if !tech.email.isEmpty {
+                    Text(tech.email)
                 }
             }, header: {
                 Text("profile")

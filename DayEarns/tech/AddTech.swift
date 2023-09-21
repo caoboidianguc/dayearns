@@ -49,8 +49,8 @@ struct AddTech: View {
     }
 }
 
-//struct AddTech_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddTech()
-//    }
-//}
+struct AddTech_Previews: PreviewProvider {
+    static var previews: some View {
+        AddTech(tech: .constant(quang))
+    }
+}

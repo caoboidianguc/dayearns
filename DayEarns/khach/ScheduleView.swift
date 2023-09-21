@@ -32,7 +32,8 @@ struct ScheduleView: View {
             .listStyle(.plain)
             .navigationTitle(tuaDe())
                 .navigationBarItems(trailing:
-                    Button("Add"){ addClient = true })
+                    Button("Add"){ addClient = true }
+                    .help(Text("Add Clients for appointment")))
                 .sheet(isPresented: $addClient){
                     NavigationView {
                         ChonNgay(client: $khachHen)
