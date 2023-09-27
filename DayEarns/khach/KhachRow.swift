@@ -9,20 +9,13 @@ import SwiftUI
 
 struct KhachRow: View {
     var khach: Khach
-    var mauChon: [Color] = [
-        .green,.purple,.accentColor,.blue,.brown,.cyan,.indigo,.mint,.orange,.pink,.red,.teal,.yellow]
-//    var mauNgau: Color {
-//        let red: Double = CGFloat.random(in: 0...1)
-//        let green: Double = CGFloat.random(in: 0...1)
-//        let blue: Double = CGFloat.random(in: 0...1)
-//        return Color(red: red, green: green, blue: blue)
-//    }
+    
     var body: some View {
         HStack {
 //            Image(systemName: "person")
 //                .font(.title3)
             RoundedRectangle(cornerRadius: 5)
-                .fill(khach.today ? mauChon.randomElement()!: .gray)
+                .fill(khach.today ? khach.mauNgauNhien : .gray)
                 .frame(width:35, height: 35)
                 .overlay{
                     Text(String(khach.name.first!))
@@ -36,13 +29,22 @@ struct KhachRow: View {
                     Spacer()
                     Text(khach.sdt)
                 }
-                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
+//                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
+//                .environment(\.calendar, calendar)
+                Text(khach.ngay.formatted(.relative(presentation: .numeric)))
+                    
                     .font(khach.schedule ? .title2 : .footnote)
                     .foregroundColor(khach.schedule ? .purple : .secondary)
             }
-        }.foregroundColor(khach.today ? mauChon.randomElement() : .gray)
+        }.foregroundColor(khach.today ? khach.mauNgauNhien : .gray)
            
     }
+    
+//    var calendar: Calendar = {
+//        var calendar = Calendar.current
+//        calendar.locale = .init(identifier: "vi")
+//        return calendar
+//    }()
     
 }
 
@@ -52,3 +54,4 @@ struct KhachRow_Previews: PreviewProvider {
             
     }
 }
+

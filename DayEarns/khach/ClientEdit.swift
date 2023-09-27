@@ -23,6 +23,7 @@ struct ClientEdit: View {
                     .focused($focusNhap, equals: .phone)
 //                TextField("Note :", text: $client.desc)
                 Label("Notes", systemImage: "hand.point.down")
+                    .help("Any note to know about custommer?")
                     
                 TextEditor(text: $client.desc)
                     .frame(width: 350, height: 150, alignment: .leading)
@@ -34,9 +35,8 @@ struct ClientEdit: View {
             ChonDichVu(client: $client)
             HStack {
                 NewService(newSer: $newSer)
-                Button("Add Service", action: {
-                    themDichVu()
-                }).disabled(newSer.dichVu.isEmpty)
+                AddServiceButton(action: themDichVu)
+                    .disabled(newSer.dichVu.isEmpty)
             }
         }//list
         .onAppear{

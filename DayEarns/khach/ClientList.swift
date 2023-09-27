@@ -23,7 +23,7 @@ struct ClientList: View {
                             Button(role: .destructive, action: {
                                 worker.delete(khach)
                             }, label: {
-                                Label("Xoa", systemImage: "trash")
+                                Label("Delete", systemImage: "trash")
                             })
                         }
                     }
@@ -47,15 +47,17 @@ struct ClientList: View {
             .navigationTitle(title.formatted(.dateTime.day().weekday()))
             
             .navigationBarItems(trailing: Button(action: {trangMoi = true },
-                                                 label: {Image(systemName: "person.badge.plus")})
-                .help(Text("Add Client")))
+                                                 label: {
+                Image(systemName: "person.badge.plus")
+                    .accessibilityLabel("Add Client")
+            }))
             .sheet(isPresented: $trangMoi) {
                 NavigationView {
                     AddClient(worker: $worker, client: $newCus)
                         .alert("Failed to add.", isPresented: $existed, actions: {}, message: {Text(warning)})
                         .navigationBarItems(leading: Button("Cancel"){
                             trangMoi = false
-                        }, trailing: Button("Add"){
+                        }, trailing: AddClientButton {
                             themKhach()
                             }.disabled(newCus.name.isEmpty))
                         .onAppear{

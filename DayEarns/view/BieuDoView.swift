@@ -34,7 +34,7 @@ struct BieuDoThang: View {
         VStack {
             Chart {
                 ForEach(worker.thangTech){
-                    BarMark(x: .value("Day", $0.ngay, unit: .weekOfMonth), y: .value("Thu", $0.earn))
+                    BarMark(x: .value("Day", $0.ngay, unit: .weekOfMonth), y: .value("Get", $0.earn))
                         .foregroundStyle(.yellow)
                 }
             }
@@ -58,7 +58,7 @@ struct BieuDoNam: View {
         VStack {
             Chart {
                 ForEach(worker.namTech){
-                    BarMark(x: .value("Ngay", $0.ngay, unit: .month), y: .value("Thu", $0.earn))
+                    BarMark(x: .value("Month", $0.ngay, unit: .month), y: .value("Get", $0.earn))
                         .foregroundStyle(.yellow)
                 }
             }

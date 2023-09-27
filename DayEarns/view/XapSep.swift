@@ -26,7 +26,7 @@ struct XapSep: View {
                             .foregroundColor(worker.tinhTheoNgay() > 3000 ? .purple : .primary)
                     }
                 }, header: {
-                    Text("Earned:")
+                    Text("last 7 days:")
                 })
                 NavigationLink  {
                     BieuDoChung(worker: $worker)

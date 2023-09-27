@@ -24,7 +24,7 @@ struct Technician: Codable {
         self.khach = khach
     }
 }
-let quang = Technician(name: "Linh", phone: "803")
+var quang = Technician(name: "Linh", phone: "803")
 
 extension Technician {
     static var dvTech: [Service] = [Service(dichVu: "Full set", gia: 60),
@@ -52,7 +52,9 @@ extension Technician {
     func tinhTheoNgay() -> Int {
         var tong = 0
         for ngay in weekEarn {
-            tong += ngay.earn
+            if ngay.trongTuan {
+                tong += ngay.earn
+            }
         }
         return tong
     }

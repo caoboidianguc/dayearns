@@ -12,7 +12,7 @@ struct ScheduleView: View {
     @State private var addClient = false
     @State private var khachHen = Khach.ThemKhach()
     @State private var daCo = false
-    
+
     var body: some View {
         NavigationStack {
             List {
@@ -24,16 +24,18 @@ struct ScheduleView: View {
                                     KhachRow(khach: khach)
                                 }
                             }
-                        }, header: {Text(quatuan.name)})
+                        }, header: {Text(LocalizedStringKey(quatuan.name))})
                     }
                 }
             }
             
             .listStyle(.plain)
-            .navigationTitle(tuaDe())
+            .navigationTitle(LocalizedStringKey(tuaDe()))
                 .navigationBarItems(trailing:
                     Button("Add"){ addClient = true }
-                    .help(Text("Add Clients for appointment")))
+                                    
+                    .help(Text("add schedule for a client"))
+                    .accessibilityLabel("add schedule for a client"))
                 .sheet(isPresented: $addClient){
                     NavigationView {
                         ChonNgay(client: $khachHen)
@@ -50,6 +52,7 @@ struct ScheduleView: View {
                             }
                     }
                 }
+                
             
         }//navi
         

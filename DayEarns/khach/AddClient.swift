@@ -22,19 +22,24 @@ struct AddClient: View {
             }.padding()
             
             ChonDichVu(client: $client)
-            HStack {
-                NewService(newSer: $newSer)
-                Button("Add Service", action: {
-                    let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
-                    worker.services.append(new)
-                    client.dvDone.append(new)
-                }).disabled(newSer.dichVu.isEmpty)
-            }
+//            HStack {
+//                NewService(newSer: $newSer)
+//                AddServiceButton(action: {
+//                    addSer()
+//                }).disabled(newSer.dichVu.isEmpty)
+//            }
         }//list
         .onAppear{
             client.dvDone.removeAll()
         }
+        
+        
     }//body
+    private func addSer(){
+        let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
+        worker.services.append(new)
+        client.dvDone.append(new)
+    }
 }
 
 struct AddClient_Previews: PreviewProvider {

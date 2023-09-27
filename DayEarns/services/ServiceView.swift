@@ -11,11 +11,13 @@ struct ServiceView: View {
     @Binding var worker: Technician
     @State private var themdv = Service.themDv()
     @State private var nutThem = false
+    @State var hienNutSort = false
+    @State private var chonSort: DSServices = .khong
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(worker.services) { dv in
+                ForEach(xapxep(ds: chonSort)){ dv in
                     HStack {
                         Text(dv.dichVu)
                         Spacer()
@@ -29,7 +31,7 @@ struct ServiceView: View {
                 .navigationTitle("Services")
                 HStack {
                     NewService(newSer: $themdv)
-                    Button("Add", action: {
+                    AddServiceButton(action: {
                         themService()
                     }).disabled(themdv.dichVu.isEmpty)
                 }
@@ -38,7 +40,15 @@ struct ServiceView: View {
                 }
                
             }//list
-            
+            .toolbar{
+                ToolbarItem(placement: .topBarTrailing) {
+                    Picker("Sort", selection: $chonSort){
+                        ForEach(DSServices.allCases, id: \.self){ chon in
+                            Text(chon.rawValue).tag(chon)
+                        }
+                    }
+                }
+            }
             .listStyle(.plain)
             .overlay {
                 if worker.services.isEmpty {
@@ -66,8 +76,28 @@ struct ServiceView: View {
     }
 }
 
-//struct ServiceView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ServiceView(worker: .constant(quang))
-//    }
-//}
+struct ServiceView_Previews: PreviewProvider {
+    static var previews: some View {
+        ServiceView(worker: .constant(quang))
+    }
+}
+
+extension ServiceView {
+    enum DSServices: String, CaseIterable {
+        case khong = "Sort"
+        case byName = "By Name"
+        case byGia = "By Price"
+        
+    }
+    
+    private func xapxep(ds: DSServices) -> [Service] {
+        switch ds {
+        case .byName:
+            return worker.services.sorted(by: {$0.dichVu < $1.dichVu})
+        case .byGia:
+            return worker.services.sorted(by: {$0.gia > $1.gia})
+        case .khong:
+            return worker.services
+        }
+    }
+}

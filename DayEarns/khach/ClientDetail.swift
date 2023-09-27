@@ -82,7 +82,8 @@ struct ClientDetail: View {
                     Button(action: {
                         claim = true
                     }, label: {
-                        Text("Claim")
+                        Text("Claim", comment: "Client claimed their point here")
+                            .help("Client claimed their point here")
                     })
                 }
                 Text("Total: $\(khach.khachTra())")
@@ -108,7 +109,9 @@ struct ClientDetail: View {
             .navigationBarItems(trailing: Button("Edit"){
                 suadoi = true
                 updateKhach = khach.mau
-            })
+            }
+                .accessibilityLabel("Edit \(khach.name)"))
+        
             .fullScreenCover(isPresented: $suadoi) {
                 NavigationView {
                     ClientEdit(worker: $worker, client: $updateKhach)
@@ -123,6 +126,8 @@ struct ClientDetail: View {
             .sheet(item: $loiRedeem){ coloi in
                 LoiView(loi: coloi)
             }
+            
+            
         
         
     }//body

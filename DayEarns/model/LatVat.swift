@@ -52,7 +52,7 @@ extension Date {
 }
 
 enum QuaTuan: String, CaseIterable, Identifiable {
-    case tuan = "Comming up"
+    case tuan = "Coming up"
     case nuaThang = "Within 7 days"
     case xaxoi = "Over week"
     
@@ -77,5 +77,12 @@ extension Khach {
           }
           diem = diem - points
       }
+    
+    var mauNgauNhien: Color {
+        let red = CGFloat.random(in: 0...1)
+        let xanh = CGFloat.random(in: 0...1)
+        let luc = CGFloat.random(in: 0...1)
+        return Color(red: red, green: xanh, blue: luc)
+    }
 }
 
