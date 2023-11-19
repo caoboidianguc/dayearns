@@ -71,12 +71,6 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var trongTuan: Bool {
         !honTuan && !schedule
     }
-//    var thang: Bool {
-//        !schedule && ngay.thang < Date.now
-//    }
-//    var nam: Bool {
-//        !schedule && ngay.nam < Date.now
-//    }
     
 }
 
@@ -114,5 +108,6 @@ extension Khach {
         ngay = data.ngay
         isNew = false
     }
+    
   
 }

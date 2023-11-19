@@ -12,17 +12,6 @@
       }
     },
     "  %@" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        }
-      }
-    },
-    "%@" : {
-      "comment" : "schedule",
       "extractionState" : "stale",
       "localizations" : {
         "vi" : {
@@ -33,7 +22,10 @@
         }
       }
     },
-    "%@ UpComming" : {
+    "%@" : {
+
+    },
+    "%@ Up Coming" : {
       "extractionState" : "manual",
       "localizations" : {
         "vi" : {
@@ -55,6 +47,7 @@
       }
     },
     "%@'s Email" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
@@ -90,6 +83,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld Khách hàng"
+          }
+        }
+      }
+    },
+    "%lld Up Coming" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Sắp tới"
           }
         }
       }
@@ -160,6 +163,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ghi chú về khách?"
+          }
+        }
+      }
+    },
+    "By Name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theo Tên"
+          }
+        }
+      }
+    },
+    "By Price" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theo Giá"
           }
         }
       }
@@ -506,17 +529,6 @@
         }
       }
     },
-    "Ngay" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ngày"
-          }
-        }
-      }
-    },
     "No Client" : {
       "localizations" : {
         "vi" : {
@@ -553,7 +565,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không: %@"
+            "value" : "Số: %@"
           }
         }
       }
@@ -629,12 +641,12 @@
         }
       }
     },
-    "Picked: %@" : {
+    "Please Pick" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đã chọn: %@"
+            "value" : "Xin Chọn"
           }
         }
       }
@@ -684,7 +696,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Biên lai"
+            "value" : "Receipt"
           }
         }
       }
@@ -784,7 +796,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xếp"
+            "value" : "Sắp Xếp"
           }
         }
       }
@@ -845,6 +857,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tổng: $ %lld"
+          }
+        }
+      }
+    },
+    "UnPick--> " : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bỏ Chọn-->"
+          }
+        }
+      }
+    },
+    "UpComing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sắp tới"
           }
         }
       }

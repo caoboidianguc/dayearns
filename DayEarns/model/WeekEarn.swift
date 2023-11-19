@@ -27,10 +27,10 @@ struct WeekEarn: Codable, Identifiable {
         !schedule && !honTuan
     }
     var thang: Bool {
-        !schedule && ngay.thang < Date.now
+        !schedule && ngay > Date().thang
     }
     var nam: Bool {
-        !schedule && ngay.nam < Date.now
+        !schedule && ngay > Date().nam
     }
     var earn3Ngay: Bool {
         !schedule && ngay > Date().qua3Ngay

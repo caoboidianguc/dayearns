@@ -22,12 +22,12 @@ struct AddClient: View {
             }.padding()
             
             ChonDichVu(client: $client)
-//            HStack {
-//                NewService(newSer: $newSer)
-//                AddServiceButton(action: {
-//                    addSer()
-//                }).disabled(newSer.dichVu.isEmpty)
-//            }
+            HStack {
+                NewService(newSer: $newSer)
+                AddServiceButton(action: {
+                    addSer()
+                }).disabled(newSer.dichVu.isEmpty)
+            }
         }//list
         .onAppear{
             client.dvDone.removeAll()

@@ -16,25 +16,29 @@ struct KhachRow: View {
 //                .font(.title3)
             RoundedRectangle(cornerRadius: 5)
                 .fill(khach.today ? khach.mauNgauNhien : .gray)
-                .frame(width:35, height: 35)
+                .frame(width:42, height: 42)
                 .overlay{
                     Text(String(khach.name.first!))
-                        .font(.system(size: 27))
+                        .font(.system(size: 35))
                         .foregroundStyle(.background)
                 }
                 
-            VStack(alignment: .leading) {
-                HStack {
+            HStack {
+                VStack(alignment: .leading) {
                     Text(khach.name)
-                    Spacer()
                     Text(khach.sdt)
+                        .font(.subheadline)
                 }
+                Spacer()
 //                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
 //                .environment(\.calendar, calendar)
-                Text(khach.ngay.formatted(.relative(presentation: .numeric)))
-                    
-                    .font(khach.schedule ? .title2 : .footnote)
-                    .foregroundColor(khach.schedule ? .purple : .secondary)
+                VStack(alignment: .trailing) {
+                    Text("")
+                    Text(khach.ngay.formatted(.relative(presentation: .numeric)))
+                        
+                        .font(khach.schedule ? .title2 : .footnote)
+                        .foregroundColor(khach.schedule ? .purple : .secondary)
+                }
             }
         }.foregroundColor(khach.today ? khach.mauNgauNhien : .gray)
            

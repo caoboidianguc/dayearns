@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+//@available(iOS 17.0, *)
 struct DayEarnsApp: App {
     @StateObject var ledger = KhachData()
     var body: some Scene {

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//@available(iOS 17.0, *)
 struct ContentView: View {
     @Binding var worker: Technician
     let luuThayDoi: () -> Void
@@ -55,7 +55,7 @@ struct ContentView: View {
     }
     
 }
-
+//@available(iOS 17.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
             ContentView(worker: .constant(quang), luuThayDoi: {})

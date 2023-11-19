@@ -24,10 +24,12 @@ struct ChonDichVu: View {
     var danhmuc: String {
         ListFormatter.localizedString(byJoining: dichvu)
     }
-    
+    var chon: LocalizedStringKey {
+        dichvu.isEmpty ? "Please Pick" : "UnPick--> "
+    }
     var body: some View {
         VStack {
-            Text("Picked: \(danhmuc)")
+            chonDv()
             LazyVGrid (columns: cotGrid,alignment: .center, spacing: 5, content: {
                 ForEach(worker.worker.services){ serv in
                     Button(action: {
@@ -42,6 +44,14 @@ struct ChonDichVu: View {
                 }
             })
         }
+    }//body
+    private func chonDv() -> some View {
+        Button(action: {
+            client.dvDone = []
+        }, label: {
+            Text(chon)
+            Text(danhmuc)
+        })
     }
 }
 
@@ -51,3 +61,4 @@ struct ChonDichVu_Previews: PreviewProvider {
             .environmentObject(KhachData())
     }
 }
+

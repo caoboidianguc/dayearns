@@ -30,7 +30,7 @@ struct ScheduleView: View {
             }
             
             .listStyle(.plain)
-            .navigationTitle(LocalizedStringKey(tuaDe()))
+            .navigationTitle(tuaDe())
                 .navigationBarItems(trailing:
                     Button("Add"){ addClient = true }
                                     
@@ -57,13 +57,14 @@ struct ScheduleView: View {
         }//navi
         
     }
-    private func tuaDe() -> String {
-        var tua = ""
-        let khach = worker.khach.filter {$0.haiNgay}.count
+    
+    private func tuaDe() -> LocalizedStringKey {
+        var tua: LocalizedStringKey = ""
+        let khach = worker.khach.filter {$0.schedule}.count
         if khach == 0 {
             tua = "No Schedules"
         } else {
-            tua = "\(khach) UpComming"
+            tua = "\(khach) Up Coming"
         }
         return tua
     }

@@ -7,17 +7,18 @@
 
 import SwiftUI
 
+//@available(iOS 17.0, *)
 struct ServiceView: View {
     @Binding var worker: Technician
     @State private var themdv = Service.themDv()
     @State private var nutThem = false
     @State var hienNutSort = false
-    @State private var chonSort: DSServices = .khong
+    @State private var chonSort: DSServices = .sort
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(xapxep(ds: chonSort)){ dv in
+                ForEach(worker.xapxep(ds: chonSort)){ dv in
                     HStack {
                         Text(dv.dichVu)
                         Spacer()
@@ -40,6 +41,15 @@ struct ServiceView: View {
                 }
                
             }//list
+            .onAppear(perform: {
+                if chonSort != .sort {
+                    worker.services = worker.xapxep(ds: chonSort)
+                }
+            })
+            
+            .onChange(of: chonSort){ _ in
+                worker.services = worker.xapxep(ds: chonSort)
+            }
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing) {
                     Picker("Sort", selection: $chonSort){
@@ -48,6 +58,11 @@ struct ServiceView: View {
                         }
                     }
                 }
+                ToolbarItem(placement: .keyboard, content: {
+                    Button("Done", action: {
+                        UIApplication.shared.endKey()
+                    })
+                })
             }
             .listStyle(.plain)
             .overlay {
@@ -75,29 +90,16 @@ struct ServiceView: View {
         themdv.dichVu.removeAll()
     }
 }
-
+//@available(iOS 17.0, *)
 struct ServiceView_Previews: PreviewProvider {
     static var previews: some View {
         ServiceView(worker: .constant(quang))
     }
 }
 
-extension ServiceView {
-    enum DSServices: String, CaseIterable {
-        case khong = "Sort"
-        case byName = "By Name"
-        case byGia = "By Price"
-        
-    }
-    
-    private func xapxep(ds: DSServices) -> [Service] {
-        switch ds {
-        case .byName:
-            return worker.services.sorted(by: {$0.dichVu < $1.dichVu})
-        case .byGia:
-            return worker.services.sorted(by: {$0.gia > $1.gia})
-        case .khong:
-            return worker.services
-        }
+
+extension UIApplication {
+    func endKey() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

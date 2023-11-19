@@ -33,8 +33,8 @@ struct BieuDoThang: View {
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.thangTech){
-                    BarMark(x: .value("Day", $0.ngay, unit: .weekOfMonth), y: .value("Get", $0.earn))
+                ForEach(worker.thangTech){ tuan in
+                    BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Get", tuan.earn))
                         .foregroundStyle(.yellow)
                 }
             }

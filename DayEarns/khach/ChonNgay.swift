@@ -14,7 +14,7 @@ struct ChonNgay: View {
             ScrollView {
                 Section(header: Text("Your Client !") ){
                     VStack {
-                        TextField("Your Name", text: $client.name).textInputAutocapitalization(.words)
+                        TextField("Name:", text: $client.name).textInputAutocapitalization(.words)
                         TextField("Phone - opt", text: $client.sdt).keyboardType(.numberPad)
                         DatePicker("iPick:", selection: $client.ngay)
                             .datePickerStyle(.automatic)

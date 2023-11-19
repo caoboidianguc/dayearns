@@ -25,7 +25,7 @@ struct HoaDon: View {
                     VStack(alignment: .trailing) {
                         Text(khach.name).font(.title2)
                         Text(khach.sdt)
-                        Text("No: \(khach.ngay.formatted(.dateTime.month().day()))")
+                        Text("No: \(khach.ngay.formatted(.dateTime.month(.twoDigits).day()))")
                     }
                 }
             }//tieu de
@@ -34,7 +34,7 @@ struct HoaDon: View {
                 Text("Services:")
                 ForEach(khach.dvDone){dv in
                     HStack {
-                        Text("  \(dv.dichVu)")
+                        Text("\(dv.dichVu)")
                         Spacer()
                         Text("$ \(dv.gia)")
                     }

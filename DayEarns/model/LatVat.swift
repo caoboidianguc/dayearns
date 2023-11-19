@@ -60,6 +60,28 @@ enum QuaTuan: String, CaseIterable, Identifiable {
     var name: String {self.rawValue}
 }
 
+enum DSServices: LocalizedStringResource , CaseIterable {
+    case sort = "Sort"
+    case byName = "By Name"
+    case byGia = "By Price"
+    
+}
+
+extension Technician {
+    
+    func xapxep(ds: DSServices) -> [Service] {
+        switch ds {
+        case .sort:
+            return services
+        case .byName:
+            return services.sorted(by: {$0.dichVu < $1.dichVu})
+        case .byGia:
+            return services.sorted(by: {$0.gia > $1.gia})
+        
+        }
+    }
+}
+
 extension Khach {
     func layTen() -> String {
         var tendau = name

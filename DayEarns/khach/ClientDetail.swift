@@ -14,12 +14,10 @@ struct ClientDetail: View {
     @State private var suadoi = false
     @State private var updatesdt = false
     @State private var sdt = ""
-    @State private var updateEmail = false
-    @State private var email: String = ""
-    @State private var checkEmail = true
     @State private var claim = false
     @State private var loiRedeem: Loi?
     @State private var redeem = ""
+    @State private var updateEmail = false
     
     var body: some View {
         List {
@@ -32,6 +30,7 @@ struct ClientDetail: View {
                                 .alert("\(khach.name)'s Number", isPresented: $updatesdt, actions: {
                                     TextField("Phone", text: $sdt)
                                         .keyboardType(.numberPad)
+                                        .textContentType(.telephoneNumber)
                                     Button("Done"){khach.sdt = sdt}
                                 })
                         
@@ -49,18 +48,7 @@ struct ClientDetail: View {
                     Spacer()
                     if khach.email.isEmpty {
                         Button(action: {updateEmail = true} , label: {
-                            Label("", systemImage: "mail.fill")
-                                .alert("\(khach.name)'s Email", isPresented: $updateEmail, actions: {
-                                TextField("Email", text: $email)
-                                        .onChange(of: email, perform: { chu in
-                                            checkEmail = checkEmail(email: chu)
-                                        })
-                                        
-                                    .keyboardType(.emailAddress)
-                                    Button("Dismiss", role: .cancel){updateEmail = false}
-                                    Button("Done"){khach.email = email}.disabled(checkEmail)
-                            })
-                        })
+                            Label("", systemImage: "mail.fill")})
                     }
                 }
             }.padding(8)
@@ -74,7 +62,9 @@ struct ClientDetail: View {
                 }
             }
             Section(header: Text("Detail:")){
-                Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
+                if !khach.isNew {
+                    Text("Latest Visits: \(khach.ngay.formatted(.dateTime))")
+                }
                 Text("Note: \(khach.desc)")
                 HStack {
                     Text("Points Earn: \(khach.diem)")
@@ -87,9 +77,8 @@ struct ClientDetail: View {
                     })
                 }
                 Text("Total: $\(khach.khachTra())")
-                if !khach.isNew {
-                    Text("Latest Visits: \(khach.ngay.formatted(.dateTime))")
-                }
+                Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
+                
                 
             }.padding(5)
             
@@ -127,17 +116,18 @@ struct ClientDetail: View {
                 LoiView(loi: coloi)
             }
             
-            
+            .sheet(isPresented: $updateEmail, content: {
+                NavigationStack {
+                    AddEmailView(khach: $khach)
+                        
+                }.presentationDetents([.medium, .large])
+                    
+            })
         
         
     }//body
+    
    
-    private func checkEmail(email: String) -> Bool {
-        guard let doan = try? Regex(".+@.+") else {return true}
-        if email.contains(doan){
-            return false
-        } else {return true}
-    }
     
     private func redeemPoint(){
         do {
