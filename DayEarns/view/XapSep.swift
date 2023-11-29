@@ -62,7 +62,13 @@ struct XapSep: View {
                         HStack {
                             Text(tuan.ngay.formatted(.dateTime.month().day()))
                             Spacer()
-                            Text("$\(tuan.earn)")
+                            VStack{
+                                Text("$ \(tuan.earn)")
+                                    .font(.title2)
+                                Text("$ \(tuan.tip ?? 0)")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.green)
+                            }
                         }
                     }.onDelete {tuan in
                         worker.weekEarn.remove(atOffsets: tuan)
@@ -107,16 +113,19 @@ struct XapSep: View {
 //        return $worker.khach[clientIndex]
 //    }
     private func luuNgayLam() {
-        let newWeek = WeekEarn(ngay: .now, earn: worker.tongNgay())
+        var tienTip: Int = worker.tinhTip()
+        var tienLam: Int = worker.tongNgay() - tienTip
+        var newWeek = WeekEarn(ngay: .now, earn: tienLam)
+        newWeek.tip = tienTip
         worker.weekEarn.insert(newWeek, at: 0)
         khong = true
     }
 }
 
-//struct XapSep_Previews: PreviewProvider {
-//    static var previews: some View {
-//        XapSep(worker: .constant(quang))
-//    }
-//}
+struct XapSep_Previews: PreviewProvider {
+    static var previews: some View {
+        XapSep(worker: .constant(quang))
+    }
+}
 
 //when save button hitted, a work day should save in array for chart data

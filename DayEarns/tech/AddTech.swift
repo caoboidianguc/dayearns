@@ -29,8 +29,8 @@ struct AddTech: View {
                     TextField("someOne @vidu.com", text: $email)
                         .keyboardType(.emailAddress)
                 })
-                
-            }.padding(10)
+            }
+            .padding(10)
             .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .primaryAction){

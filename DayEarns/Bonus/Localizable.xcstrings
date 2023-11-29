@@ -23,7 +23,14 @@
       }
     },
     "%@" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@ Up Coming" : {
       "extractionState" : "manual",
@@ -817,6 +824,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thu"
+          }
+        }
+      }
+    },
+    "Tip" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiền Bo"
+          }
+        }
+      }
+    },
+    "Tip Amount" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bo"
+          }
+        }
+      }
+    },
+    "Tip:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiền bo"
+          }
+        }
+      }
+    },
+    "Tipping" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bo tiền"
+          }
+        }
+      }
+    },
+    "Tips" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiền bo"
           }
         }
       }

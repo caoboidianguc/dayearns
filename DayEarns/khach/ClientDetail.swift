@@ -18,6 +18,7 @@ struct ClientDetail: View {
     @State private var loiRedeem: Loi?
     @State private var redeem = ""
     @State private var updateEmail = false
+    @State private var tip: Int?
     
     var body: some View {
         List {
@@ -52,7 +53,14 @@ struct ClientDetail: View {
                     }
                 }
             }.padding(8)
-            Section(header: Text("Services:")) {
+            Section(content: {
+                if let bonus = khach.tip {
+                    HStack {
+                        Text("Tip:").foregroundStyle(.green)
+                        Spacer()
+                        Text("$ \(bonus)")
+                    }
+                }
                 ForEach(khach.dvDone){dv in
                     HStack {
                         Text(dv.dichVu)
@@ -60,7 +68,10 @@ struct ClientDetail: View {
                         Text("$\(dv.gia)")
                     }
                 }
-            }
+            }, header: {Text("Services:")}, footer: {
+                AddTip(khach: $khach)
+            })
+
             Section(header: Text("Detail:")){
                 if !khach.isNew {
                     Text("Latest Visits: \(khach.ngay.formatted(.dateTime))")
@@ -80,7 +91,8 @@ struct ClientDetail: View {
                 Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
                 
                 
-            }.padding(5)
+            }
+                .padding(5)
             
             NavigationLink("Receipt", destination: {
                 HoaDon(worker: worker, khach: khach)
@@ -108,6 +120,7 @@ struct ClientDetail: View {
                             suadoi = false
                         }, trailing: Button("Update"){
                             khach.update(tu: updateKhach)
+                            khach.tip = nil
                             suadoi = false
                         })
                 }

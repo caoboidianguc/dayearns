@@ -18,8 +18,6 @@ struct Service: Codable, Identifiable {
     }
 }
 
-
-
 extension Service {
     struct themDv {
         var dichVu: String = ""

@@ -11,6 +11,7 @@ struct WeekEarn: Codable, Identifiable {
     var id: UUID
     var ngay: Date
     var earn: Int
+    var tip: Int?
     
     init(id: UUID = UUID(), ngay: Date, earn: Int) {
         self.id = id

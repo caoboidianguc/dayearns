@@ -30,6 +30,7 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var email: String = ""
     var firstCome: Date
     var isNew: Bool = true
+    var tip: Int?
     
     init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0, diem: Int, firstCome: Date = .now){
         self.id = id
@@ -43,11 +44,20 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         self.firstCome = firstCome
     }
     
+    func khachTip() -> Int{
+        var tong = 0
+        if let bonus = self.tip {
+            tong += bonus
+        }
+        return tong
+    }
+    
     func khachTra() -> Int {
         var tongChi = 0
         for dvu in self.dvDone {
             tongChi += dvu.gia
         }
+        tongChi += khachTip()
         return tongChi
     }
     var schedule: Bool {

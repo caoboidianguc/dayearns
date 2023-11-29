@@ -52,3 +52,35 @@ struct AddClientButton: View {
         })
     }
 }
+
+struct AddTip: View {
+    @Binding var khach: Khach
+    @State private var tip: Int?
+    @State private var addTip = false
+    
+    var body: some View {
+        Button(action: {addTip = true}, label: {
+            Label("Tip", systemImage: "dollarsign.arrow.circlepath")
+                .alert("Tipping", isPresented: $addTip, actions: {
+                    TextField("Tip Amount", value: $tip, format: .number)
+                        .keyboardType(.numberPad)
+                        .textContentType(.telephoneNumber)
+                    Button("Done"){if let bonus = tip {
+                        khach.tip = bonus
+                    }}
+                })
+        })
+            
+    }
+}
+
+    
+struct LabelChart: View {
+    var body: some View {
+        HStack {
+            Label("Tips", systemImage: "rectangle.fill").foregroundStyle(.green)
+            Spacer()
+            Label("Earns", systemImage: "rectangle.fill").foregroundStyle(.yellow)
+        }
+    }
+}

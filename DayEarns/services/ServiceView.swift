@@ -41,11 +41,11 @@ struct ServiceView: View {
                 }
                
             }//list
-            .onAppear(perform: {
-                if chonSort != .sort {
-                    worker.services = worker.xapxep(ds: chonSort)
-                }
-            })
+//            .onAppear(perform: {
+//                if chonSort != .sort {
+//                    worker.services = worker.xapxep(ds: chonSort)
+//                }
+//            })
             
             .onChange(of: chonSort){ _ in
                 worker.services = worker.xapxep(ds: chonSort)

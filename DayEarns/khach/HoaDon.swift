@@ -32,6 +32,13 @@ struct HoaDon: View {
             Spacer()
             VStack(alignment: .leading) {
                 Text("Services:")
+                if let bonus = khach.tip {
+                    HStack {
+                        Text("Tip:")
+                        Spacer()
+                        Text("$ \(bonus)")
+                    }
+                }
                 ForEach(khach.dvDone){dv in
                     HStack {
                         Text("\(dv.dichVu)")

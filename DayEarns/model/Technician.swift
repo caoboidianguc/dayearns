@@ -39,6 +39,18 @@ extension Technician {
         self.khach.contains(client)
     }
     
+    func tinhTip() -> Int {
+        var tong = 0
+        for khack in khach {
+            if khack.today {
+                if let bonus = khack.tip {
+                    tong += bonus
+                }
+            }
+        }
+        return tong
+    }
+    
     func tongNgay() -> Int {
         var tong = 0
         for lan in khach {
