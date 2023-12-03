@@ -17,8 +17,8 @@ struct ClientDetail: View {
     @State private var claim = false
     @State private var loiRedeem: Loi?
     @State private var redeem = ""
-    @State private var updateEmail = false
     @State private var tip: Int?
+    
     
     var body: some View {
         List {
@@ -43,14 +43,8 @@ struct ClientDetail: View {
                 if !khach.email.isEmpty {
                     Link(destination: URL(string: "mailto:\(khach.email)")!, label: {Text(khach.email)})
                 }
-                
                 HStack{
                     DanhGiaView(danhGia: $khach.danhGia)
-                    Spacer()
-                    if khach.email.isEmpty {
-                        Button(action: {updateEmail = true} , label: {
-                            Label("", systemImage: "mail.fill")})
-                    }
                 }
             }.padding(8)
             Section(content: {
@@ -128,19 +122,10 @@ struct ClientDetail: View {
             .sheet(item: $loiRedeem){ coloi in
                 LoiView(loi: coloi)
             }
-            
-            .sheet(isPresented: $updateEmail, content: {
-                NavigationStack {
-                    AddEmailView(khach: $khach)
-                        
-                }.presentationDetents([.medium, .large])
-                    
-            })
-        
+               
         
     }//body
     
-   
     
     private func redeemPoint(){
         do {
@@ -158,6 +143,7 @@ struct ClientDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ClientDetail(worker: .constant(quang),khach: .constant(khachmau[0]))
+                .environmentObject(KhachData())
         }
     }
 }

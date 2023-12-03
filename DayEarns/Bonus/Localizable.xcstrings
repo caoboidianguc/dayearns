@@ -386,6 +386,16 @@
         }
       }
     },
+    "Email:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thư tín:"
+          }
+        }
+      }
+    },
     "Failed to add." : {
       "localizations" : {
         "vi" : {

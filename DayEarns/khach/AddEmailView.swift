@@ -12,6 +12,8 @@ struct AddEmailView: View {
     @State private var email: String = ""
     @State private var checkEmail = true
     @Environment(\.dismiss) private var dismiss
+    
+    
     var body: some View {
         HStack {
             TextField("Email", text: $email)
@@ -42,6 +44,8 @@ struct AddEmailView: View {
              return false
          } else {return true}
      }
+    
+    
     
 }
 

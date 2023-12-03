@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BieuDoView: View {
     @Binding var worker: Technician
-//    @State private var tuan: Date = Date.now.addingTimeInterval(-7 * 3600 * 24 * 30)
     
     var body: some View {
         VStack {
@@ -22,6 +21,7 @@ struct BieuDoView: View {
                         .foregroundStyle(.green)
                         .cornerRadius(3)
                 }
+                
             }
     //        .chartScrollPosition(x: $tuan)
             LabelChart()
@@ -41,7 +41,9 @@ struct BieuDoThang: View {
                 ForEach(worker.thangTech){ tuan in
                     BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Get", tuan.earn))
                         .foregroundStyle(.yellow)
-                    BarMark(x: .value("Day", tuan.ngay, unit: .day), y: .value("Tip", tuan.tip ?? 0))
+                }
+                ForEach(worker.thangTech){ tuan in
+                    BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Tip", tuan.tip ?? 0))
                         .foregroundStyle(.green)
                 }
             }
@@ -67,7 +69,9 @@ struct BieuDoNam: View {
                 ForEach(worker.namTech){
                     BarMark(x: .value("Month", $0.ngay, unit: .month), y: .value("Get", $0.earn))
                         .foregroundStyle(.yellow)
-                    BarMark(x: .value("Day", $0.ngay, unit: .day), y: .value("Tip", $0.tip ?? 0))
+                }
+                ForEach(worker.namTech){
+                    BarMark(x: .value("Day", $0.ngay, unit: .month), y: .value("Tip", $0.tip ?? 0))
                         .foregroundStyle(.green)
                 }
             }

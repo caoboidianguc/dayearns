@@ -90,6 +90,7 @@ extension Khach {
     struct ThemKhach {
         var name: String = ""
         var sdt: String = ""
+        var email: String = ""
         var desc: String = ""
         var dvDone: [Service] = []
         var diem: Int = 0
@@ -104,7 +105,7 @@ extension Khach {
     }
     //mau: ThemKhach la de khi update custommer, load this
     var mau: ThemKhach {
-        return ThemKhach(name: name, sdt: sdt, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
+        return ThemKhach(name: name, sdt: sdt,email: email, desc: desc, dvDone: dvDone, diem: diem, ngay: ngay)
     }
     
     static var dvmau = [Service(dichVu: "Full set", gia: 60)]

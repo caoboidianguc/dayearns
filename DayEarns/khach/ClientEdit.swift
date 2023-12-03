@@ -11,8 +11,8 @@ import SwiftUI
 struct ClientEdit: View {
     @Binding var worker: Technician
     @Binding var client: Khach.ThemKhach
-    @State var newSer = Service.themDv()
     @FocusState private var focusNhap: NhapThongTin?
+    @State private var checkEmailType: String = ""
 
     var body: some View {
         ScrollView {
@@ -21,6 +21,21 @@ struct ClientEdit: View {
                     .focused($focusNhap, equals: .name)
                 TextField("Phone Option", text: $client.sdt).keyboardType(.numberPad)
                     .focused($focusNhap, equals: .phone)
+                if !checkEmailType.isEmpty {
+                    Text(checkEmailType)
+                        .font(.subheadline)
+                        .foregroundStyle(.red)
+                }
+                TextField("Email:", text: $client.email)
+                    .keyboardType(.emailAddress)
+                    .onChange(of: client.email, perform: { chu in
+                        checkEmailType(email: chu)
+                        if chu.count < 4 {
+                            checkEmailType = ""
+                        }
+                    })
+                
+                    
 //                TextField("Note :", text: $client.desc)
                 Label("Notes", systemImage: "hand.point.down")
                     .help("Any note to know about custommer?")
@@ -33,11 +48,6 @@ struct ClientEdit: View {
             }.padding()
             
             ChonDichVu(client: $client)
-            HStack {
-                NewService(newSer: $newSer)
-                AddServiceButton(action: themDichVu)
-                    .disabled(newSer.dichVu.isEmpty)
-            }
         }//list
         .onAppear{
             client.dvDone.removeAll()
@@ -51,12 +61,15 @@ struct ClientEdit: View {
         }
         .listStyle(.automatic)
     }//body
-    private func themDichVu(){
-        let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
-        worker.services.append(new)
-        client.dvDone.append(new)
+   
+    private func checkEmailType(email: String) {
+        guard let doan = try? Regex(".+@.+") else {return}
+        if email.contains(doan){
+            checkEmailType = ""
+        } else {
+            checkEmailType = "Email incompleted!"
+        }
     }
-    
 }
 
 //struct ClientEdit_Previews: PreviewProvider {

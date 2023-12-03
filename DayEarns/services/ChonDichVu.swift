@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChonDichVu: View {
     @EnvironmentObject var worker: KhachData
+    @State var newSer = Service.themDv()
     @Binding var client: Khach.ThemKhach
     var cotGrid: [GridItem] = [GridItem(spacing:5, alignment: .center),
                                GridItem(spacing:5, alignment: .center),
@@ -43,8 +44,21 @@ struct ChonDichVu: View {
                     })
                 }
             })
+            HStack {
+                NewService(newSer: $newSer)
+                AddServiceButton(action: themDichVu)
+                    .disabled(newSer.dichVu.isEmpty)
+            }
         }
     }//body
+    
+    private func themDichVu(){
+        let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
+        worker.worker.services.append(new)
+        client.dvDone.append(new)
+    }
+    
+    
     private func chonDv() -> some View {
         Button(action: {
             client.dvDone = []
