@@ -17,14 +17,18 @@ struct BieuDoView: View {
                 ForEach(worker.motTuan){ kha in
                     BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.earn))
                         .foregroundStyle(.yellow)
+                        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
+                            Text("\(kha.earn)").foregroundStyle(.white)
+                        }
                     BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Tip", kha.tip ?? 0))
                         .foregroundStyle(.green)
                         .cornerRadius(3)
+                        .annotation(position: .automatic, alignment: .center){
+                            Text("\(kha.tip ?? 0)").foregroundStyle(.green)
+                        }
                 }
                 
             }
-    //        .chartScrollPosition(x: $tuan)
-            LabelChart()
         }
     }
 }
@@ -45,6 +49,7 @@ struct BieuDoThang: View {
                 ForEach(worker.thangTech){ tuan in
                     BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Tip", tuan.tip ?? 0))
                         .foregroundStyle(.green)
+                        
                 }
             }
 //            .chartXAxis(.visible)
@@ -69,6 +74,7 @@ struct BieuDoNam: View {
                 ForEach(worker.namTech){
                     BarMark(x: .value("Month", $0.ngay, unit: .month), y: .value("Get", $0.earn))
                         .foregroundStyle(.yellow)
+                    
                 }
                 ForEach(worker.namTech){
                     BarMark(x: .value("Day", $0.ngay, unit: .month), y: .value("Tip", $0.tip ?? 0))

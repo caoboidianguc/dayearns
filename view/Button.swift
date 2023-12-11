@@ -74,13 +74,3 @@ struct AddTip: View {
     }
 }
 
-    
-struct LabelChart: View {
-    var body: some View {
-        HStack {
-            Label("Tips", systemImage: "rectangle.fill").foregroundStyle(.green)
-            Spacer()
-            Label("Earns", systemImage: "rectangle.fill").foregroundStyle(.yellow)
-        }
-    }
-}

@@ -879,6 +879,7 @@
       }
     },
     "Tips" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {

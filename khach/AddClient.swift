@@ -22,12 +22,7 @@ struct AddClient: View {
             }.padding()
             
             ChonDichVu(client: $client)
-            HStack {
-                NewService(newSer: $newSer)
-                AddServiceButton(action: {
-                    addSer()
-                }).disabled(newSer.dichVu.isEmpty)
-            }
+           
         }//list
         .onAppear{
             client.dvDone.removeAll()
@@ -40,6 +35,7 @@ struct AddClient: View {
         worker.services.append(new)
         client.dvDone.append(new)
     }
+    
 }
 
 struct AddClient_Previews: PreviewProvider {
