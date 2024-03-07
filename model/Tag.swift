@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Tag: Codable, Identifiable {
+    var id: UUID
+    var name: String
+}

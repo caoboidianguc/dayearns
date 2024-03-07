@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct TagView: View {
+    @State private var tagName = ""
+    @Binding var khach: Khach
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TextField("Tag's name", text: $tagName)
     }
 }
 
-#Preview {
-    TagView()
-}
+//#Preview {
+//    TagView()
+//}

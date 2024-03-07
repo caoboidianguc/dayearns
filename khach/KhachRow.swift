@@ -12,8 +12,6 @@ struct KhachRow: View {
     
     var body: some View {
         HStack {
-//            Image(systemName: "person")
-//                .font(.title3)
             RoundedRectangle(cornerRadius: 5)
                 .fill(khach.today ? khach.mauNgauNhien : .gray)
                 .frame(width:42, height: 42)

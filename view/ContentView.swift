@@ -24,6 +24,7 @@ struct ContentView: View {
                         Label("Schedule", systemImage: "calendar.badge.clock")
                     }
                     .tag(Chon.schedule)
+                
                 ClientList(worker: $worker)
                     .tabItem {
                         Label("Clients", systemImage: "person.text.rectangle")

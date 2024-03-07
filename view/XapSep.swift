@@ -113,8 +113,8 @@ struct XapSep: View {
 //        return $worker.khach[clientIndex]
 //    }
     private func luuNgayLam() {
-        var tienTip: Int = worker.tinhTip()
-        var tienLam: Int = worker.tongNgay() - tienTip
+        let tienTip: Int = worker.tinhTip()
+        let tienLam: Int = worker.tongNgay() - tienTip
         var newWeek = WeekEarn(ngay: .now, earn: tienLam)
         newWeek.tip = tienTip
         worker.weekEarn.insert(newWeek, at: 0)

@@ -109,3 +109,30 @@ struct BieuDoChung: View {
     }
     
 }
+
+
+struct BieuDoHangNam: View {
+    @Binding var worker: Technician
+    
+    var body: some View {
+        VStack {
+            Chart {
+                ForEach(worker.namTech){
+                    BarMark(x: .value("Year", $0.ngay, unit: .year), y: .value("Get", $0.earn))
+                        .foregroundStyle(.yellow)
+                    
+                }
+                ForEach(worker.namTech){
+                    BarMark(x: .value("Year", $0.ngay, unit: .year), y: .value("Tip", $0.tip ?? 0))
+                        .foregroundStyle(.green)
+                }
+            }
+            .chartXAxis(.visible)
+            .chartYAxis(.automatic)
+            Label("Yearly", systemImage: "chart.pie.fill")
+                .font(.title)
+                
+        }
+    }
+    
+}

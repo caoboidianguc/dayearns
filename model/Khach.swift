@@ -31,6 +31,7 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var firstCome: Date
     var isNew: Bool = true
     var tip: Int?
+    var tag: Tag?
     
     init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0, diem: Int, firstCome: Date = .now){
         self.id = id
@@ -118,6 +119,7 @@ extension Khach {
         diem = data.diem + self.khachTra()
         ngay = data.ngay
         isNew = false
+        email = data.email
     }
     
   

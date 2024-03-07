@@ -9,12 +9,32 @@ import SwiftUI
 
 
 struct PhoneButton: View {
-    var action: () -> Void = {}
+    @State private var sdt = ""
+    @State private var updateSdt = false
+    @State private var incorrect = false
+    @Binding var khach: Khach
     var body: some View {
-        Button(action: action, label: {
+        Button(action: {updateSdt = true}, label: {
             Image(systemName: "phone.badge.plus")
                 .foregroundStyle(.red)
             .font(.title)})
+        .alert("\(khach.name)'s Number", isPresented: $updateSdt, actions: {
+            TextField("Phone", text: $sdt)
+                .keyboardType(.numberPad)
+                .textContentType(.telephoneNumber)
+            Button("Done"){
+                if !sdt.isEmpty && sdt.count < 10 {
+                    incorrect = true
+                } else {
+                    khach.sdt = sdt
+                }
+            }
+        })
+        .alert("Phone is incorrect!", isPresented: $incorrect, actions: {
+            Button("Done"){
+                updateSdt = false
+            }
+        })
     }
 }
 
@@ -34,9 +54,7 @@ struct AddServiceButton: View {
         })
     }
 }
-#Preview {
-    AddClientButton()
-}
+
 
 struct AddClientButton: View {
     var action: () -> Void = {}
@@ -73,4 +91,5 @@ struct AddTip: View {
             
     }
 }
+
 

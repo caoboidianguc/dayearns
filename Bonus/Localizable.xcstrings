@@ -11,17 +11,6 @@
         }
       }
     },
-    "  %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        }
-      }
-    },
     "%@" : {
       "localizations" : {
         "vi" : {
@@ -225,12 +214,13 @@
         }
       }
     },
-    "Client in your list" : {
+    "Client existed\nUpdate client for future appointment." : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Khách nằm trong danh sách"
+            "value" : "Khách trong danh sách, Cập nhật ngày đến cho cuộc hẹn tiếp theo."
           }
         }
       }
@@ -648,6 +638,9 @@
         }
       }
     },
+    "Phone is incorrect!" : {
+
+    },
     "Phone Option" : {
       "localizations" : {
         "vi" : {
@@ -987,6 +980,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trong 7 ngày"
+          }
+        }
+      }
+    },
+    "Year" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Năm"
+          }
+        }
+      }
+    },
+    "Yearly" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hàng năm"
           }
         }
       }

@@ -33,6 +33,7 @@ struct ClientEdit: View {
                         if chu.count < 4 {
                             checkEmailType = ""
                         }
+                        
                     })
                 
                     

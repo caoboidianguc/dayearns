@@ -12,6 +12,7 @@ struct ScheduleView: View {
     @State private var addClient = false
     @State private var khachHen = Khach.ThemKhach()
     @State private var daCo = false
+    @State private var thongbao = ""
 
     var body: some View {
         NavigationStack {
@@ -39,7 +40,7 @@ struct ScheduleView: View {
                 .sheet(isPresented: $addClient){
                     NavigationView {
                         ChonNgay(client: $khachHen)
-                            .alert("Client in your list", isPresented: $daCo, actions: {})
+                            .alert(thongbao, isPresented: $daCo, actions: {})
                             .navigationBarItems(leading: Button("Cancel") {
                                 addClient = false
                             }, trailing: Button("Add"){
@@ -75,6 +76,10 @@ struct ScheduleView: View {
     private func layHen(){
         let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
         if worker.clientExisted(newApp) {
+            thongbao = "Client existed\nUpdate client for future appointment."
+            daCo = true
+        } else if !khachHen.sdt.isEmpty && khachHen.sdt.count < 10 {
+            thongbao = "Phone number is incorrect!"
             daCo = true
         } else {
             worker.khach.append(newApp)

@@ -87,8 +87,12 @@ struct ClientList: View {
     }
     private func themKhach() {
         let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
+        
         if worker.clientExisted(newClient) {
             warning = "Client existed!"
+            existed = true
+        } else if !newCus.sdt.isEmpty && newCus.sdt.count < 10 {
+            warning = "Phone number is incorrect!"
             existed = true
         } else {
             worker.khach.insert(newClient, at: 0)
@@ -96,8 +100,8 @@ struct ClientList: View {
     }
 }
 
-struct ClientList_Previews: PreviewProvider {
-    static var previews: some View {
-        ClientList(worker: .constant(quang))
-    }
-}
+//struct ClientList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ClientList(worker: .constant(quang))
+//    }
+//}
