@@ -33,11 +33,6 @@ struct AddClient: View {
         
         
     }//body
-    private func addSer(){
-        let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
-        worker.services.append(new)
-        client.dvDone.append(new)
-    }
     
 }
 

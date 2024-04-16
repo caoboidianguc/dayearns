@@ -67,44 +67,6 @@ enum DSServices: LocalizedStringResource , CaseIterable {
     
 }
 
-extension Technician {
-    
-    func xapxep(ds: DSServices) -> [Service] {
-        switch ds {
-        case .sort:
-            return services
-        case .byName:
-            return services.sorted(by: {$0.dichVu < $1.dichVu})
-        case .byGia:
-            return services.sorted(by: {$0.gia > $1.gia})
-        
-        }
-    }
-}
 
-extension Khach {
-    func layTen() -> String {
-        var tendau = name
-        if let doanCuoi = name.firstIndex(of: " "){
-            let dau = name[...doanCuoi]
-            tendau = String(dau)
-            return tendau
-        } else {
-            return tendau}
-    }
-    
-      mutating func redeemPoints(points: Int) throws {
-          guard diem >= points else {
-              throw BiLoi.khongDuDiem
-          }
-          diem = diem - points
-      }
-    
-    var mauNgauNhien: Color {
-        let red = CGFloat.random(in: 0...1)
-        let xanh = CGFloat.random(in: 0...1)
-        let luc = CGFloat.random(in: 0...1)
-        return Color(red: red, green: xanh, blue: luc)
-    }
-}
+
 

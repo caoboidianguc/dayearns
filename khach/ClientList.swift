@@ -14,22 +14,26 @@ struct ClientList: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(text == "" ? worker.tuan : worker.listDaTim(ten: text)) { khach in
-                    if !khach.schedule {
-                        NavigationLink(destination: ClientDetail(worker: $worker, khach: binding(for: khach))){
-                            KhachRow(khach: khach) }
-                        .swipeActions {
-                            Button(role: .destructive, action: {
-                                worker.delete(khach)
-                            }, label: {
-                                Label("Delete", systemImage: "trash")
-                            })
+            ZStack {
+                List {
+                    ForEach(text == "" ? worker.tuan : worker.listDaTim(ten: text)) { khach in
+                        if !khach.schedule {
+                            NavigationLink{ClientDetail(worker: $worker, khach: binding(for: khach))} label: {
+                                KhachRow(khach: khach)
+                            }
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    worker.delete(khach)
+                                }, label: {
+                                    Label("Delete", systemImage: "trash")
+                                })
+                            }
                         }
                     }
-                }
-                .listRowSeparator(.hidden)
-            }//list
+                    .listRowSeparator(.hidden)
+                }//list
+                nutThemKhach()            
+            }
             .overlay {
                 if worker.khach.isEmpty {
                     VStack(alignment: .leading){
@@ -42,15 +46,10 @@ struct ClientList: View {
                 }
             }
             .listStyle(.plain)
-            .searchable(text: $text, placement: .automatic, prompt: "Name or Phone")
+            .searchable(text: $text, placement: .automatic, prompt: "Name or Phone").textInputAutocapitalization(.words)
           
             .navigationTitle(title.formatted(.dateTime.day().weekday()))
             
-            .navigationBarItems(trailing: Button(action: {trangMoi = true },
-                                                 label: {
-                Image(systemName: "person.badge.plus")
-                    .accessibilityLabel("Add Client")
-            }))
             .sheet(isPresented: $trangMoi) {
                 NavigationView {
                     AddClient(worker: $worker, client: $newCus)
@@ -71,6 +70,14 @@ struct ClientList: View {
         }
         
     }//body
+    private func nutThemKhach() -> some View{
+        Button(action: {trangMoi = true }, label: {
+            Image(systemName: "person.crop.circle.badge.plus")
+                .font(.largeTitle)
+                .accessibilityLabel("Add Client")
+                .foregroundStyle(.yellow)
+        }).offset(x: 160, y: 230)
+    }
     var title: Date {
         get {
             return Date.now
@@ -96,12 +103,13 @@ struct ClientList: View {
             existed = true
         } else {
             worker.khach.insert(newClient, at: 0)
-            trangMoi = false}
+            trangMoi = false
+        }
     }
 }
 
-//struct ClientList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ClientList(worker: .constant(quang))
-//    }
-//}
+struct ClientList_Previews: PreviewProvider {
+    static var previews: some View {
+        ClientList(worker: .constant(quang))
+    }
+}

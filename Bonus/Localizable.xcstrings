@@ -153,6 +153,16 @@
         }
       }
     },
+    "Add Tag" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm thẻ"
+          }
+        }
+      }
+    },
     "Any note to know about custommer?" : {
       "localizations" : {
         "vi" : {
@@ -639,7 +649,14 @@
       }
     },
     "Phone is incorrect!" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Số điện thoại không đúng!"
+          }
+        }
+      }
     },
     "Phone Option" : {
       "localizations" : {
@@ -817,6 +834,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tóm gọn"
+          }
+        }
+      }
+    },
+    "Tag" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thẻ"
+          }
+        }
+      }
+    },
+    "Tag name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tên thẻ"
           }
         }
       }

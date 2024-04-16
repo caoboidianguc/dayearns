@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Khach: Codable, Identifiable, Equatable, Hashable {
     func hash(into hasher: inout Hasher) {
@@ -31,7 +32,10 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var firstCome: Date
     var isNew: Bool = true
     var tip: Int?
-    var tag: Tag?
+    var tag: String?
+    var birthDay: Date?
+//    var products: [Product]?
+//    var histories: [HistoryVisit]?
     
     init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0, diem: Int, firstCome: Date = .now){
         self.id = id
@@ -83,6 +87,16 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         !honTuan && !schedule
     }
     
+    var isBirthday: Bool {
+        let hnay = Date.now.formatted(Date.FormatStyle().month().day())
+        var sinh = false
+        if let ngay = self.birthDay {
+            if hnay == ngay.formatted(Date.FormatStyle().month().day()) {
+                sinh = true
+            }
+        }
+        return sinh
+    }
 }
 
 let khachmau = [Khach(name: "Jubi", sdt: "7373", dvDone:[Service(dichVu: "talk", gia: 60)], ngay: Date.from(year: 2022, month: 11, day:21), diem: 42)]
@@ -124,3 +138,47 @@ extension Khach {
     
   
 }
+
+extension Khach {
+    func layTen() -> String {
+        var tendau = name
+        if let doanCuoi = name.firstIndex(of: " "){
+            let dau = name[...doanCuoi]
+            tendau = String(dau)
+            return tendau
+        } else {
+            return tendau}
+    }
+    
+      mutating func redeemPoints(points: Int) throws {
+          guard diem >= points else {
+              throw BiLoi.khongDuDiem
+          }
+          diem = diem - points
+      }
+    
+    var mauNgauNhien: Color {
+        let red = CGFloat.random(in: 0...1)
+        let xanh = CGFloat.random(in: 0...1)
+        let luc = CGFloat.random(in: 0...1)
+        return Color(red: red, green: xanh, blue: luc)
+    }
+}
+
+//extension Khach {
+//    var allproducts: [Product] {
+//        var allProduct: [Product] = []
+//        if let product = self.products {
+//            allProduct += product
+//        }
+//        return allProduct
+//    }
+//    
+//    var historiesVisit: [HistoryVisit] {
+//        var daden : [HistoryVisit] = []
+//        if let history = self.histories {
+//            daden += history
+//        }
+//        return daden
+//    }
+//}

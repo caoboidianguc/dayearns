@@ -13,20 +13,30 @@ struct ClientDetail: View {
     @State private var updateKhach: Khach.ThemKhach = Khach.ThemKhach()
     @State private var suadoi = false
     @State private var loiRedeem: Loi?
+    @State private var detail = false
+    @State private var history = false
     
     
     var body: some View {
         List {
             HeadDetailSection(khach: $khach)
-            
             ServiceDetailSection(khach: $khach)
-            
-            DetailSection(khach: $khach)
+            Section(content: {
+                HStack {
+                    Text("Detail")
+                    Spacer()
+                    Toggle(isOn: $detail, label: {
+                        Image(systemName: "exclamationmark.bubble.circle.fill")
+                    })
+                        .toggleStyle(.button)
+                }
+            })
             
             NavigationLink("Receipt", destination: {
                 HoaDon(worker: worker, khach: khach)
             })
-        }
+//            DeleteButton(worker: $worker, khach: khach)
+        }//list
         
         .navigationTitle(Text("\(khach.layTen()) visited"))
             .navigationBarItems(trailing: Button("Edit"){
@@ -47,13 +57,38 @@ struct ClientDetail: View {
                         })
                 }
             }
+            
             .sheet(item: $loiRedeem){ coloi in
                 LoiView(loi: coloi)
             }
-               
+            .sheet(isPresented: $detail){
+                NavigationView {
+                    DetailSection(khach: $khach)
+                        .navigationTitle("\(khach.name)'s detail")
+                        .toolbar{
+                            ToolbarItem(placement: .navigationBarTrailing){
+                                Button("Done"){
+                                    detail = false
+                                }
+                            }
+                        }
+                }
+            }
     }//body
     
-    var renderURL = URL.documentsDirectory.appending(path: "hoadon.pdf")
+   
+    private func historyView() -> some View {
+        Section(content: {
+            HStack {
+                Text("Histories")
+                Spacer()
+                Toggle(isOn: $history, label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                })
+                    .toggleStyle(.button)
+            }
+        })
+    }
 }
 
 struct ClientDetail_Previews: PreviewProvider {
@@ -66,45 +101,51 @@ struct ClientDetail_Previews: PreviewProvider {
 }
 
 
+
 struct DetailSection: View {
     @State private var loiRedeem: Loi?
     @Binding var khach: Khach
     @State private var claim = false
     @State private var redeem = ""
     var body: some View {
-        Section(content: {
+        List {
             if !khach.isNew {
-                Text("Latest Visits: \(khach.ngay.formatted(.dateTime))")
+                Text("\(visit) \(khach.ngay.formatted(.dateTime))")
             }
             Text("Note: \(khach.desc)")
             HStack {
                 Text("Points Earn: \(khach.diem)")
                 Spacer()
-                Button(action: {
+                ClaimPointButton(){
                     claim = true
-                }, label: {
-                    Text("Claim", comment: "Client claimed their point here")
-                        .help("Client claimed their point here")
-                })
+                }
             }
-            Text("Total: $\(khach.khachTra())")
             Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
-        }, header: {
-            Text("Detail:")
-        }, footer: {
-            if let tag = khach.tag?.name {
-                Text(tag)
-            }
             
-        })
+            if let birthDay = khach.birthDay {
+                HStack {
+                    Label(khach.isBirthday ? "It's Today" : "Birthday", systemImage: khach.isBirthday ? "birthday.cake.fill" : "")
+                        .font(khach.isBirthday ? .headline : .callout)
+                        .foregroundStyle(khach.isBirthday ? .green : .primary)
+                    Spacer()
+                    Text(birthDay, style: .date)
+                        .opacity(khach.isBirthday ? 0.1 : 0.9)
+                }
+            }else {
+                BirthdayButton(khach: $khach)
+            }
+        }
+        .listStyle(.plain)
             .alert("Redeem points", isPresented: $claim, actions: {
                 TextField("Points", text: $redeem)
+                    .keyboardType(.numberPad)
                 Button("Dismiss", role: .cancel){ claim = false }
                 Button("Redeem"){
                     redeemPoint()
+                    claim = false
                 }
             })
-    }
+    }//body
     private func redeemPoint(){
         do {
             if let diem = Int(redeem){
@@ -112,7 +153,9 @@ struct DetailSection: View {
         } catch {
             loiRedeem = Loi(error: BiLoi.khongDuDiem, chiTiet: "The amounts enter larger than \(khach.name) earn")
         }
-        claim = false
+    }
+    var visit: String {
+        khach.ngay > Date.now ? "Next Visit:" : "Latest Visit:"
     }
 }
 
@@ -121,7 +164,7 @@ struct DetailSection: View {
 struct HeadDetailSection: View {
     @Binding var khach: Khach
     var body: some View {
-        Section(header: Text("Client:")) {
+        Section(content: {
             HStack {
                 Text(khach.name)
                 Spacer()
@@ -138,7 +181,15 @@ struct HeadDetailSection: View {
             HStack{
                 DanhGiaView(danhGia: $khach.danhGia)
             }
-        }
+        },header: {
+            Text("Client:")
+        } , footer: {
+            if let theTag = khach.tag {
+                Label(theTag, systemImage: "tag")
+            } else {
+                AddTag(khach: $khach)
+            }
+        }).padding(5)
     }
 }
 
@@ -160,8 +211,42 @@ struct ServiceDetailSection: View {
                     Text("$\(dv.gia)")
                 }
             }
-        }, header: {Text("Services:")}, footer: {
-            AddTip(khach: $khach)
-        })
+            HStack {
+                Text("Total:")
+                Spacer()
+                Text("$ \(khach.khachTra())")
+            }.font(.title2)
+        }, header: {
+            HStack {
+                Text("Services:")
+                Spacer()
+                AddTip(khach: $khach)
+            }
+        }).padding(5)
     }
 }
+
+//struct DeleteButton: View {
+//    @Binding var worker: Technician
+//    var khach: Khach
+//    @State private var xoa = false
+//    
+//    var body: some View {
+//        Button(action: {
+//            xoa = true
+//        }, label: {
+//            
+//            Text("Delete this Client")
+//                .foregroundStyle(.red)
+//                .font(.headline)
+//        })
+//        .alert("Sure ee!", isPresented: $xoa, actions: {
+//            Button("Nooo!"){
+//                xoa = false
+//            }
+//            Button("Delete", action: {
+//                worker.delete(khach)
+//            })
+//        })
+//    }
+//}

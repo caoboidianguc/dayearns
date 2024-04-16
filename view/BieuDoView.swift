@@ -9,7 +9,7 @@ import Charts
 import SwiftUI
 
 struct BieuDoView: View {
-    @Binding var worker: Technician
+    var worker: Technician
     
     var body: some View {
         VStack {
@@ -37,7 +37,7 @@ struct BieuDoView: View {
 //    BieuDoView(worker: .constant(quang))
 //}
 struct BieuDoThang: View {
-    @Binding var worker: Technician
+    var worker: Technician
     
     var body: some View {
         VStack {
@@ -66,7 +66,7 @@ struct BieuDoThang: View {
 }
 
 struct BieuDoNam: View {
-    @Binding var worker: Technician
+    var worker: Technician
     
     var body: some View {
         VStack {
@@ -83,7 +83,7 @@ struct BieuDoNam: View {
             }
             .chartXAxis(.visible)
             .chartYAxis(.automatic)
-            Label("Monthly Earns", systemImage: "chart.pie.fill")
+            Label("Monthly Earns", systemImage: "chart.xyaxis.line")
                 .font(.title)
                 
         }.overlay {
@@ -95,24 +95,8 @@ struct BieuDoNam: View {
     
 }
 
-struct BieuDoChung: View {
-    @Binding var worker: Technician
-    
-    var body: some View {
-        ScrollView {
-            BieuDoThang(worker: $worker)
-                .frame(height: 300)
-            BieuDoNam(worker: $worker)
-                .frame(height: 300)
-        }
-        
-    }
-    
-}
-
-
 struct BieuDoHangNam: View {
-    @Binding var worker: Technician
+    var worker: Technician
     
     var body: some View {
         VStack {
@@ -129,10 +113,37 @@ struct BieuDoHangNam: View {
             }
             .chartXAxis(.visible)
             .chartYAxis(.automatic)
-            Label("Yearly", systemImage: "chart.pie.fill")
+            Label("Yearly", systemImage: "chart.line.uptrend.xyaxis")
                 .font(.title)
                 
         }
     }
     
 }
+
+
+struct BieuDoChung: View {
+    var worker: Technician
+    var anNam: Bool {
+        worker.namTech.isEmpty
+    }
+    var anThang: Bool {
+        worker.thangTech.isEmpty
+    }
+    var body: some View {
+        ScrollView {
+            BieuDoThang(worker: worker)
+                .frame(height: 300)
+            BieuDoNam(worker: worker)
+                .frame(height: 300)
+                .opacity(anThang ? 0 : 1)
+            BieuDoHangNam(worker: worker)
+                .frame(height: 300)
+                .opacity(anNam ? 0 : 1)
+        }
+        
+    }
+    
+}
+
+

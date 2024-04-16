@@ -16,9 +16,15 @@ struct KhachRow: View {
                 .fill(khach.today ? khach.mauNgauNhien : .gray)
                 .frame(width:42, height: 42)
                 .overlay{
-                    Text(String(khach.name.first!))
-                        .font(.system(size: 35))
-                        .foregroundStyle(.background)
+                    if khach.isBirthday {
+                        Image(systemName: "birthday.cake.fill")
+                            .foregroundStyle(.green)
+                            .font(.system(size: 35))
+                    } else {
+                        Text(String(khach.name.first!))
+                            .font(.system(size: 35))
+                            .foregroundStyle(.background)
+                    }
                 }
                 
             HStack {
@@ -33,7 +39,6 @@ struct KhachRow: View {
                 VStack(alignment: .trailing) {
                     Text("")
                     Text(khach.ngay.formatted(.relative(presentation: .numeric)))
-                        
                         .font(khach.schedule ? .title2 : .footnote)
                         .foregroundColor(khach.schedule ? .purple : .secondary)
                 }

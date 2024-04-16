@@ -16,6 +16,8 @@ struct Technician: Codable {
     var services: [Service]
     var khach: [Khach]
     var weekEarn: [WeekEarn] = []
+    var products: [Product]?
+    
     init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = []){
         self.id = id
         self.name = name
@@ -86,7 +88,13 @@ extension Technician {
     }
     
     func listDaTim(ten: String) -> [Khach] {
-        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) }
+        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) || ($0.tag ?? "").contains(ten) }
+    }
+    
+    func timService(ten: String) -> [Service]{
+        self.services.filter {
+            $0.dichVu.contains(ten)
+        }
     }
 }
 
@@ -103,6 +111,26 @@ extension Technician {
     var namTech: [WeekEarn] {
         self.weekEarn.filter {$0.nam}
     }
-    
+ 
+    func xapxep(ds: DSServices) -> [Service] {
+        switch ds {
+        case .sort:
+            return services
+        case .byName:
+            return services.sorted(by: {$0.dichVu < $1.dichVu})
+        case .byGia:
+            return services.sorted(by: {$0.gia > $1.gia})
+        
+        }
+    }
 }
 
+extension Technician {
+    var allproducts: [Product] {
+        var allProduct: [Product] = []
+        if let product = self.products {
+            allProduct = product
+        }
+        return allProduct
+    }
+}

@@ -29,9 +29,9 @@ struct XapSep: View {
                     Text("last 7 days:")
                 })
                 NavigationLink  {
-                    BieuDoChung(worker: $worker)
+                    BieuDoChung(worker: worker)
                 } label: {
-                    BieuDoView(worker: $worker)
+                    BieuDoView(worker: worker)
                         .frame(height: 250)
                 }.overlay {
                     if worker.motTuan.isEmpty {

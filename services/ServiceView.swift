@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-//@available(iOS 17.0, *)
+
 struct ServiceView: View {
     @Binding var worker: Technician
     @State private var themdv = Service.themDv()
     @State private var nutThem = false
     @State var hienNutSort = false
     @State private var chonSort: DSServices = .sort
+    @State private var timService = ""
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(worker.xapxep(ds: chonSort)){ dv in
+                ForEach(timService == "" ? worker.xapxep(ds: chonSort) : worker.timService(ten: timService)){ dv in
                     HStack {
                         Text(dv.dichVu)
                         Spacer()
@@ -41,12 +42,7 @@ struct ServiceView: View {
                 }
                
             }//list
-//            .onAppear(perform: {
-//                if chonSort != .sort {
-//                    worker.services = worker.xapxep(ds: chonSort)
-//                }
-//            })
-            
+            .searchable(text: $timService, placement: .automatic).textInputAutocapitalization(.words)
             .onChange(of: chonSort){ _ in
                 worker.services = worker.xapxep(ds: chonSort)
             }

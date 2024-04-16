@@ -28,8 +28,6 @@ struct ContentView: View {
                 ClientList(worker: $worker)
                     .tabItem {
                         Label("Clients", systemImage: "person.text.rectangle")
-                            
-                            
                     }
                     .tag(Chon.khach)
                 
