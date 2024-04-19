@@ -52,6 +52,7 @@ extension Date {
 }
 
 enum QuaTuan: String, CaseIterable, Identifiable {
+    case birthday = "Happy Birthday"
     case tuan = "Coming up"
     case nuaThang = "Within 7 days"
     case xaxoi = "Over week"

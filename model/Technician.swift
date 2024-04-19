@@ -76,6 +76,8 @@ extension Technician {
     func tuan(quaTuan: QuaTuan) -> [Khach] {
         self.khach.filter {
             switch quaTuan {
+            case .birthday:
+                return $0.isBirthday
             case .tuan:
                 return $0.haiNgay
             case .nuaThang:

@@ -13,7 +13,6 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var manhinh: Chon = .khach
     
-    
     var body: some View {
         if worker.name.isEmpty {
             AddTech(tech: $worker)
@@ -49,7 +48,11 @@ struct ContentView: View {
                     luuThayDoi()
                 }
             }
-            
+            .onAppear {
+                if !worker.khach.filter({$0.haiNgay}).isEmpty {
+                    manhinh = .schedule
+                }
+            }
         }
     }
     
