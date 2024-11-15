@@ -35,7 +35,6 @@ struct ClientDetail: View {
             NavigationLink("Receipt", destination: {
                 HoaDon(worker: worker, khach: khach)
             })
-//            DeleteButton(worker: $worker, khach: khach)
         }//list
         
         .navigationTitle(Text("\(khach.layTen()) visited"))
@@ -51,7 +50,9 @@ struct ClientDetail: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             suadoi = false
                         }, trailing: Button("Update"){
+                            let hitory = HistoryVisit(ngay: updateKhach.ngay,note: updateKhach.desc, dvDone: updateKhach.dvDone)
                             khach.update(tu: updateKhach)
+                            khach.histories.append(hitory)
                             khach.tip = nil
                             suadoi = false
                         })
@@ -94,7 +95,7 @@ struct ClientDetail: View {
 struct ClientDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ClientDetail(worker: .constant(quang),khach: .constant(khachmau[0]))
+            ClientDetail(worker: .constant(quang), khach: .constant(khachmau[0]))
                 .environmentObject(KhachData())
         }
     }
@@ -134,6 +135,10 @@ struct DetailSection: View {
             }else {
                 BirthdayButton(khach: $khach)
             }
+            NavigationLink("Histories visited", destination: {
+                HistoriesView(histories: khach.histories)
+            })
+            
         }
         .listStyle(.plain)
             .alert("Redeem points", isPresented: $claim, actions: {
@@ -225,7 +230,21 @@ struct ServiceDetailSection: View {
         }).padding(5)
     }
 }
-
+struct BirthdayButton: View {
+    @Binding var khach: Khach
+    @State private var ngaySinh: Date = Date.now
+    
+    var body: some View {
+        VStack {
+            DatePicker("Birthday", selection: $ngaySinh, in: Date.distantPast...Date.now, displayedComponents: .date)
+            Spacer()
+            Button("Save") {
+                khach.birthDay = ngaySinh
+            }.foregroundStyle(.blue)
+                .disabled(Calendar.current.isDateInToday(ngaySinh))
+        }
+    }
+}
 //struct DeleteButton: View {
 //    @Binding var worker: Technician
 //    var khach: Khach

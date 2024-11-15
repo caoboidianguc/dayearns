@@ -13,7 +13,7 @@ struct DayEarnsApp: App {
     @StateObject var ledger = KhachData()
     var body: some Scene {
         WindowGroup {
-                ContentView(worker: $ledger.worker) {
+            ContentView(tech: $ledger.worker) {
                     Task {
                         do{
                             try await ledger.save(tech: ledger.worker)
@@ -22,13 +22,13 @@ struct DayEarnsApp: App {
                         }
                     }
                 }
-                .environmentObject(ledger)
+            .environmentObject(ledger)
                 .onAppear {
                     Task {
                         do{
                             try await ledger.load()
                         } catch {
-                            fatalError("Can't load")
+                            print("Loading or migration failed: \(error)")
                         }
                     }
                 }
@@ -45,3 +45,6 @@ struct DayEarnsApp: App {
         }
     }
 }
+
+
+    

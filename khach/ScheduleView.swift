@@ -21,7 +21,7 @@ struct ScheduleView: View {
                     if !worker.tuan(quaTuan: quatuan).isEmpty {
                         Section(content: {
                             ForEach(worker.tuan(quaTuan: quatuan)) { khach in
-                                NavigationLink(destination: ClientDetail(worker: $worker ,khach: binding(for: khach)) ){
+                                NavigationLink(destination: ClientDetail(worker: $worker, khach: binding(for: khach)) ){
                                     KhachRow(khach: khach)
                                 }
                             }
@@ -34,7 +34,6 @@ struct ScheduleView: View {
             .navigationTitle(tuaDe())
                 .navigationBarItems(trailing:
                     Button("Add"){ addClient = true }
-                                    
                     .help(Text("add schedule for a client"))
                     .accessibilityLabel("add schedule for a client"))
                 .sheet(isPresented: $addClient){
@@ -74,7 +73,8 @@ struct ScheduleView: View {
         return $worker.khach[clientIndex]
     }
     private func layHen(){
-        let newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
+        var newApp = Khach(name: khachHen.name, sdt: khachHen.sdt,dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
+        let hitory = HistoryVisit(ngay: khachHen.ngay, note: khachHen.desc, dvDone: khachHen.dvDone)
         if worker.clientExisted(newApp) {
             thongbao = "Client existed\nUpdate client for future appointment."
             daCo = true
@@ -82,6 +82,7 @@ struct ScheduleView: View {
             thongbao = "Phone number is incorrect!"
             daCo = true
         } else {
+            newApp.histories.append(hitory)
             worker.khach.append(newApp)
             addClient = false }
     }

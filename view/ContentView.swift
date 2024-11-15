@@ -6,37 +6,36 @@
 //
 
 import SwiftUI
-//@available(iOS 17.0, *)
 struct ContentView: View {
-    @Binding var worker: Technician
+    @Binding var tech: Technician
     let luuThayDoi: () -> Void
     @Environment(\.scenePhase) private var scenePhase
     @State private var manhinh: Chon = .khach
     
     var body: some View {
-        if worker.name.isEmpty {
-            AddTech(tech: $worker)
+        if tech.name.isEmpty {
+            AddTech(tech: $tech)
         } else {
             TabView(selection: $manhinh) {
-                ScheduleView(worker: $worker)
+                ScheduleView(worker: $tech)
                     .tabItem {
-                        Label("Schedule", systemImage: "calendar.badge.clock")
+                        sinhNhatLabel()
                     }
                     .tag(Chon.schedule)
                 
-                ClientList(worker: $worker)
+                ClientList(tech: $tech)
                     .tabItem {
                         Label("Clients", systemImage: "person.text.rectangle")
                     }
                     .tag(Chon.khach)
                 
-                ServiceView(worker: $worker)
+                ServiceView(worker: $tech)
                     .tabItem {
                         Label("Services", systemImage: "list.dash")
                     }
                     .tag(Chon.dv)
                 
-                XapSep(worker: $worker)
+                XapSep(worker: $tech)
                     .tabItem{
                         Label("Earns", systemImage: "scroll")
                     }
@@ -49,18 +48,25 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                if !worker.khach.filter({$0.haiNgay}).isEmpty {
+                if !tech.khach.filter({$0.haiNgay}).isEmpty || !tech.khach.filter({$0.isBirthday}).isEmpty {
                     manhinh = .schedule
                 }
             }
         }
+    }//body
+    var sinhNhat : Bool {
+        if tech.khach.contains(where: {$0.isBirthday}){
+            return true
+        } else { return false }
+    }
+    private func sinhNhatLabel() -> some View {
+        Label(sinhNhat ? "Party" : "Schedule", systemImage: sinhNhat ? "birthday.cake" : "calendar.badge.clock")
     }
     
 }
-//@available(iOS 17.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-            ContentView(worker: .constant(quang), luuThayDoi: {})
+        ContentView(tech: .constant(quang), luuThayDoi: {})
                 .environmentObject(KhachData())
     }
 }

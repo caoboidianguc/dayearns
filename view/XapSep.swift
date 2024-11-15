@@ -10,7 +10,6 @@ import SwiftUI
 struct XapSep: View {
     @Binding var worker: Technician
     @State private var khong: Bool = false
-//    @State private var resetWarning = false
     @State private var hienProfile = false
     var ngayEarn: [WeekEarn] {
         worker.weekEarn.filter {$0.earn3Ngay}
@@ -78,20 +77,12 @@ struct XapSep: View {
             }//list
             .navigationTitle("Summary!")
             .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading){
-//                    Button("Reset"){
-//                        resetWarning = true
-//                    }
-//                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         hienProfile = true
                     }, label: {Image(systemName: "person.crop.rectangle.fill")})
                 }
             }
-//            .confirmationDialog("Delete", isPresented: $resetWarning) {
-//                Button("Erase All Days Saved!", role: .destructive){ worker.weekEarn.removeAll()}
-//                Button("Cancel", role: .cancel){ resetWarning = false }}
             .sheet(isPresented: $hienProfile){
                 NavigationView {
                     TechView(tech: worker)
@@ -108,10 +99,7 @@ struct XapSep: View {
 
         }
     }//body
-//    private func binding(for khachIndex: Khach) -> Binding<Khach> {
-//        guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
-//        return $worker.khach[clientIndex]
-//    }
+    
     private func luuNgayLam() {
         let tienTip: Int = worker.tinhTip()
         let tienLam: Int = worker.tongNgay() - tienTip
@@ -125,7 +113,7 @@ struct XapSep: View {
 struct XapSep_Previews: PreviewProvider {
     static var previews: some View {
         XapSep(worker: .constant(quang))
+            
     }
 }
 
-//when save button hitted, a work day should save in array for chart data

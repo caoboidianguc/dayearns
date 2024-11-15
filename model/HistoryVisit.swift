@@ -11,6 +11,7 @@ import Foundation
 struct HistoryVisit: Codable, Identifiable {
     var id: UUID = UUID()
     var ngay: Date
+    var note: String = ""
     var dvDone: [Service]
 }
 

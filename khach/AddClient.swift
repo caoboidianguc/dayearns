@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct AddClient: View {
-    @Binding var worker: Technician
     @Binding var client: Khach.ThemKhach
-    @State var newSer = Service.themDv()
-    @State private var sdtCheck = false
-    @State private var sdtLoi = ""
     
     var body: some View {
         ScrollView {

@@ -73,11 +73,11 @@ struct ClientEdit: View {
     }
 }
 
-//struct ClientEdit_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ClientEdit(worker: .constant(quang),client: .constant(khachmau[0].mau))
-//            .environmentObject(KhachData())
-//
-//    }
-//}
+struct ClientEdit_Previews: PreviewProvider {
+    static var previews: some View {
+        ClientEdit(worker: .constant(quang),client: .constant(khachmau[0].mau))
+            .environmentObject(KhachData())
+
+    }
+}
 

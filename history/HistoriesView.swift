@@ -16,20 +16,22 @@ struct HistoriesView: View {
                 ForEach(histories) { history in
                     VStack {
                         Text(history.ngay.formatted(date: .abbreviated, time: .shortened))
-                        dvDone(services: history.dvDone)
+                        if !history.note.isEmpty {
+                            Text(history.note)
+                                .font(.subheadline)
+                        }
+                        ForEach(history.dvDone){ dv in
+                            HStack {
+                                Text(dv.dichVu)
+                                Text(dv.gia.description)
+                            }
+                        }
                     }
                 }
             }.navigationTitle("Histories")
         }
     }//body
-    private func dvDone(services: [Service]) -> some View {
-        ForEach(services){ dv in
-            HStack {
-                Text(dv.dichVu)
-                Text(dv.gia.description)
-            }
-        }
-    }
+    
 }
 
 #Preview {

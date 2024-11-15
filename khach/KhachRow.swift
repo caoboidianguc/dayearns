@@ -13,7 +13,7 @@ struct KhachRow: View {
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 5)
-                .fill(khach.today ? khach.mauNgauNhien : .gray)
+                .fill(mauRow ? khach.mauNgauNhien : .gray)
                 .frame(width:42, height: 42)
                 .overlay{
                     if khach.isBirthday {
@@ -39,14 +39,19 @@ struct KhachRow: View {
                 VStack(alignment: .trailing) {
                     Text("")
                     Text(khach.ngay.formatted(.relative(presentation: .numeric)))
-                        .font(khach.schedule ? .title2 : .footnote)
-                        .foregroundColor(khach.schedule ? .purple : .secondary)
+                        .font(mauLayHen ? .title2 : .footnote)
+                        .foregroundColor(mauLayHen ? .purple : .secondary)
                 }
             }
         }.foregroundColor(khach.today ? khach.mauNgauNhien : .gray)
            
     }
-    
+    var mauRow: Bool {
+        khach.today || khach.isBirthday
+    }
+    var mauLayHen: Bool {
+        khach.schedule
+    }
 //    var calendar: Calendar = {
 //        var calendar = Calendar.current
 //        calendar.locale = .init(identifier: "vi")
@@ -57,7 +62,8 @@ struct KhachRow: View {
 
 struct KhachRow_Previews: PreviewProvider {
     static var previews: some View {
-        KhachRow(khach: khachmau[0]).previewLayout(.fixed(width: 300, height: 50))
+        KhachRow(khach: khachmau[0])
+            .previewLayout(.fixed(width: 300, height: 50))
             
     }
 }
