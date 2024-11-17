@@ -12,7 +12,13 @@ struct HistoryVisit: Codable, Identifiable {
     var id: UUID = UUID()
     var ngay: Date
     var note: String = ""
-    var dvDone: [Service]
+    var dvDone: [Service] = []
+    var tip: Int?
+    
+    var tongTien: Int {
+        dvDone.reduce(0) { $0 + $1.gia }
+    }
 }
 
 let mau = HistoryVisit(ngay: Date.from(year: 2023, month: 11, day:21), dvDone: [Service(dichVu: "Lish su", gia: 60)])
+

@@ -96,7 +96,6 @@ struct ClientList: View {
         let hitory = HistoryVisit(ngay: Date.now, note: newCus.desc, dvDone: newCus.dvDone)
         var newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
         newClient.histories.append(hitory)
-        
         if tech.clientExisted(newClient) {
             warning = "Client existed!"
             existed = true

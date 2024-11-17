@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+//if change struct to class, data will slowly update at View.
 struct Khach: Codable, Identifiable, Equatable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
@@ -107,7 +107,7 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         }
         return tong
     }
-    
+   
     func khachTra() -> Int {
         var tongChi = 0
         for dvu in self.dvDone {
@@ -137,7 +137,12 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var trongTuan: Bool {
         !honTuan && !schedule
     }
-    
+    var thang: Bool {
+        !schedule && ngay > Date().thang
+    }
+    var nam: Bool {
+        !schedule && ngay > Date().nam
+    }
     var isBirthday: Bool {
         let hnay = Date.now.formatted(Date.FormatStyle().month().day())
         var sinh = false

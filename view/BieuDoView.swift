@@ -4,28 +4,35 @@
 //
 //  Created by Jubi on 8/1/23.
 //
-
 import Charts
 import SwiftUI
-
+//ForEach(worker.motTuanHistory){ kha in
+//    BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.tongTien))
+//        .foregroundStyle(.yellow)
+//        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
+//            Text("\(kha.earn)").foregroundStyle(.white)
+//        }
+//}
 struct BieuDoView: View {
     var worker: Technician
     
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.motTuan){ kha in
-                    BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.earn))
+                ForEach(worker.motTuanHistory){histo in
+                    BarMark(x: .value("Day",  histo.ngay, unit: .day), y: .value("Total", histo.tongTien))
                         .foregroundStyle(.yellow)
-                        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
-                            Text("\(kha.earn)").foregroundStyle(.white)
-                        }
+//                        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
+//                            Text("\(histo.tongTien)").foregroundStyle(.white)
+//                        }
+                }
+                ForEach(worker.motTuanHistory) { kha in
                     BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Tip", kha.tip ?? 0))
                         .foregroundStyle(.green)
                         .cornerRadius(3)
-                        .annotation(position: .automatic, alignment: .center){
-                            Text("\(kha.tip ?? 0)").foregroundStyle(.green)
-                        }
+//                        .annotation(position: .automatic, alignment: .center){
+//                            Text("\(kha.tip ?? 0)").foregroundStyle(.green)
+//                        }
                 }
                 
             }
@@ -42,11 +49,11 @@ struct BieuDoThang: View {
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.thangTech){ tuan in
-                    BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Get", tuan.earn))
+                ForEach(worker.thangHistory){tha in
+                    BarMark(x: .value("Day", tha.ngay, unit: .weekOfMonth), y: .value("Total", tha.tongTien))
                         .foregroundStyle(.yellow)
                 }
-                ForEach(worker.thangTech){ tuan in
+                ForEach(worker.thangHistory){ tuan in
                     BarMark(x: .value("Day", tuan.ngay, unit: .weekOfMonth), y: .value("Tip", tuan.tip ?? 0))
                         .foregroundStyle(.green)
                         
@@ -57,7 +64,7 @@ struct BieuDoThang: View {
             Label("Weekly Earns", systemImage: "chart.line.uptrend.xyaxis")
                 .font(.title)
         }.overlay {
-            if worker.thangTech.isEmpty {
+            if worker.thangHistory.isEmpty {
                 Label("Go by week", systemImage: "chart.line.uptrend.xyaxis.circle.fill")
             }
         }
@@ -71,12 +78,11 @@ struct BieuDoNam: View {
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.namTech){
-                    BarMark(x: .value("Month", $0.ngay, unit: .month), y: .value("Get", $0.earn))
+                ForEach(worker.namHistory){
+                    BarMark(x: .value("Year", $0.ngay, unit: .month), y: .value("Totle", $0.tongTien))
                         .foregroundStyle(.yellow)
-                    
                 }
-                ForEach(worker.namTech){
+                ForEach(worker.namHistory){
                     BarMark(x: .value("Day", $0.ngay, unit: .month), y: .value("Tip", $0.tip ?? 0))
                         .foregroundStyle(.green)
                 }
@@ -87,7 +93,7 @@ struct BieuDoNam: View {
                 .font(.title)
                 
         }.overlay {
-            if worker.namTech.isEmpty {
+            if worker.namHistory.isEmpty {
                 Label("Go by month", systemImage: "chart.xyaxis.line")
             }
         }
@@ -101,12 +107,12 @@ struct BieuDoHangNam: View {
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.namTech){
-                    BarMark(x: .value("Year", $0.ngay, unit: .year), y: .value("Get", $0.earn))
+                ForEach(worker.namHistory){
+                    BarMark(x: .value("Year", $0.ngay, unit: .year), y: .value("Get", $0.tongTien))
                         .foregroundStyle(.yellow)
                     
                 }
-                ForEach(worker.namTech){
+                ForEach(worker.namHistory){
                     BarMark(x: .value("Year", $0.ngay, unit: .year), y: .value("Tip", $0.tip ?? 0))
                         .foregroundStyle(.green)
                 }
@@ -125,10 +131,10 @@ struct BieuDoHangNam: View {
 struct BieuDoChung: View {
     var worker: Technician
     var anNam: Bool {
-        worker.namTech.isEmpty
+        worker.namHistory.isEmpty
     }
     var anThang: Bool {
-        worker.thangTech.isEmpty
+        worker.thangHistory.isEmpty
     }
     var body: some View {
         ScrollView {
