@@ -230,21 +230,7 @@ struct ServiceDetailSection: View {
         }).padding(5)
     }
 }
-struct BirthdayButton: View {
-    @Binding var khach: Khach
-    @State private var ngaySinh: Date = Date.now
-    
-    var body: some View {
-        VStack {
-            DatePicker("Birthday", selection: $ngaySinh, in: Date.distantPast...Date.now, displayedComponents: .date)
-            Spacer()
-            Button("Save") {
-                khach.birthDay = ngaySinh
-            }.foregroundStyle(.blue)
-                .disabled(Calendar.current.isDateInToday(ngaySinh))
-        }
-    }
-}
+
 //struct DeleteButton: View {
 //    @Binding var worker: Technician
 //    var khach: Khach

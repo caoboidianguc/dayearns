@@ -33,7 +33,7 @@ struct XapSep: View {
                     BieuDoView(worker: worker)
                         .frame(height: 250)
                 }.overlay {
-                    if worker.motTuan.isEmpty {
+                    if worker.motTuanHistory.isEmpty {
                         VStack (alignment: .center) {
                             Image(systemName: "chart.pie.fill")
                                 .font(.system(size: 70))

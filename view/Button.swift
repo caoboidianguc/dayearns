@@ -124,13 +124,31 @@ struct AddTip: View {
                     Button("Done"){
                         if let bonus = tip {
                             khach.tip = bonus
+                            let daDen = HistoryVisit(ngay: khach.ngay, dvDone: khach.dvDone, tip: bonus)
+                            khach.histories.removeAll(where: {$0.ngay.formatted(.dateTime.day()) == khach.ngay.formatted(.dateTime.day())})
+                            khach.histories.append(daDen)
                         }
                     }
                 })
         })
             
     }
+    
 }
 
 
-
+struct BirthdayButton: View {
+    @Binding var khach: Khach
+    @State private var ngaySinh: Date = Date.now
+    
+    var body: some View {
+        VStack {
+            DatePicker("Birthday", selection: $ngaySinh, in: Date.distantPast...Date.now, displayedComponents: .date)
+            Spacer()
+            Button("Save") {
+                khach.birthDay = ngaySinh
+            }.foregroundStyle(.blue)
+                .disabled(Calendar.current.isDateInToday(ngaySinh))
+        }
+    }
+}

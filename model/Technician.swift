@@ -135,15 +135,18 @@ extension Technician {
     var tuan: [Khach] {
         self.khach.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
     }
-    var motTuan: [WeekEarn] {
-        self.weekEarn.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
-    }
-    var thangTech: [WeekEarn] {
-        self.weekEarn.filter {$0.thang}
-    }
-    var namTech: [WeekEarn] {
-        self.weekEarn.filter {$0.nam}
-    }
+//    chart
+//    var motTuan: [WeekEarn] {
+//        self.weekEarn.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
+//    }
+//    
+//    var thangTech: [WeekEarn] {
+//        self.weekEarn.filter {$0.thang}
+//    }
+//    
+//    var namTech: [WeekEarn] {
+//        self.weekEarn.filter {$0.nam}
+//    }
  
     func xapxep(ds: DSServices) -> [Service] {
         switch ds {
@@ -155,6 +158,36 @@ extension Technician {
             return services.sorted(by: {$0.gia > $1.gia})
         
         }
+    }
+    var motTuanHistory: [HistoryVisit] {
+        var allHistory: [HistoryVisit] = []
+        let allKhach = self.khach.filter {$0.trongTuan}
+        for khach in allKhach {
+            for historyV in khach.histories {
+                allHistory.append(historyV)
+            }
+        }
+        return allHistory
+    }
+    var thangHistory: [HistoryVisit] {
+        var allHistory: [HistoryVisit] = []
+        let allKhach = self.khach.filter {$0.thang}
+        for khach in allKhach {
+            for historyV in khach.histories {
+                allHistory.append(historyV)
+            }
+        }
+        return allHistory
+    }
+    var namHistory: [HistoryVisit] {
+        var allHistory: [HistoryVisit] = []
+        let allKhach = self.khach.filter {$0.nam}
+        for khach in allKhach {
+            for historyV in khach.histories {
+                allHistory.append(historyV)
+            }
+        }
+        return allHistory
     }
 }
 

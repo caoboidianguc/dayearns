@@ -15,10 +15,14 @@ struct HistoriesView: View {
             List {
                 ForEach(histories) { history in
                     VStack {
-                        Text(history.ngay.formatted(date: .abbreviated, time: .shortened))
+                        Text(history.ngay.formatted(date: .numeric, time: .shortened))
                         if !history.note.isEmpty {
                             Text(history.note)
                                 .font(.subheadline)
+                        }
+                        if let tip = history.tip {
+                            Text("Tip: \(tip.description)")
+                                .foregroundStyle(.green)
                         }
                         ForEach(history.dvDone){ dv in
                             HStack {
