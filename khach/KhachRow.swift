@@ -34,8 +34,6 @@ struct KhachRow: View {
                         .font(.subheadline)
                 }
                 Spacer()
-//                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
-//                .environment(\.calendar, calendar)
                 VStack(alignment: .trailing) {
                     Text("")
                     Text(khach.ngay.formatted(.relative(presentation: .numeric)))
@@ -43,21 +41,16 @@ struct KhachRow: View {
                         .foregroundColor(mauLayHen ? .purple : .secondary)
                 }
             }
-        }.foregroundColor(khach.today ? khach.mauNgauNhien : .gray)
+        }.foregroundColor(mauRow ? khach.mauNgauNhien : .gray)
            
     }
     var mauRow: Bool {
-        khach.today || khach.isBirthday
+        let lich = Calendar.current
+        return lich.isDateInToday(khach.ngay) || khach.isBirthday
     }
     var mauLayHen: Bool {
         khach.schedule
     }
-//    var calendar: Calendar = {
-//        var calendar = Calendar.current
-//        calendar.locale = .init(identifier: "vi")
-//        return calendar
-//    }()
-    
 }
 
 struct KhachRow_Previews: PreviewProvider {

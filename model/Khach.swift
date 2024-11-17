@@ -129,7 +129,8 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         ngay >= Date().qua7Ngay
     }
     var today: Bool {
-        ngay.formatted(date: .numeric, time: .omitted) == Date().formatted(date: .numeric, time: .omitted)
+        let lich = Calendar.current
+        return lich.isDateInToday(ngay)
     }
     var honTuan: Bool {
         ngay.qua7Ngay < Date.now

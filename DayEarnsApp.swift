@@ -27,8 +27,15 @@ struct DayEarnsApp: App {
                     Task {
                         do{
                             try await ledger.load()
+                            await ledger.loadAppAndBirthday()
                         } catch {
                             print("Loading or migration failed: \(error)")
+                        }
+                        requestNotificationPermission()
+                        ledger.clientBirthday.forEach{ client in clientBirthdayNotification(client: client) }
+                        
+                        ledger.clientAppointment.forEach{ client in
+                            khachHenComingUp(client: client)
                         }
                     }
                 }

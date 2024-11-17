@@ -12,7 +12,10 @@ struct XapSep: View {
     @State private var khong: Bool = false
     @State private var hienProfile = false
     var ngayEarn: [WeekEarn] {
-        worker.weekEarn.filter {$0.earn3Ngay}
+        worker.weekEarn.filter {$0.trongTuan}
+    }
+    var ngayEarnH: [HistoryVisit] {
+        worker.motTuanHistory
     }
     var body: some View {
         NavigationStack {
@@ -69,7 +72,8 @@ struct XapSep: View {
                                     .foregroundStyle(.green)
                             }
                         }
-                    }.onDelete {tuan in
+                    }
+                    .onDelete {tuan in
                         worker.weekEarn.remove(atOffsets: tuan)
                     }
                 }
