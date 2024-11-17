@@ -18,16 +18,28 @@ class KhachData: ObservableObject {
                                     create: false)
         .appendingPathComponent("khach.data")
     }
-        
+    @Published var clientBirthday: [Khach] = []
+    @Published var clientAppointment: [Khach] = []
     @Published var worker: Technician = Technician(name: "", phone: "")
     
+    func loadAppAndBirthday() async {
+        do {
+            for khach in self.worker.khach {
+                if khach.isBirthday {
+                    self.clientBirthday.append(khach)
+                }
+                if khach.schedule {
+                    self.clientAppointment.append(khach)
+                }
+            }
+        }
+    }
     func load() async throws {
             do {
                 let url = try Self.fileURL()
                 if FileManager.default.fileExists(atPath: url.path) {
                     let data = try Data(contentsOf: url)
                     let user = try JSONDecoder().decode(Technician.self, from: data)
-                    print("Tech loaded: \(user)")
                     await MainActor.run {  // Ensure UI updates happen on the main thread
                         self.worker = user
                     }
