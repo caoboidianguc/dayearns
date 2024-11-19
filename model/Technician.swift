@@ -16,7 +16,6 @@ struct Technician: Codable {
     var services: [Service]
     var khach: [Khach]
     var weekEarn: [WeekEarn]
-//    var products: [Product]
     
     init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = [], weekEarn:[WeekEarn] = []){
         self.id = id
@@ -26,36 +25,7 @@ struct Technician: Codable {
         self.khach = khach
         self.weekEarn = weekEarn
     }
-    //for migration -->
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case name
-//        case email
-//        case phone
-//        case services
-//        case khach
-//        case weekEarn    }
-//    
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try container.decode(UUID.self, forKey: .id)
-//        name = try container.decode(String.self, forKey: .name)
-//        phone = try container.decode(String.self, forKey: .phone)
-//        email = try container.decode(String.self, forKey: .email)
-//        services = try container.decode([Service].self, forKey: .services)
-//        khach = try container.decode([Khach].self, forKey: .khach)
-//        weekEarn = try container.decode([WeekEarn].self, forKey: .weekEarn)
-//    }
-//    func encode(to encoder: any Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(name, forKey: .name)
-//        try container.encode(phone, forKey: .phone)
-//        try container.encode(email, forKey: .email)
-//        try container.encode(services, forKey: .services)
-//        try container.encode(khach, forKey: .khach)
-//        try container.encode(weekEarn, forKey: .weekEarn)
-//    }//<--
+    
 }
 var quang = Technician(name: "Linh", phone: "803")
 

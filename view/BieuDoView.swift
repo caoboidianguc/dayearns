@@ -6,13 +6,6 @@
 //
 import Charts
 import SwiftUI
-//ForEach(worker.motTuanHistory){ kha in
-//    BarMark(x: .value("Day", kha.ngay, unit: .day), y: .value("Thu", kha.tongTien))
-//        .foregroundStyle(.yellow)
-//        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
-//            Text("\(kha.earn)").foregroundStyle(.white)
-//        }
-//}
 struct BieuDoView: View {
     var worker: Technician
     
@@ -59,8 +52,6 @@ struct BieuDoThang: View {
                         
                 }
             }
-//            .chartXAxis(.visible)
-//            .chartYAxis(.automatic)
             Label("Weekly Earns", systemImage: "chart.line.uptrend.xyaxis")
                 .font(.title)
         }.overlay {

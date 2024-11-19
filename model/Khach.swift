@@ -48,57 +48,6 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         self.firstCome = firstCome
         self.histories = histories
     }
-//    for migration-->
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case name
-//        case sdt
-//        case desc
-//        case diem
-//        case dvDone
-//        case ngay
-//        case danhGia
-//        case email
-//        case firstCome
-//        case histories
-//        case tip
-//        case tag
-//        case birthDay
-//    }
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try container.decode(UUID.self, forKey: .id)
-//        name = try container.decode(String.self, forKey: .name)
-//        sdt = try container.decode(String.self, forKey: .sdt)
-//        desc = try container.decode(String.self, forKey: .desc)
-//        diem = try container.decode(Int.self, forKey: .diem)
-//        dvDone = try container.decodeIfPresent([Service].self, forKey: .dvDone) ?? []
-//        ngay = try container.decode(Date.self, forKey: .ngay)
-//        danhGia = try container.decode(Int.self, forKey: .danhGia)
-//        email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
-//        firstCome = try container.decode(Date.self, forKey: .firstCome)
-//        histories = try container.decodeIfPresent([HistoryVisit].self, forKey: .histories) ?? []
-//        tip = try container.decodeIfPresent(Int.self, forKey: .tip)
-//        tag = try container.decodeIfPresent(String.self, forKey: .tag)
-//        birthDay = try container.decodeIfPresent(Date.self, forKey: .birthDay)
-//    }
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(name, forKey: .name)
-//        try container.encode(sdt, forKey: .sdt)
-//        try container.encode(desc, forKey: .desc)
-//        try container.encode(diem, forKey: .diem)
-//        try container.encode(dvDone, forKey: .dvDone)
-//        try container.encode(ngay, forKey: .ngay)
-//        try container.encode(danhGia, forKey: .danhGia)
-//        try container.encode(email, forKey: .email)
-//        try container.encode(firstCome, forKey: .firstCome)
-//        try container.encodeIfPresent(histories, forKey: .histories)
-//        try container.encodeIfPresent(tip, forKey: .tip)
-//        try container.encodeIfPresent(tag, forKey: .tag)
-//        try container.encodeIfPresent(birthDay, forKey: .birthDay)
-//    }//<--
     
     func khachTip() -> Int{
         var tong = 0
@@ -220,6 +169,7 @@ extension Khach {
         let luc = CGFloat.random(in: 0...1)
         return Color(red: red, green: xanh, blue: luc)
     }
+    
 }
 
 //extension Khach {
