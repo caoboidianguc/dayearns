@@ -23,22 +23,23 @@ struct DayEarnsApp: App {
                     }
                 }
             .environmentObject(ledger)
-                .onAppear {
-                    Task {
-                        do{
-                            try await ledger.load()
-                            await ledger.loadAppAndBirthday()
-                        } catch {
-                            print("Loading or migration failed: \(error)")
-                        }
-                        requestNotificationPermission()
-                        ledger.clientBirthday.forEach{ client in clientBirthdayNotification(client: client) }
-                        
-                        ledger.clientAppointment.forEach{ client in
-                            khachHenComingUp(client: client)
-                        }
+            .onAppear {
+                Task {
+                    do{
+                        try await ledger.load()
+                    } catch {
+                        print("Loading or migration failed: \(error)")
+                    }
+                    requestNotificationPermission()
+                    
+                    ledger.worker.khach.filter{$0.isBirthday}.forEach{ client in clientBirthdayNotification(client: client) }
+                    
+                    ledger.worker.khach.filter{$0.schedule}.forEach{ client in
+                        khachHenComingUp(client: client)
+                        print(client.name)
                     }
                 }
+            }
             
                 .refreshable {
                     Task {
