@@ -7,35 +7,35 @@
 
 import SwiftUI
 struct ContentView: View {
-    @Binding var tech: Technician
+    @EnvironmentObject var tech: KhachData
     let luuThayDoi: () -> Void
     @Environment(\.scenePhase) private var scenePhase
     @State private var manhinh: Chon = .khach
     
     var body: some View {
-        if tech.name.isEmpty {
-            AddTech(tech: $tech)
+        if tech.worker.name.isEmpty {
+            AddTech(tech: $tech.worker)
         } else {
             TabView(selection: $manhinh) {
-                ScheduleView(worker: $tech)
+                ScheduleView(worker: $tech.worker)
                     .tabItem {
                         sinhNhatLabel()
                     }
                     .tag(Chon.schedule)
                 
-                ClientList(tech: $tech)
+                ClientList(tech: $tech.worker)
                     .tabItem {
                         Label("Clients", systemImage: "person.text.rectangle")
                     }
                     .tag(Chon.khach)
                 
-                ServiceView(worker: $tech)
+                ServiceView(worker: $tech.worker)
                     .tabItem {
                         Label("Services", systemImage: "list.dash")
                     }
                     .tag(Chon.dv)
                 
-                XapSep(worker: $tech)
+                XapSep(worker: $tech.worker)
                     .tabItem{
                         Label("Earns", systemImage: "scroll")
                     }
@@ -48,14 +48,20 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                if !tech.khach.filter({$0.haiNgay}).isEmpty || !tech.khach.filter({$0.isBirthday}).isEmpty {
+                if !tech.worker.khach.filter({$0.haiNgay}).isEmpty || !tech.worker.khach.filter({$0.isBirthday}).isEmpty {
                     manhinh = .schedule
                 }
+//                tech.khach.filter{$0.isBirthday}.forEach{ client in clientBirthdayNotification(client: client) }
+//                
+//                tech.khach.filter{$0.schedule}.forEach{ client in
+//                    khachHenComingUp(client: client)
+//                    print(client.name)
+//                }
             }
         }
     }//body
     var sinhNhat : Bool {
-        if tech.khach.contains(where: {$0.isBirthday}){
+        if tech.worker.khach.contains(where: {$0.isBirthday}){
             return true
         } else { return false }
     }
@@ -66,7 +72,7 @@ struct ContentView: View {
 }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(tech: .constant(quang), luuThayDoi: {})
+        ContentView(luuThayDoi: {})
                 .environmentObject(KhachData())
     }
 }

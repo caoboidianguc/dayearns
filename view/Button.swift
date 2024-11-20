@@ -159,10 +159,15 @@ struct BirthdayButton: View {
 
 func correctPhone(laySo: String) -> String {
     guard !laySo.isEmpty || laySo.count > 10 else {return ""}
-    var phone = Array(laySo)
-    phone.insert(")", at: 3)
-    phone.insert(" ", at: 4)
-    phone.insert("-", at: 8)
-    let sophone = String(phone)
-    return "(\(sophone)"
+    if laySo.count > 10 {
+        return laySo
+    }else {
+        var phone = Array(laySo)
+        phone.insert(")", at: 3)
+        phone.insert(" ", at: 4)
+        phone.insert("-", at: 8)
+        let sophone = String(phone)
+        return "(\(sophone)"
+    }
 }
+

@@ -71,21 +71,21 @@ func clientBirthdayNotification(client: Khach){
     }
 }
 
-func khachHenComingUp(client: Khach){
-    let thoiGianBao = Calendar.current.date(byAdding: .minute, value: -20, to: client.ngay)!
-    let dateCompo = Calendar.current.dateComponents([.year,.month,.day, .hour, .minute, .second], from: thoiGianBao)
-  
+func khachHenComingUp(client: Khach) {
+    
+    let thoiGianBao = Calendar.current.date(byAdding: .minute, value: -15, to: client.ngay)!
+//        let thoiGianBao = client.ngay.addingTimeInterval(-15 * 60)
+    var dateCompo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: thoiGianBao)
+    dateCompo.second = 0
     let batDau = UNCalendarNotificationTrigger(dateMatching: dateCompo, repeats: false)
     
     let center = UNUserNotificationCenter.current()
     let content = UNMutableNotificationContent()
     content.title = "Appointment Reminder"
     content.sound = .default
-    content.body = "Appointment with \(client.name) in 20 minutes."
+    content.body = "Appointment with \(client.name) in 15 minutes."
     let request = UNNotificationRequest(identifier: "AppointmentReminder", content: content, trigger: batDau)
     center.add(request)
+
 }
-
-
-
 

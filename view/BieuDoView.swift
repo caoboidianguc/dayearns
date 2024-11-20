@@ -12,7 +12,7 @@ struct BieuDoView: View {
     var body: some View {
         VStack {
             Chart {
-                ForEach(worker.motTuanHistory){histo in
+                ForEach(worker.motTuanHistory){ histo in
                     BarMark(x: .value("Day",  histo.ngay, unit: .day), y: .value("Total", histo.tongTien))
                         .foregroundStyle(.yellow)
 //                        .annotation(position: .overlay, alignment: .centerFirstTextBaseline){
@@ -142,5 +142,4 @@ struct BieuDoChung: View {
     }
     
 }
-
 

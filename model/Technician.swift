@@ -137,8 +137,9 @@ extension Technician {
                 allHistory.append(historyV)
             }
         }
-        return allHistory
+        return allHistory.filter{$0.trongTuan}
     }
+    
     var thangHistory: [HistoryVisit] {
         var allHistory: [HistoryVisit] = []
         let allKhach = self.khach.filter {$0.thang}
@@ -147,7 +148,7 @@ extension Technician {
                 allHistory.append(historyV)
             }
         }
-        return allHistory
+        return allHistory.filter{$0.thang}
     }
     var namHistory: [HistoryVisit] {
         var allHistory: [HistoryVisit] = []
@@ -157,7 +158,7 @@ extension Technician {
                 allHistory.append(historyV)
             }
         }
-        return allHistory
+        return allHistory.filter{$0.nam}
     }
 }
 

@@ -19,7 +19,17 @@ class KhachData: ObservableObject {
         .appendingPathComponent("khach.data")
     }
     @Published var worker: Technician = Technician(name: "", phone: "")
+    @Published var khachHen: [Khach] = []
+    @Published var sinhNhat: [Khach] = []
     
+    func layKhach() async {
+        do{
+            let khachs = worker.khach.filter{$0.schedule}
+            let sinhNhats = worker.khach.filter{$0.isBirthday}
+            self.khachHen = khachs
+            self.sinhNhat = sinhNhats
+        }
+    }
     
     func load() async throws {
             do {
@@ -62,5 +72,3 @@ class KhachData: ObservableObject {
     }
     
 }
-
-

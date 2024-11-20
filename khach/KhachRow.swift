@@ -13,7 +13,7 @@ struct KhachRow: View {
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 5)
-                .fill(mauRow ? khach.mauNgauNhien : .gray)
+                .fill(mauRow() ? khach.mauNgauNhien : .gray)
                 .frame(width:42, height: 42)
                 .overlay{
                     if khach.isBirthday {
@@ -35,21 +35,23 @@ struct KhachRow: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("")
-                    Text(khach.ngay.formatted(.relative(presentation: .numeric)))
+                    Text(hienThoiGiandong)
                         .font(mauLayHen ? .title2 : .footnote)
                         .foregroundColor(mauLayHen ? .purple : .secondary)
                 }
             }
-        }.foregroundColor(mauRow ? khach.mauNgauNhien : .gray)
-           
+        }.foregroundColor(mauRow() ? khach.mauNgauNhien : .gray)
+            
     }
-    var mauRow: Bool {
+    func mauRow() -> Bool {
         let lich = Calendar.current
         return lich.isDateInToday(khach.ngay) || khach.isBirthday
     }
     var mauLayHen: Bool {
         khach.schedule
+    }
+    var hienThoiGiandong: String {
+        khach.today ? khach.ngay.formatted(.dateTime.hour().minute()) : khach.ngay.formatted(.dateTime.day().weekday())
     }
 }
 
