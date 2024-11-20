@@ -13,7 +13,7 @@ struct DayEarnsApp: App {
     @StateObject var ledger = KhachData()
     var body: some Scene {
         WindowGroup {
-            ContentView(tech: $ledger.worker) {
+            ContentView() {
                     Task {
                         do{
                             try await ledger.save(tech: ledger.worker)
@@ -23,24 +23,22 @@ struct DayEarnsApp: App {
                     }
                 }
             .environmentObject(ledger)
-            .onAppear {
-                Task {
+           
+            .task {
                     do{
                         try await ledger.load()
+                        await ledger.layKhach()
                     } catch {
                         print("Loading or migration failed: \(error)")
                     }
                     requestNotificationPermission()
-                    
-                    ledger.worker.khach.filter{$0.isBirthday}.forEach{ client in clientBirthdayNotification(client: client) }
-                    
-                    ledger.worker.khach.filter{$0.schedule}.forEach{ client in
-                        khachHenComingUp(client: client)
-                        print(client.name)
-                    }
+                ledger.sinhNhat.forEach{ client in clientBirthdayNotification(client: client)}
+                
+                ledger.khachHen.forEach{ client in
+                    khachHenComingUp(client: client)
+                    print(client.name)
                 }
-            }
-            
+                }//task
                 .refreshable {
                     Task {
                         do{

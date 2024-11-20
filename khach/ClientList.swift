@@ -94,20 +94,20 @@ struct ClientList: View {
     }
     private func themKhach() {
         let hitory = HistoryVisit(ngay: Date.now, note: newCus.desc, dvDone: newCus.dvDone)
-        let newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
-        
-        if tech.clientExisted(newClient) {
-            warning = "Client existed!"
-            existed = true
-        } else if !newCus.sdt.isEmpty && newCus.sdt.count < 10 {
+        if !newCus.sdt.isEmpty && newCus.sdt.count < 10 {
             warning = "Phone number is incorrect!"
             existed = true
         } else {
             let phone = correctPhone(laySo: newCus.sdt)
             var newClient = Khach(name: newCus.name, sdt: phone, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
-            newClient.histories.append(hitory)
-            tech.khach.insert(newClient, at: 0)
-            trangMoi = false
+            if tech.clientExisted(newClient){
+                warning = "Client existed!"
+                existed = true
+            } else {
+                    newClient.histories.append(hitory)
+                    tech.khach.insert(newClient, at: 0)
+                    trangMoi = false
+                }
         }
     }
 }

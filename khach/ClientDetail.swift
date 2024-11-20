@@ -16,20 +16,22 @@ struct ClientDetail: View {
     @State private var detail = false
     @State private var history = false
     
-    
+    var denTham: String {
+        return khach.schedule ? "Next Visit" : "Last Visit"
+    }
     var body: some View {
         List {
             HeadDetailSection(khach: $khach)
             ServiceDetailSection(khach: $khach)
             Section(content: {
                 HStack {
-                    Text("Detail")
+                    Text("\(denTham) -> \(khach.ngay.formatted(date: .omitted, time: .shortened))")
                     Spacer()
                     Toggle(isOn: $detail, label: {
                         Image(systemName: "exclamationmark.bubble.circle.fill")
                     })
                         .toggleStyle(.button)
-                }
+                }.font(.title2)
             })
             
             NavigationLink("Receipt", destination: {
@@ -110,37 +112,40 @@ struct DetailSection: View {
     @State private var redeem = ""
     var body: some View {
         List {
-            if !khach.isNew {
-                Text("\(visit) \(khach.ngay.formatted(.dateTime))")
-            }
-            Text("Note: \(khach.desc)")
-            HStack {
-                Text("Points Earn: \(khach.diem)")
-                Spacer()
-                ClaimPointButton(){
-                    claim = true
+            Section(content: {
+                if !khach.isNew {
+                    Text("\(visit) \(khach.ngay.formatted(.dateTime))")
                 }
-            }
-            Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
-            
-            if let birthDay = khach.birthDay {
+                Text("Note: \(khach.desc)")
                 HStack {
-                    Label(khach.isBirthday ? "It's Today" : "Birthday", systemImage: khach.isBirthday ? "birthday.cake.fill" : "")
-                        .font(khach.isBirthday ? .headline : .callout)
-                        .foregroundStyle(khach.isBirthday ? .green : .primary)
+                    Text("Points Earn: \(khach.diem)")
                     Spacer()
-                    Text(birthDay, style: .date)
-                        .opacity(khach.isBirthday ? 0.1 : 0.9)
+                    ClaimPointButton(){
+                        claim = true
+                    }
                 }
-            }else {
-                BirthdayButton(khach: $khach)
-            }
+                Text("First Visits: \(khach.firstCome.formatted(.dateTime))")
+                
+                if let birthDay = khach.birthDay {
+                    HStack {
+                        Label(khach.isBirthday ? "It's Today" : "Birthday", systemImage: khach.isBirthday ? "birthday.cake.fill" : "")
+                            .font(khach.isBirthday ? .headline : .callout)
+                            .foregroundStyle(khach.isBirthday ? .green : .primary)
+                        Spacer()
+                        Text(birthDay, style: .date)
+                            .opacity(khach.isBirthday ? 0.1 : 0.9)
+                    }
+                }else {
+                    BirthdayButton(khach: $khach)
+                }
+            }, header: {Text("Info")})
+          
             NavigationLink("Histories visited", destination: {
                 HistoriesView(histories: khach.histories)
             })
-            
+          
         }
-        .listStyle(.plain)
+//        .listStyle(.plain)
             .alert("Redeem points", isPresented: $claim, actions: {
                 TextField("Points", text: $redeem)
                     .keyboardType(.numberPad)

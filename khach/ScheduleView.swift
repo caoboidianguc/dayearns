@@ -72,21 +72,26 @@ struct ScheduleView: View {
         return $worker.khach[clientIndex]
     }
     private func layHen(){
-        var newApp = Khach(name: khachHen.name, sdt: khachHen.sdt, dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
         let hitory = HistoryVisit(ngay: khachHen.ngay, note: khachHen.desc, dvDone: khachHen.dvDone)
-        if worker.clientExisted(newApp) {
-            thongbao = "Client existed\nUpdate client for future appointment."
-            daCo = true
-        } else if !khachHen.sdt.isEmpty && khachHen.sdt.count < 10 {
+//        if worker.clientExisted(newApp) {
+//            thongbao = "Client existed\nUpdate client for future appointment."
+//            daCo = true
+//        } else
+        if !khachHen.sdt.isEmpty && khachHen.sdt.count < 10 {
             thongbao = "Phone number is incorrect!"
             daCo = true
         } else {
             let phonenumber = correctPhone(laySo: khachHen.sdt)
-            let newClient = Khach(name: khachHen.name, sdt: phonenumber, dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
-            worker.khach.append(newClient)
-            newApp.histories.append(hitory)
-            addClient = false
-                        
+            var newClient = Khach(name: khachHen.name, sdt: phonenumber, dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
+            if worker.clientExisted(newClient){
+                thongbao = "Client existed\nUpdate client for future appointment."
+                daCo = true
+            } else {
+                newClient.histories.append(hitory)
+                worker.khach.append(newClient)
+                addClient = false
+            }
+                                    
         }
     }
     
