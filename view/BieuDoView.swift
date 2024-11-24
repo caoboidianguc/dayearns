@@ -70,7 +70,7 @@ struct BieuDoNam: View {
         VStack {
             Chart {
                 ForEach(worker.namHistory){
-                    BarMark(x: .value("Year", $0.ngay, unit: .month), y: .value("Totle", $0.tongTien))
+                    BarMark(x: .value("Year", $0.ngay, unit: .month), y: .value("Total", $0.tongTien))
                         .foregroundStyle(.yellow)
                 }
                 ForEach(worker.namHistory){

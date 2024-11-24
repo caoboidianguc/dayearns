@@ -19,35 +19,7 @@ class KhachData: ObservableObject {
         .appendingPathComponent("khach.data")
     }
     @Published var worker: Technician = Technician(name: "", phone: "")
-    @Published var khachHen: [Khach] = []
-    @Published var sinhNhat: [Khach] = []
-    
-    func layKhach() async {
-        do{
-            let khachs = worker.khach.filter{$0.schedule}
-            let sinhNhats = worker.khach.filter{$0.isBirthday}
-            self.khachHen = khachs
-            self.sinhNhat = sinhNhats
-        }
-    }
-    
-    func load() async throws {
-            do {
-                let url = try Self.fileURL()
-                if FileManager.default.fileExists(atPath: url.path) {
-                    let data = try Data(contentsOf: url)
-                    let user = try JSONDecoder().decode(Technician.self, from: data)
-                    await MainActor.run {  // Ensure UI updates happen on the main thread
-                        self.worker = user
-                    }
-                } else {
-                    print("No existing user data found")
-                }
-            } catch {
-                throw error
-            }
-        }
-    
+   
     func save(tech: Technician) async throws {
         let task = Task {
             let url = try Self.fileURL()
@@ -70,5 +42,24 @@ class KhachData: ObservableObject {
     func clientExisted(_ client: Khach) -> Bool {
         worker.khach.contains(client)
     }
+    func load() async throws {
+            let task = Task<Technician, Error>{
+                let fileURL = try Self.fileURL()
+                guard let data = try? Data(contentsOf: fileURL) else { return worker}
+                let newTech = try JSONDecoder().decode(Technician.self, from: data)
+                return newTech
+            }
+            let tech = try await task.value
+            self.worker = tech
+        }
+    func checkForSchedule(){
+        self.worker.khach.filter{$0.isBirthday}.forEach{ client in clientBirthdayNotification(client: client)}
     
+        self.worker.khach.filter{$0.schedule}.forEach{ client in
+            khachHenComingUp(client: client)
+            
+        }
+    }
 }
+
+

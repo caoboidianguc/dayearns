@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct ServiceView: View {
-    @Binding var worker: Technician
+    @EnvironmentObject var tech: KhachData
     @State private var themdv = Service.themDv()
     @State private var nutThem = false
     @State var hienNutSort = false
@@ -19,7 +19,7 @@ struct ServiceView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(timService == "" ? worker.xapxep(ds: chonSort) : worker.timService(ten: timService)){ dv in
+                ForEach(timService == "" ? tech.worker.xapxep(ds: chonSort) : tech.worker.timService(ten: timService)){ dv in
                     HStack {
                         Text(dv.dichVu)
                         Spacer()
@@ -27,7 +27,7 @@ struct ServiceView: View {
                     }.padding(.bottom)
                 }
                 .onDelete {xoa in
-                    worker.services.remove(atOffsets: xoa)
+                    tech.worker.services.remove(atOffsets: xoa)
                 }
                 .onMove(perform: move)
                 .navigationTitle("Services")
@@ -44,7 +44,7 @@ struct ServiceView: View {
             }//list
             .searchable(text: $timService, placement: .automatic).textInputAutocapitalization(.words)
             .onChange(of: chonSort){ _ in
-                worker.services = worker.xapxep(ds: chonSort)
+                tech.worker.services = tech.worker.xapxep(ds: chonSort)
             }
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing) {
@@ -62,7 +62,7 @@ struct ServiceView: View {
             }
             .listStyle(.plain)
             .overlay {
-                if worker.services.isEmpty {
+                if tech.worker.services.isEmpty {
                     VStack(alignment: .center){
                         Label("No Service", systemImage: "scissors")
                             .padding(.bottom)
@@ -77,19 +77,20 @@ struct ServiceView: View {
     }
     private func move(from: IndexSet, to: Int){
         withAnimation(.default){
-            worker.services.move(fromOffsets: from, toOffset: to)
+            tech.worker.services.move(fromOffsets: from, toOffset: to)
         }
     }
     private func themService() {
         let newSer = Service(dichVu: themdv.dichVu, gia: themdv.gia)
-        worker.services.append(newSer)
+        tech.worker.services.append(newSer)
         themdv.dichVu.removeAll()
     }
 }
 //@available(iOS 17.0, *)
 struct ServiceView_Previews: PreviewProvider {
     static var previews: some View {
-        ServiceView(worker: .constant(quang))
+        ServiceView()
+            .environmentObject(KhachData())
     }
 }
 

@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ClientList: View {
-    @Binding var tech: Technician
+    @EnvironmentObject var tech: KhachData
     @State var newCus = Khach.ThemKhach()
     @State private var trangMoi = false
     @State private var existed = false
@@ -16,14 +16,14 @@ struct ClientList: View {
         NavigationStack {
             ZStack {
                 List {
-                    ForEach(text == "" ? tech.tuan : tech.listDaTim(ten: text)) { khach in
+                    ForEach(text == "" ? tech.worker.tuan : tech.worker.listDaTim(ten: text)) { khach in
                         if !khach.schedule {
-                            NavigationLink{ClientDetail(worker: $tech, khach: binding(for: khach))} label: {
-                                KhachRow(khach: khach)
+                            NavigationLink{ClientDetail(worker: $tech.worker, khach: binding(for: khach))} label: {
+                                KhachRow(khach: binding(for: khach))
                             }
                             .swipeActions {
                                 Button(role: .destructive, action: {
-                                    tech.delete(khach)
+                                    tech.worker.delete(khach)
                                 }, label: {
                                     Label("Delete", systemImage: "trash")
                                 })
@@ -35,7 +35,7 @@ struct ClientList: View {
                 nutThemKhach()            
             }
             .overlay {
-                if tech.khach.isEmpty {
+                if tech.worker.khach.isEmpty {
                     VStack(alignment: .leading){
                         Label("No Client", systemImage: "person.fill.questionmark")
                             .padding(.bottom)
@@ -89,8 +89,8 @@ struct ClientList: View {
         }
     }
     private func binding(for khachIndex: Khach) -> Binding<Khach> {
-        guard let clientIndex = tech.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
-        return $tech.khach[clientIndex]
+        guard let clientIndex = tech.worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
+        return $tech.worker.khach[clientIndex]
     }
     private func themKhach() {
         let hitory = HistoryVisit(ngay: Date.now, note: newCus.desc, dvDone: newCus.dvDone)
@@ -98,14 +98,13 @@ struct ClientList: View {
             warning = "Phone number is incorrect!"
             existed = true
         } else {
-            let phone = correctPhone(laySo: newCus.sdt)
-            var newClient = Khach(name: newCus.name, sdt: phone, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
+            var newClient = Khach(name: newCus.name, sdt: newCus.sdt, desc: newCus.desc ,dvDone: newCus.dvDone, diem: newCus.pointsKhach())
             if tech.clientExisted(newClient){
                 warning = "Client existed!"
                 existed = true
             } else {
-                    newClient.histories.append(hitory)
-                    tech.khach.insert(newClient, at: 0)
+                newClient.histories.insert(hitory, at: 0)
+                tech.worker.khach.insert(newClient, at: 0)
                     trangMoi = false
                 }
         }
@@ -114,6 +113,7 @@ struct ClientList: View {
 
 struct ClientList_Previews: PreviewProvider {
     static var previews: some View {
-        ClientList(tech: .constant(quang))
+        ClientList()
+            .environmentObject(KhachData())
     }
 }

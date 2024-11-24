@@ -17,25 +17,25 @@ struct ContentView: View {
             AddTech(tech: $tech.worker)
         } else {
             TabView(selection: $manhinh) {
-                ScheduleView(worker: $tech.worker)
+                ScheduleView()
                     .tabItem {
                         sinhNhatLabel()
                     }
                     .tag(Chon.schedule)
                 
-                ClientList(tech: $tech.worker)
+                ClientList()
                     .tabItem {
                         Label("Clients", systemImage: "person.text.rectangle")
                     }
                     .tag(Chon.khach)
                 
-                ServiceView(worker: $tech.worker)
+                ServiceView()
                     .tabItem {
                         Label("Services", systemImage: "list.dash")
                     }
                     .tag(Chon.dv)
                 
-                XapSep(worker: $tech.worker)
+                XapSep()
                     .tabItem{
                         Label("Earns", systemImage: "scroll")
                     }
@@ -46,17 +46,12 @@ struct ContentView: View {
                 if phase == .background {
                     luuThayDoi()
                 }
+                UIApplication.shared.applicationIconBadgeNumber = 0
             }
             .onAppear {
                 if !tech.worker.khach.filter({$0.haiNgay}).isEmpty || !tech.worker.khach.filter({$0.isBirthday}).isEmpty {
                     manhinh = .schedule
                 }
-//                tech.khach.filter{$0.isBirthday}.forEach{ client in clientBirthdayNotification(client: client) }
-//                
-//                tech.khach.filter{$0.schedule}.forEach{ client in
-//                    khachHenComingUp(client: client)
-//                    print(client.name)
-//                }
             }
         }
     }//body

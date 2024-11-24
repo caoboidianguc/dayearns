@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct XapSep: View {
-    @Binding var worker: Technician
+    @EnvironmentObject var tech: KhachData
     @State private var khong: Bool = false
     @State private var hienProfile = false
     var ngayEarn: [WeekEarn] {
-        worker.weekEarn.filter {$0.trongTuan}
+        tech.worker.weekEarn.filter {$0.trongTuan}
     }
     var ngayEarnH: [HistoryVisit] {
-        worker.motTuanHistory
+        tech.worker.motTuanHistory
     }
     var body: some View {
         NavigationStack {
@@ -24,19 +24,19 @@ struct XapSep: View {
                     HStack {
                         Text("Total:")
                         Spacer()
-                        Text("\(worker.tinhTheoNgay())")
-                            .foregroundColor(worker.tinhTheoNgay() > 3000 ? .purple : .primary)
+                        Text("\(tech.worker.tinhTheoNgay())")
+                            .foregroundColor(tech.worker.tinhTheoNgay() > 3000 ? .purple : .primary)
                     }
                 }, header: {
                     Text("last 7 days:")
                 })
                 NavigationLink  {
-                    BieuDoChung(worker: worker)
+                    BieuDoChung(worker: tech.worker)
                 } label: {
-                    BieuDoView(worker: worker)
+                    BieuDoView(worker: tech.worker)
                         .frame(height: 250)
                 }.overlay {
-                    if worker.motTuanHistory.isEmpty {
+                    if tech.worker.motTuanHistory.isEmpty {
                         VStack (alignment: .center) {
                             Image(systemName: "chart.pie.fill")
                                 .font(.system(size: 70))
@@ -47,7 +47,7 @@ struct XapSep: View {
                 }
                 Section(header: Text("Today")){
                     HStack {
-                        Label("\(worker.tongNgay())", systemImage: "dollarsign")
+                        Label("\(tech.worker.tongNgay())", systemImage: "dollarsign")
                         Spacer()
                         Button(action: {
                             luuNgayLam()
@@ -74,7 +74,7 @@ struct XapSep: View {
                         }
                     }
                     .onDelete {tuan in
-                        worker.weekEarn.remove(atOffsets: tuan)
+                        tech.worker.weekEarn.remove(atOffsets: tuan)
                     }
                 }
                 
@@ -89,7 +89,7 @@ struct XapSep: View {
             }
             .sheet(isPresented: $hienProfile){
                 NavigationView {
-                    TechView(tech: worker)
+                    TechView(tech: tech.worker)
                         .navigationTitle("Info")
                         .toolbar{
                             ToolbarItem(placement: .navigationBarTrailing){
@@ -105,19 +105,19 @@ struct XapSep: View {
     }//body
     
     private func luuNgayLam() {
-        let tienTip: Int = worker.tinhTip()
-        let tienLam: Int = worker.tongNgay() - tienTip
+        let tienTip: Int = tech.worker.tinhTip()
+        let tienLam: Int = tech.worker.tongNgay() - tienTip
         var newWeek = WeekEarn(ngay: .now, earn: tienLam)
         newWeek.tip = tienTip
-        worker.weekEarn.insert(newWeek, at: 0)
+        tech.worker.weekEarn.insert(newWeek, at: 0)
         khong = true
     }
 }
 
 struct XapSep_Previews: PreviewProvider {
     static var previews: some View {
-        XapSep(worker: .constant(quang))
-            
+        XapSep()
+            .environmentObject(KhachData())
     }
 }
 

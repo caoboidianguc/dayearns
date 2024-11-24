@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct KhachRow: View {
-    var khach: Khach
-    
+    @Binding var khach: Khach
+    var phone: String {
+        khach.correctPhone(laySo: khach.sdt)
+    }
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 5)
@@ -30,7 +32,7 @@ struct KhachRow: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(khach.name)
-                    Text(khach.sdt)
+                    Text(phone)
                         .font(.subheadline)
                 }
                 Spacer()
@@ -42,7 +44,8 @@ struct KhachRow: View {
             }
         }.foregroundColor(mauRow() ? khach.mauNgauNhien : .gray)
             
-    }
+    }//body
+        
     func mauRow() -> Bool {
         let lich = Calendar.current
         return lich.isDateInToday(khach.ngay) || khach.isBirthday
@@ -57,7 +60,7 @@ struct KhachRow: View {
 
 struct KhachRow_Previews: PreviewProvider {
     static var previews: some View {
-        KhachRow(khach: khachmau[0])
+        KhachRow(khach: .constant(khachmau[0]))
             .previewLayout(.fixed(width: 300, height: 50))
             
     }

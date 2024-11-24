@@ -36,10 +36,7 @@ struct PhoneButton: View {
                 if !sdt.isEmpty && sdt.count < 10 {
                     incorrect = true
                 } else {
-//                    on simulator, it got error. but work fine on physical phone.
-                    let sdtDung = correctPhone(laySo: sdt)
-//                    print("Day la so \(sdtDung)")
-                    khach.sdt = sdtDung
+                    khach.sdt = sdt
                 }
             }
         })
@@ -157,17 +154,5 @@ struct BirthdayButton: View {
     }
 }
 
-func correctPhone(laySo: String) -> String {
-    guard !laySo.isEmpty || laySo.count > 10 else {return ""}
-    if laySo.count > 10 {
-        return laySo
-    }else {
-        var phone = Array(laySo)
-        phone.insert(")", at: 3)
-        phone.insert(" ", at: 4)
-        phone.insert("-", at: 8)
-        let sophone = String(phone)
-        return "(\(sophone)"
-    }
-}
+
 

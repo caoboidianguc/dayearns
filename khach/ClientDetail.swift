@@ -33,7 +33,18 @@ struct ClientDetail: View {
                         .toggleStyle(.button)
                 }.font(.title2)
             })
-            
+            Section(content: {
+                if let diaChi = khach.address {
+                    Text("\(diaChi.street) \(diaChi.alternateStreet),\n\(diaChi.city), \(diaChi.state)  \(diaChi.zip).")
+                        .textSelection(.enabled)
+                }else {
+                    NavigationLink(destination: {
+                        GetAddressView(khach: $khach)
+                    }, label: {
+                        Text("Add Address?")
+                    })
+                }
+            })
             NavigationLink("Receipt", destination: {
                 HoaDon(worker: worker, khach: khach)
             })
@@ -52,15 +63,14 @@ struct ClientDetail: View {
                         .navigationBarItems(leading: Button("Cancel"){
                             suadoi = false
                         }, trailing: Button("Update"){
-                            let hitory = HistoryVisit(ngay: updateKhach.ngay,note: updateKhach.desc, dvDone: updateKhach.dvDone)
-                            khach.update(tu: updateKhach)
-                            khach.histories.append(hitory)
-                            khach.tip = nil
-                            suadoi = false
+                                let hitory = HistoryVisit(ngay: updateKhach.ngay,note: updateKhach.desc, dvDone: updateKhach.dvDone)
+                                khach.update(tu: updateKhach)
+                                khach.histories.append(hitory)
+                                khach.tip = nil
+                                suadoi = false
                         })
                 }
             }
-            
             .sheet(item: $loiRedeem){ coloi in
                 LoiView(loi: coloi)
             }
@@ -78,8 +88,13 @@ struct ClientDetail: View {
                 }
             }
     }//body
+    func printAddress(){
+        if let diaChi = khach.address {
+            print("\(diaChi.street), \(diaChi.state), \(diaChi.zip)")
+        }
+    }
     
-   
+
     private func historyView() -> some View {
         Section(content: {
             HStack {
@@ -94,14 +109,14 @@ struct ClientDetail: View {
     }
 }
 
-struct ClientDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ClientDetail(worker: .constant(quang), khach: .constant(khachmau[0]))
-                .environmentObject(KhachData())
-        }
-    }
-}
+//struct ClientDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            ClientDetail(worker: .constant(quang), khach: .constant(khachmau[0]))
+//                .environmentObject(KhachData())
+//        }
+//    }
+//}
 
 
 
@@ -173,6 +188,9 @@ struct DetailSection: View {
 
 struct HeadDetailSection: View {
     @Binding var khach: Khach
+    var phone: String{
+        khach.correctPhone(laySo: khach.sdt)
+    }
     var body: some View {
         Section(content: {
             HStack {
@@ -181,7 +199,7 @@ struct HeadDetailSection: View {
                 if khach.sdt.isEmpty {
                     PhoneButton(khach: $khach)
                 } else {
-                    Link(destination: URL(string: "sms:\(khach.sdt)")!, label: {Text(khach.sdt)})
+                    Link(destination: URL(string: "sms:\(phone)")!, label: {Text(phone)})
                 }
             }
 //                replace "tel" to "sms" for message

@@ -35,6 +35,7 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
     var tag: String?
     var birthDay: Date?
     var histories: [HistoryVisit]
+    var address: Address?
     
     init(id: UUID = UUID(),name: String, sdt: String, desc: String = "", dvDone: [Service] = [], ngay: Date = Date(), danhGia: Int = 0, diem: Int, firstCome: Date = .now, histories:[HistoryVisit] = []){
         self.id = id
@@ -169,23 +170,17 @@ extension Khach {
         let luc = CGFloat.random(in: 0...1)
         return Color(red: red, green: xanh, blue: luc)
     }
-    
+    func correctPhone(laySo: String) -> String {
+        guard !laySo.isEmpty || laySo.count > 10 else {return ""}
+        if laySo.count > 10 {
+            return laySo
+        }else {
+            var phone = Array(laySo)
+            phone.insert(")", at: 3)
+            phone.insert(" ", at: 4)
+            phone.insert("-", at: 8)
+            let sophone = String(phone)
+            return "(\(sophone)"
+        }
+    }
 }
-
-//extension Khach {
-//    var allproducts: [Product] {
-//        var allProduct: [Product] = []
-//        if let product = self.products {
-//            allProduct += product
-//        }
-//        return allProduct
-//    }
-//    
-//    var historiesVisit: [HistoryVisit] {
-//        var daden : [HistoryVisit] = []
-//        if let history = self.histories {
-//            daden += history
-//        }
-//        return daden
-//    }
-//}

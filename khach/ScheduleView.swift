@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    @Binding var worker: Technician
+    @EnvironmentObject var tech: KhachData
     @State private var addClient = false
     @State private var khachHen = Khach.ThemKhach()
     @State private var daCo = false
@@ -18,11 +18,11 @@ struct ScheduleView: View {
         NavigationStack {
             List {
                 ForEach(QuaTuan.allCases){ quatuan in
-                    if !worker.tuan(quaTuan: quatuan).isEmpty {
+                    if !tech.worker.tuan(quaTuan: quatuan).isEmpty {
                         Section(content: {
-                            ForEach(worker.tuan(quaTuan: quatuan)) { khach in
-                                NavigationLink(destination: ClientDetail(worker: $worker, khach: binding(for: khach)) ){
-                                    KhachRow(khach: khach)
+                            ForEach(tech.worker.tuan(quaTuan: quatuan)) { khach in
+                                NavigationLink(destination: ClientDetail(worker: $tech.worker, khach: binding(for: khach)) ){
+                                    KhachRow(khach: binding(for: khach))
                                 }
                             }
                         }, header: {Text(LocalizedStringKey(quatuan.name))})
@@ -59,7 +59,7 @@ struct ScheduleView: View {
     }
     private func tuaDe() -> LocalizedStringKey {
         var tua: LocalizedStringKey = ""
-        let khach = worker.khach.filter {$0.schedule}.count
+        let khach = tech.worker.khach.filter {$0.schedule}.count
         if khach == 0 {
             tua = "No Schedules"
         } else {
@@ -68,27 +68,22 @@ struct ScheduleView: View {
         return tua
     }
     private func binding(for khachIndex: Khach) -> Binding<Khach> {
-        guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
-        return $worker.khach[clientIndex]
+        guard let clientIndex = tech.worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
+        return $tech.worker.khach[clientIndex]
     }
     private func layHen(){
         let hitory = HistoryVisit(ngay: khachHen.ngay, note: khachHen.desc, dvDone: khachHen.dvDone)
-//        if worker.clientExisted(newApp) {
-//            thongbao = "Client existed\nUpdate client for future appointment."
-//            daCo = true
-//        } else
         if !khachHen.sdt.isEmpty && khachHen.sdt.count < 10 {
             thongbao = "Phone number is incorrect!"
             daCo = true
         } else {
-            let phonenumber = correctPhone(laySo: khachHen.sdt)
-            var newClient = Khach(name: khachHen.name, sdt: phonenumber, dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
-            if worker.clientExisted(newClient){
+            var newClient = Khach(name: khachHen.name, sdt: khachHen.sdt, dvDone: khachHen.dvDone, ngay: khachHen.ngay, diem: khachHen.pointsKhach())
+            if tech.worker.clientExisted(newClient){
                 thongbao = "Client existed\nUpdate client for future appointment."
                 daCo = true
             } else {
-                newClient.histories.append(hitory)
-                worker.khach.append(newClient)
+                newClient.histories.insert(hitory, at: 0)
+                tech.worker.khach.append(newClient)
                 addClient = false
             }
                                     
@@ -98,7 +93,7 @@ struct ScheduleView: View {
 }
 struct ScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleView(worker: .constant(quang))
+        ScheduleView()
             .environmentObject(KhachData())
     }
 }

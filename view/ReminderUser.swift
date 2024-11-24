@@ -20,41 +20,34 @@ func requestNotificationPermission() {
 }
 
 //https://developer.apple.com/documentation/usernotifications/unnotificationrequest
-func scheduleBirthdayNotification(for khach: Khach) {
-    guard let birthday = khach.birthDay else { return }
+
+func khachHenComingUp(client: Khach) {
+    let identifier = UUID()
+    let thoiGianBao = Calendar.current.date(byAdding: .minute, value: -15, to: client.ngay)!
+    let dateCompo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: thoiGianBao)
+    let batDau = UNCalendarNotificationTrigger(dateMatching: dateCompo, repeats: false)
     
     let center = UNUserNotificationCenter.current()
-    
     let content = UNMutableNotificationContent()
-    content.title = "Birthday Reminder"
-    content.body = "\(khach.name)'s birthday is tomorrow!"
+    content.title = "Appointment Reminder"
     content.sound = .default
-    
-    // Create DateComponent for tomorrow
-    let birthdayComponents = Calendar.current.dateComponents([.month, .day], from: birthday)
-    
-    let today = Date()
-    let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-    var tomorrowComponents = Calendar.current.dateComponents([.year, .month, .day], from: tomorrow)
-    tomorrowComponents.month = birthdayComponents.month
-    tomorrowComponents.day = birthdayComponents.day
-
-    let triggerDate = Calendar.current.date(from: tomorrowComponents)
-    
-    if let triggerDate = triggerDate, Calendar.current.isDate(triggerDate, inSameDayAs: tomorrow) {
-        // Notification should appear at 9 AM
-        let triggerDateComponent = Calendar.current.dateComponents([.year, .month, .day], from: triggerDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponent, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "\(khach.id)", content: content, trigger: trigger)
-        
-        center.add(request)
+    content.badge = 1
+    content.body = "With \(client.name) in 15 minutes."
+    let request = UNNotificationRequest(identifier: "\(identifier)", content: content, trigger: batDau)
+    do {
+        center.add(request){(error: Error?) in
+            if let erro = error {
+                print("Error: \(erro.localizedDescription)")
+            }
+        }
     }
+
 }
+
 func clientBirthdayNotification(client: Khach){
     guard let birthDay = client.birthDay else {return}
     var dateComponents = Calendar.current.dateComponents([.month, .day], from: birthDay)
-    dateComponents.hour = 7
+    dateComponents.hour = 8
     dateComponents.minute = 0
     let center = UNUserNotificationCenter.current()
     let content = UNMutableNotificationContent()
@@ -70,22 +63,3 @@ func clientBirthdayNotification(client: Khach){
         }
     }
 }
-
-func khachHenComingUp(client: Khach) {
-    
-    let thoiGianBao = Calendar.current.date(byAdding: .minute, value: -15, to: client.ngay)!
-//        let thoiGianBao = client.ngay.addingTimeInterval(-15 * 60)
-    var dateCompo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: thoiGianBao)
-    dateCompo.second = 0
-    let batDau = UNCalendarNotificationTrigger(dateMatching: dateCompo, repeats: false)
-    
-    let center = UNUserNotificationCenter.current()
-    let content = UNMutableNotificationContent()
-    content.title = "Appointment Reminder"
-    content.sound = .default
-    content.body = "Appointment with \(client.name) in 15 minutes."
-    let request = UNNotificationRequest(identifier: "AppointmentReminder", content: content, trigger: batDau)
-    center.add(request)
-
-}
-

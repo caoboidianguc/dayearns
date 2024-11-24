@@ -24,21 +24,17 @@ struct DayEarnsApp: App {
                 }
             .environmentObject(ledger)
            
-            .task {
-                    do{
-                        try await ledger.load()
-                        await ledger.layKhach()
-                    } catch {
-                        print("Loading or migration failed: \(error)")
-                    }
-                    requestNotificationPermission()
-                ledger.sinhNhat.forEach{ client in clientBirthdayNotification(client: client)}
-                
-                ledger.khachHen.forEach{ client in
-                    khachHenComingUp(client: client)
-                    print(client.name)
+            .onAppear{
+                requestNotificationPermission()
+                Task {
+                do{
+                    try await ledger.load()
+                } catch {
+                    print("Loading or migration failed: \(error)")
                 }
-                }//task
+                    ledger.checkForSchedule()
+                }
+            }
                 .refreshable {
                     Task {
                         do{
