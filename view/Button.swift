@@ -125,7 +125,7 @@ struct AddTip: View {
                     Button("Done"){
                         if let bonus = tip {
                             khach.tip = bonus
-                            let daDen = HistoryVisit(ngay: khach.ngay, dvDone: khach.dvDone, tip: bonus)
+                            let daDen = HistoryVisit(ngay: khach.ngay, note: khach.desc, dvDone: khach.dvDone,tip: bonus)
                             khach.histories.removeAll(where: {$0.ngay.formatted(.dateTime.day()) == khach.ngay.formatted(.dateTime.day())})
                             khach.histories.append(daDen)
                         }

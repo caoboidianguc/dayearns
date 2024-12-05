@@ -20,21 +20,21 @@ struct DayEarnsApp: App {
                         } catch {
                             fatalError("Can't save")
                         }
+                        ledger.checkForSchedule()
                     }
                 }
-            .environmentObject(ledger)
-           
-            .onAppear{
-                requestNotificationPermission()
-                Task {
-                do{
-                    try await ledger.load()
-                } catch {
-                    print("Loading or migration failed: \(error)")
+                .environmentObject(ledger)
+               
+                .onAppear{
+                    requestNotificationPermission()
+                    Task {
+                    do {
+                        try await ledger.load()
+                    } catch {
+                        print("Loading or migration failed: \(error)")
+                        }
+                    }
                 }
-                    ledger.checkForSchedule()
-                }
-            }
                 .refreshable {
                     Task {
                         do{

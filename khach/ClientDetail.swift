@@ -33,18 +33,18 @@ struct ClientDetail: View {
                         .toggleStyle(.button)
                 }.font(.title2)
             })
-            Section(content: {
-                if let diaChi = khach.address {
-                    Text("\(diaChi.street) \(diaChi.alternateStreet),\n\(diaChi.city), \(diaChi.state)  \(diaChi.zip).")
-                        .textSelection(.enabled)
-                }else {
-                    NavigationLink(destination: {
-                        GetAddressView(khach: $khach)
-                    }, label: {
-                        Text("Add Address?")
-                    })
-                }
-            })
+//            Section(content: {
+//                if let diaChi = khach.address {
+//                    Text("\(diaChi.street) \(diaChi.alternateStreet),\n\(diaChi.city), \(diaChi.state)  \(diaChi.zip).")
+//                        .textSelection(.enabled)
+//                }else {
+//                    NavigationLink(destination: {
+//                        GetAddressView(khach: $khach)
+//                    }, label: {
+//                        Text("Add Shipping Address")
+//                    })
+//                }
+//            })
             NavigationLink("Receipt", destination: {
                 HoaDon(worker: worker, khach: khach)
             })
