@@ -136,9 +136,6 @@ struct TotalWorkingRange: View {
         }.onChange(of: fromDate){ ngay in
             tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
             tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
-            for kha in tech.calculateDateWorked(fromDate: ngay, toDate: toDate) {
-                print("\(kha.ngay) tong:\(kha.tongTien)")
-            }
         }
     }
 }

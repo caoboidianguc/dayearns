@@ -72,6 +72,7 @@ class KhachData: ObservableObject {
             }
             
         }
+//        these not work correctly
 //        let tu = fromDate.formatted(date: .numeric, time: .omitted)
 //        let den = toDate.formatted(date: .numeric, time: .omitted)
 //        let allKhach = self.worker.khach
