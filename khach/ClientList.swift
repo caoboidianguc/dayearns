@@ -17,6 +17,7 @@ struct ClientList: View {
             ZStack {
                 List {
                     ForEach(text == "" ? tech.worker.tuan : tech.worker.listDaTim(ten: text)) { khach in
+//                        only Clients from past to today
                         if !khach.schedule {
                             NavigationLink{ClientDetail(worker: $tech.worker, khach: binding(for: khach))} label: {
                                 KhachRow(khach: binding(for: khach))

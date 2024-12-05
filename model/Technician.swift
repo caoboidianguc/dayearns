@@ -63,17 +63,7 @@ extension Technician {
         }
         return tong
     }
-    
-    func tinhTheoNgay() -> Int {
-        var tong = 0
-        for ngay in weekEarn {
-            if ngay.trongTuan {
-                tong += ngay.earn
-            }
-        }
-        return tong
-    }
-    
+        
     func tuan(quaTuan: QuaTuan) -> [Khach] {
         self.khach.filter {
             switch quaTuan {
@@ -131,7 +121,7 @@ extension Technician {
     }
     var motTuanHistory: [HistoryVisit] {
         var allHistory: [HistoryVisit] = []
-        let allKhach = self.khach.filter {$0.trongTuan}
+        let allKhach = self.khach.filter {$0.nam} //maybe customer have one time visit and never come back?
         for khach in allKhach {
             for historyV in khach.histories {
                 allHistory.append(historyV)
@@ -142,8 +132,7 @@ extension Technician {
     
     var thangHistory: [HistoryVisit] {
         var allHistory: [HistoryVisit] = []
-        let allKhach = self.khach.filter {$0.thang}
-        for khach in allKhach {
+        for khach in self.khach {
             for historyV in khach.histories {
                 allHistory.append(historyV)
             }
@@ -152,8 +141,7 @@ extension Technician {
     }
     var namHistory: [HistoryVisit] {
         var allHistory: [HistoryVisit] = []
-        let allKhach = self.khach.filter {$0.nam}
-        for khach in allKhach {
+        for khach in self.khach {
             for historyV in khach.histories {
                 allHistory.append(historyV)
             }

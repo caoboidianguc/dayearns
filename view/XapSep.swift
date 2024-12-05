@@ -21,14 +21,9 @@ struct XapSep: View {
         NavigationStack {
             List {
                 Section(content: {
-                    HStack {
-                        Text("Total:")
-                        Spacer()
-                        Text("\(tech.worker.tinhTheoNgay())")
-                            .foregroundColor(tech.worker.tinhTheoNgay() > 3000 ? .purple : .primary)
-                    }
+                    TotalWorkingRange(tech: tech)
                 }, header: {
-                    Text("last 7 days:")
+                    Text("Review timeline:")
                 })
                 NavigationLink  {
                     BieuDoChung(worker: tech.worker)
@@ -77,7 +72,6 @@ struct XapSep: View {
                         tech.worker.weekEarn.remove(atOffsets: tuan)
                     }
                 }
-                
             }//list
             .navigationTitle("Summary!")
             .toolbar {
@@ -121,3 +115,30 @@ struct XapSep_Previews: PreviewProvider {
     }
 }
 
+struct TotalWorkingRange: View {
+    @State var fromDate: Date = Date()
+    @State var toDate: Date = Date()
+    var tech: KhachData
+    @State private var tongTien: Int = 0
+    @State private var tongTip: Int = 0
+    var body: some View {
+        VStack {
+            DatePicker("From", selection: $fromDate, displayedComponents: .date)
+            DatePicker("To", selection: $toDate, displayedComponents: .date)
+                .onChange(of: toDate){ngay in
+                    tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: fromDate, toDate: ngay)
+                    tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: fromDate, toDate: ngay)
+                }
+            HStack {
+                Text("Total Earnings: \(tongTien)").foregroundStyle(.yellow)
+                Text("Total tip: \(tongTip)").foregroundStyle(.green)
+            }
+        }.onChange(of: fromDate){ ngay in
+            tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
+            tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
+            for kha in tech.calculateDateWorked(fromDate: ngay, toDate: toDate) {
+                print("\(kha.ngay) tong:\(kha.tongTien)")
+            }
+        }
+    }
+}

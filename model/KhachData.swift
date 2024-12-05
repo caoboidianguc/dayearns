@@ -60,6 +60,38 @@ class KhachData: ObservableObject {
             
         }
     }
+    
+    func calculateDateWorked(fromDate: Date, toDate: Date) -> [HistoryVisit] {
+        let lich = Calendar.current
+        let from = lich.startOfDay(for: fromDate)
+        let to = lich.startOfDay(for: toDate)
+        return self.worker.khach.flatMap { khach in
+            khach.histories.filter { his in
+                let visitDate = lich.startOfDay(for: his.ngay)
+                return visitDate >= from && visitDate <= to
+            }
+            
+        }
+//        let tu = fromDate.formatted(date: .numeric, time: .omitted)
+//        let den = toDate.formatted(date: .numeric, time: .omitted)
+//        let allKhach = self.worker.khach
+//        var allHistoryVisit: [HistoryVisit] = []
+//        for client in allKhach {
+//            for his in client.histories {
+//                allHistoryVisit.append(his)
+//            }
+//        }
+//        return allHistoryVisit.filter { hist in
+//            hist.ngay.formatted(date: .numeric, time: .omitted) >= tu && hist.ngay.formatted(date: .numeric, time: .omitted) <= den
+//        }
+    }
+    
+    func tongTienTrongKhoangThoiGian(fromDate: Date, toDate: Date) -> Int {
+        calculateDateWorked(fromDate: fromDate, toDate: toDate).reduce(0) { $0 + $1.tongTien }
+    }
+    func tongTipTrongKhoangThoiGian(fromDate: Date, toDate: Date) -> Int {
+        calculateDateWorked(fromDate: fromDate, toDate: toDate).reduce(0) { $0 + ($1.tip ?? 0) }
+    }
 }
 
 

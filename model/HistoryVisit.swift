@@ -33,6 +33,8 @@ struct HistoryVisit: Codable, Identifiable {
     var nam: Bool {
         !schedule && ngay > Date().nam
     }
+    
+    
 }
 
 let mau = HistoryVisit(ngay: Date.from(year: 2023, month: 11, day:21), dvDone: [Service(dichVu: "Lish su", gia: 60)])

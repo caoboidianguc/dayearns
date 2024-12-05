@@ -57,7 +57,9 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         }
         return tong
     }
-   
+   var totalService: Int {
+       dvDone.reduce(0) {$0 + $1.gia}
+    }
     func khachTra() -> Int {
         var tongChi = 0
         for dvu in self.dvDone {
