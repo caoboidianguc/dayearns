@@ -10,7 +10,7 @@ import SwiftUI
 struct ChonNgay: View {
     @Binding var client: Khach.ThemKhach
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 Section(header: Text("Your Client !") ){
                     VStack {

@@ -18,9 +18,9 @@ struct AddEmailView: View {
         HStack {
             TextField("Email", text: $email)
                 .keyboardType(.emailAddress)
-                .onChange(of: email, perform: { chu in
+                .onChange(of: email) { chu in
                     checkEmail = checkEmail(email: chu)
-                })
+                }
         }
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading){

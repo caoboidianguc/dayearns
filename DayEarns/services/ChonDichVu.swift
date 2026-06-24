@@ -28,20 +28,13 @@ struct ChonDichVu: View {
     var chon: LocalizedStringKey {
         dichvu.isEmpty ? "Please Pick" : "UnPick--> "
     }
+    @State private var chonnut = ""
     var body: some View {
         VStack {
             chonDv()
             LazyVGrid (columns: cotGrid,alignment: .center, spacing: 5, content: {
                 ForEach(worker.worker.services){ serv in
-                    Button(action: {
-                        client.dvDone.append(serv)
-                    }, label: {
-                        VStack {
-                        Text(serv.dichVu)
-                        Text("$\(serv.gia)")
-                        }.padding()
-                                
-                    })
+                    nutHieuUng(serv: serv)
                 }
             })
             HStack {
@@ -51,7 +44,24 @@ struct ChonDichVu: View {
             }
         }
     }//body
-    
+    private func nutHieuUng(serv: Service) -> some View {
+        Button(action: {
+            withAnimation(.bouncy(duration: 0.6)){
+                client.dvDone.append(serv)
+                chonnut = serv.dichVu
+            }
+        }, label: {
+            VStack {
+            Text(serv.dichVu)
+            Text("$\(serv.gia)")
+            }.padding()
+                .transition(.scale)
+                .opacity(chonnut == serv.dichVu ? 0 : 1)
+                .scaleEffect(chonnut == serv.dichVu ? 0.1 : 1)
+                .rotationEffect(.degrees(chonnut == serv.dichVu ? 360 : 0))
+                    
+        })
+    }
     private func themDichVu(){
         let new = Service(dichVu: newSer.dichVu, gia: newSer.gia)
         worker.worker.services.append(new)
@@ -61,7 +71,9 @@ struct ChonDichVu: View {
     
     private func chonDv() -> some View {
         Button(action: {
-            client.dvDone = []
+            withAnimation(.bouncy(duration: 0.5)) {
+                client.dvDone = []
+            }
         }, label: {
             Text(chon)
             Text(danhmuc)
@@ -75,4 +87,3 @@ struct ChonDichVu_Previews: PreviewProvider {
             .environmentObject(KhachData())
     }
 }
-

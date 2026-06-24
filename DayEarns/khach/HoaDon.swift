@@ -10,7 +10,12 @@ import SwiftUI
 struct HoaDon: View {
     var worker: Technician
     var khach: Khach
-    
+    var phoneKhach: String{
+        khach.correctPhone(laySo: khach.sdt)
+    }
+    var phoneTech: String{
+        khach.correctPhone(laySo: worker.phone)
+    }
     var body: some View {
         VStack {
             VStack {
@@ -18,13 +23,13 @@ struct HoaDon: View {
                     VStack(alignment: .leading) {
                         Text(worker.name)
                             .font(.title)
-                        Text(worker.phone)
+                        Text(phoneTech)
                         Text(worker.email)
                     }
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text(khach.name).font(.title2)
-                        Text(khach.sdt)
+                        Text(phoneKhach)
                         Text("No: \(khach.ngay.formatted(.dateTime.month(.twoDigits).day()))")
                     }
                 }

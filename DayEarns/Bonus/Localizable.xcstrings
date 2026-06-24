@@ -2,25 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        }
-      }
-    },
-    "  %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " "
-          }
-        }
-      }
+
     },
     "%@" : {
       "localizations" : {
@@ -32,34 +14,48 @@
         }
       }
     },
-    "%@ Up Coming" : {
-      "extractionState" : "manual",
+    "%@ %@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ Sắp tới"
+            "value" : "%1$@ %2$@"
           }
         }
       }
     },
-    "%@ visited" : {
+    "%@ %@,\n%@, %@ %@" : {
       "localizations" : {
-        "vi" : {
+        "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ đã đến"
+            "state" : "new",
+            "value" : "%1$@ %2$@,\n%3$@, %4$@ %5$@"
           }
         }
       }
     },
-    "%@'s Email" : {
-      "extractionState" : "stale",
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "%@'s Details" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thư của %@"
+            "value" : "%@’s chi tiết"
           }
         }
       }
@@ -69,7 +65,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Số của %@"
+            "value" : "%@’s Số"
+          }
+        }
+      }
+    },
+    "%@'s Visit" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@’s thăm"
           }
         }
       }
@@ -89,7 +95,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld Khách hàng"
+            "value" : "%lld Khách"
           }
         }
       }
@@ -99,7 +105,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld Sắp tới"
+            "value" : "%lld Xắp Tới"
           }
         }
       }
@@ -119,7 +125,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "$ %lld "
+            "value" : "$ %lld"
           }
         }
       }
@@ -139,7 +145,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm Khách"
+            "value" : "Thêm khách"
           }
         }
       }
@@ -149,7 +155,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lấy hẹn cho khách"
+            "value" : "thêm hẹn cho khách"
           }
         }
       }
@@ -159,7 +165,27 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thêm dịch vụ"
+            "value" : "Thêm Dịch Vụ"
+          }
+        }
+      }
+    },
+    "Add Shipping Address" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm Địa chỉ"
+          }
+        }
+      }
+    },
+    "Add Tag" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm thẻ"
           }
         }
       }
@@ -169,7 +195,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ghi chú về khách?"
+            "value" : "ghi chú về khách hàng ?"
+          }
+        }
+      }
+    },
+    "Birthday" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sinh Nhật"
           }
         }
       }
@@ -204,13 +240,23 @@
         }
       }
     },
+    "City:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thành Phố:"
+          }
+        }
+      }
+    },
     "Claim" : {
       "comment" : "Client claimed their point here",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lấy điểm"
+            "value" : "Đổi điểm"
           }
         }
       }
@@ -220,17 +266,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trừ điểm khách ở đây."
-          }
-        }
-      }
-    },
-    "Client in your list" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Khách nằm trong danh sách"
+            "value" : "Khách đổi điểm ở đây"
           }
         }
       }
@@ -240,7 +276,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Khách trong một tuần sẽ hiện ở đây"
+            "value" : "Khách trong một tuần sẽ hiện ở đây."
           }
         }
       }
@@ -260,18 +296,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Khách hàng"
-          }
-        }
-      }
-    },
-    "Coming up" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sắp tới"
+            "value" : "Khách"
           }
         }
       }
@@ -291,7 +316,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Những ngày đã lưu"
+            "value" : "NHỮNG NGÀY ĐÃ LƯU"
           }
         }
       }
@@ -302,16 +327,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Xoá"
-          }
-        }
-      }
-    },
-    "Detail:" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chi tiết:"
           }
         }
       }
@@ -351,17 +366,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kiếm được"
-          }
-        }
-      }
-    },
-    "Edit" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sửa lại"
+            "value" : "Kiếm"
           }
         }
       }
@@ -381,7 +386,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thư"
+            "value" : "Thư tín"
           }
         }
       }
@@ -396,22 +401,52 @@
         }
       }
     },
+    "Enter points" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhập điểm"
+          }
+        }
+      }
+    },
+    "Enter the number of points to redeem." : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhập điểm cần nạp."
+          }
+        }
+      }
+    },
     "Failed to add." : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chưa thể thêm."
+            "value" : "Không thể thêm."
           }
         }
       }
     },
-    "First Visits: %@" : {
+    "First Visit: %@" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lần đầu đến: %@"
+            "value" : "Lần đầu:%@"
+          }
+        }
+      }
+    },
+    "From" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Từ"
           }
         }
       }
@@ -431,7 +466,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lấy hẹn"
+            "value" : "Lấy Hẹn"
           }
         }
       }
@@ -451,7 +486,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Theo tuần"
+            "value" : "Theo Tuần"
+          }
+        }
+      }
+    },
+    "Histories" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lịch Sử"
           }
         }
       }
@@ -486,32 +531,22 @@
         }
       }
     },
-    "last 7 days:" : {
+    "It's Today!" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bảy ngày cuối:"
+            "value" : "Hôm nay!"
           }
         }
       }
     },
-    "Latest Visits: %@" : {
+    "Load more" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đến lần cuối: %@"
-          }
-        }
-      }
-    },
-    "Month" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tháng"
+            "value" : "Xem Thêm"
           }
         }
       }
@@ -521,7 +556,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thu mỗi tháng"
+            "value" : "Kiếm hàng tháng"
           }
         }
       }
@@ -531,7 +566,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tên hoặc số"
+            "value" : "Tên hay Điện thoại"
           }
         }
       }
@@ -551,18 +586,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không có ai"
+            "value" : "Khách Trống"
           }
         }
       }
     },
     "No Schedules" : {
-      "extractionState" : "manual",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không có hẹn"
+            "value" : "Hẹn Trống"
           }
         }
       }
@@ -572,7 +606,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không có dịch vụ"
+            "value" : "Dịch vụ Trống"
           }
         }
       }
@@ -617,13 +651,26 @@
         }
       }
     },
-    "Over week" : {
-      "extractionState" : "manual",
+    "OK" : {
+      "comment" : "A button that dismisses an alert.",
+      "isCommentAutoGenerated" : true
+    },
+    "Party" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hơn tuần"
+            "value" : "Tiệc"
+          }
+        }
+      }
+    },
+    "Personal Info" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông tin cá nhân"
           }
         }
       }
@@ -633,7 +680,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Điện thoại"
+            "value" : "Số Điện thoại"
           }
         }
       }
@@ -643,7 +690,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Điện thoại - lựa chọn"
+            "value" : "Số Điện thoại - tuỳ ý"
+          }
+        }
+      }
+    },
+    "Phone is incorrect!" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Số không đúng!"
           }
         }
       }
@@ -653,7 +710,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Điện thoại nếu có"
+            "value" : "SĐT tuỳ ý"
           }
         }
       }
@@ -668,22 +725,12 @@
         }
       }
     },
-    "Points" : {
+    "Points Earned: %lld" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Điểm"
-          }
-        }
-      }
-    },
-    "Points Earn: %lld" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Điểm có: %lld"
+            "value" : "Điểm kiếm được:%lld"
           }
         }
       }
@@ -713,7 +760,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Receipt"
+            "value" : "Biên nhận"
           }
         }
       }
@@ -723,27 +770,59 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nhận điểm"
+            "value" : "Đổi"
           }
         }
       }
     },
-    "Redeem points" : {
+    "Redeem Points" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nhận điểm thưởng"
+            "value" : "Đổi điểm"
           }
         }
       }
+    },
+    "Remove" : {
+      "comment" : "The text on a button that removes an address from a client.",
+      "isCommentAutoGenerated" : true
+    },
+    "Remove Address?" : {
+      "comment" : "An alert title that asks if the user wants to remove their shipping address.",
+      "isCommentAutoGenerated" : true
+    },
+    "Review timeline:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xem theo ngày:"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lưu"
+          }
+        }
+      }
+    },
+    "Save Error" : {
+      "comment" : "A title for an alert that indicates a problem saving data.",
+      "isCommentAutoGenerated" : true
     },
     "Schedule" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đặt hẹn"
+            "value" : "Lịch Hẹn"
           }
         }
       }
@@ -753,7 +832,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dịch vụ"
+            "value" : "Dịch Vụ"
           }
         }
       }
@@ -763,7 +842,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dịch vụ bạn thêm vào sẽ hiện ở đây."
+            "value" : "Dịch vụ thêm vào sẽ hiện ở đây."
           }
         }
       }
@@ -773,7 +852,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dịch vụ"
+            "value" : "Dịch Vụ"
           }
         }
       }
@@ -783,7 +862,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dịch vụ"
+            "value" : "Dịch Vụ:"
+          }
+        }
+      }
+    },
+    "Show client details" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chi tiết khách"
           }
         }
       }
@@ -793,7 +882,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "lỗi Nhỏ thôi!"
+            "value" : "Lỗi nhỏ!"
           }
         }
       }
@@ -803,7 +892,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ai đó @vidu.com"
+            "value" : "tên_email @vidu.com"
           }
         }
       }
@@ -813,7 +902,37 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sắp Xếp"
+            "value" : "Phân loại"
+          }
+        }
+      }
+    },
+    "State:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tỉnh:"
+          }
+        }
+      }
+    },
+    "Street optionally:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đường nếu cần:"
+          }
+        }
+      }
+    },
+    "Street:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tên đường:"
           }
         }
       }
@@ -823,17 +942,27 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tóm gọn"
+            "value" : "Sơ lược!"
           }
         }
       }
     },
-    "Thu" : {
+    "Tag" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thu"
+            "value" : "Thẻ"
+          }
+        }
+      }
+    },
+    "Tag name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tên Thẻ"
           }
         }
       }
@@ -843,7 +972,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiền Bo"
+            "value" : "Bo"
           }
         }
       }
@@ -853,7 +982,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bo"
+            "value" : "Bo nhiêu"
           }
         }
       }
@@ -863,7 +992,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiền bo"
+            "value" : "Bo:"
           }
         }
       }
@@ -873,17 +1002,17 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bo tiền"
+            "value" : "Bo"
           }
         }
       }
     },
-    "Tips" : {
+    "To" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiền bo"
+            "value" : "Đến"
           }
         }
       }
@@ -903,7 +1032,37 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Đã lưu hôm nay"
+            "value" : "Lưu hôm nay"
+          }
+        }
+      }
+    },
+    "Total" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tổng"
+          }
+        }
+      }
+    },
+    "Total Earnings: %lld" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tổng Kiếm: %lld"
+          }
+        }
+      }
+    },
+    "Total tip: %lld" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tổng bo: %lld"
           }
         }
       }
@@ -918,33 +1077,12 @@
         }
       }
     },
-    "Total: $%lld" : {
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tổng: $ %lld"
-          }
-        }
-      }
-    },
     "UnPick--> " : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bỏ Chọn-->"
-          }
-        }
-      }
-    },
-    "UpComing" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sắp tới"
+            "value" : "Bỏ—>"
           }
         }
       }
@@ -959,12 +1097,32 @@
         }
       }
     },
+    "Visit Histories" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đã đến"
+          }
+        }
+      }
+    },
+    "Visit Info" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông tin đến"
+          }
+        }
+      }
+    },
     "Weekly Earns" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thu mỗi tuần"
+            "value" : "Kiếm mỗi tuần"
           }
         }
       }
@@ -974,18 +1132,27 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DayEarn xin chào"
+            "value" : "DayEarn chào bạn"
           }
         }
       }
     },
-    "Within 7 days" : {
-      "extractionState" : "manual",
+    "Year" : {
       "localizations" : {
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trong 7 ngày"
+            "value" : "Năm"
+          }
+        }
+      }
+    },
+    "Yearly" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hàng năm"
           }
         }
       }
@@ -995,7 +1162,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bạn có"
+            "value" : "bạn tăng được"
           }
         }
       }
@@ -1005,7 +1172,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Khách của bạn"
+            "value" : "Khách của bạn !"
           }
         }
       }
@@ -1015,7 +1182,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Biểu đồ hàng ngày hiện ở đây!"
+            "value" : "Biểu Đồ hàng ngày!"
           }
         }
       }
@@ -1029,7 +1196,17 @@
           }
         }
       }
+    },
+    "Zip Code:" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mã bưu chính:"
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }

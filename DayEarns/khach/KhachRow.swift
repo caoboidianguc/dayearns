@@ -8,53 +8,85 @@
 import SwiftUI
 
 struct KhachRow: View {
-    var khach: Khach
+    @Binding var khach: Khach
+    var phone: String {
+        khach.correctPhone(laySo: khach.sdt)
+    }
+    
     
     var body: some View {
         HStack {
-//            Image(systemName: "person")
-//                .font(.title3)
-            RoundedRectangle(cornerRadius: 5)
-                .fill(khach.today ? khach.mauNgauNhien : .gray)
-                .frame(width:42, height: 42)
-                .overlay{
-                    Text(String(khach.name.first!))
-                        .font(.system(size: 35))
-                        .foregroundStyle(.background)
-                }
+            ZStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(mauRow() ? khach.avatarColor : .gray)
+                    .frame(width:42, height: 42)
+                    .shadow(radius: 2, x: 1, y: 1)
+                    .overlay{
+                        if khach.isBirthday {
+                            Image(systemName: "birthday.cake.fill")
+                                .foregroundStyle(.green)
+                                .font(.system(size: 35))
+                        } else {
+                            Text(khach.name.first.map(String.init) ?? "?")
+                                .font(.system(size: 35))
+                                .foregroundStyle(.background)
+                        }
+                    }
+            }
                 
             HStack {
                 VStack(alignment: .leading) {
                     Text(khach.name)
-                    Text(khach.sdt)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .foregroundStyle(.primary)
+                    Text(phone)
                         .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
                 }
                 Spacer()
-//                Text("\(khach.ngay.formatted(.relative(presentation: .numeric)))")
-//                .environment(\.calendar, calendar)
                 VStack(alignment: .trailing) {
-                    Text("")
-                    Text(khach.ngay.formatted(.relative(presentation: .numeric)))
-                        
-                        .font(khach.schedule ? .title2 : .footnote)
-                        .foregroundColor(khach.schedule ? .purple : .secondary)
+                    HStack {
+                        if mauLayHen {
+                            Label("", systemImage: "calendar.badge.clock")
+                                .foregroundStyle(.purple)
+                                .font(.caption)
+                        }
+                        Text(hienThoiGiandong)
+                            .font(mauLayHen ? .title2 : .footnote)
+                            .foregroundColor(mauLayHen ? .purple : .secondary)
+                            .lineLimit(1)
+                    }
                 }
             }
-        }.foregroundColor(khach.today ? khach.mauNgauNhien : .gray)
-           
+        }.foregroundColor(mauRow() ? khach.avatarColor : .gray)
+            .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.background)
+                .shadow(radius: 2, x: 1, y: 1)
+                .opacity(mauRow() ? 0.1 : 0.05)
+        )
+            .padding(.horizontal, 4)
+            
+    }//body
+        
+    func mauRow() -> Bool {
+        let lich = Calendar.current
+        return lich.isDateInToday(khach.ngay) || khach.isBirthday
     }
-    
-//    var calendar: Calendar = {
-//        var calendar = Calendar.current
-//        calendar.locale = .init(identifier: "vi")
-//        return calendar
-//    }()
-    
+    var mauLayHen: Bool {
+        khach.schedule
+    }
+    var hienThoiGiandong: String {
+        khach.today ? khach.ngay.formatted(.dateTime.hour().minute()) : khach.ngay.formatted(.dateTime.day().weekday())
+    }
 }
 
 struct KhachRow_Previews: PreviewProvider {
     static var previews: some View {
-        KhachRow(khach: khachmau[0]).previewLayout(.fixed(width: 300, height: 50))
+        KhachRow(khach: .constant(khachmau[0]))
+            .previewLayout(.fixed(width: 300, height: 50))
             
     }
 }

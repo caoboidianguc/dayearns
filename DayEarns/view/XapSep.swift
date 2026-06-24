@@ -8,61 +8,67 @@
 import SwiftUI
 
 struct XapSep: View {
-    @Binding var worker: Technician
+    @EnvironmentObject var tech: KhachData
     @State private var khong: Bool = false
-//    @State private var resetWarning = false
     @State private var hienProfile = false
     var ngayEarn: [WeekEarn] {
-        worker.weekEarn.filter {$0.earn3Ngay}
+        tech.worker.weekEarn.filter(\.trongTuan)
     }
+
     var body: some View {
         NavigationStack {
             List {
-                Section(content: {
-                    HStack {
-                        Text("Total:")
-                        Spacer()
-                        Text("\(worker.tinhTheoNgay())")
-                            .foregroundColor(worker.tinhTheoNgay() > 3000 ? .purple : .primary)
-                    }
-                }, header: {
-                    Text("last 7 days:")
-                })
-                NavigationLink  {
-                    BieuDoChung(worker: $worker)
+                Section {
+                    TotalWorkingRange(tech: tech)
+                } header: {
+                    Text("Review timeline:")
+                        .font(.headline)
+                }
+                NavigationLink {
+                    BieuDoChung(worker: tech.worker)
                 } label: {
-                    BieuDoView(worker: $worker)
+                    BieuDoView(worker: tech.worker)
                         .frame(height: 250)
-                }.overlay {
-                    if worker.motTuan.isEmpty {
-                        VStack (alignment: .center) {
+                }
+                .overlay {
+                    if tech.worker.motTuanHistory.isEmpty {
+                        VStack(alignment: .center, spacing: 10) {
                             Image(systemName: "chart.pie.fill")
                                 .font(.system(size: 70))
                                 .foregroundStyle(.yellow)
+                                .shadow(radius: 2)
                             Text("Your daily chart show here!")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
-                Section(header: Text("Today")){
+                Section(header: Text("Today")) {
                     HStack {
-                        Label("\(worker.tongNgay())", systemImage: "dollarsign")
+                        Label("\(tech.worker.tongNgay())", systemImage: "dollarsign")
+                            .font(.title2)
+
                         Spacer()
-                        Button(action: {
-                            luuNgayLam()
-                        }, label:{
+                        Button {
+                            withAnimation(.easeInOut) {
+                                luuNgayLam()
+                            }
+                        } label: {
                             Image(systemName: "tray.and.arrow.down")
                                 .opacity(khong ? 0 : 1)
-                        })
+                                .font(.title2)
+                                .padding(5)
+                        }
                     }
-                    .alert("Today have saved", isPresented: $khong, actions: {})
+                    .alert("Today have saved", isPresented: $khong) {}
                 }
-                
-                Section(header: Text("DAYS WERE SAVED")){
+
+                Section(header: Text("DAYS WERE SAVED")) {
                     ForEach(ngayEarn) { tuan in
                         HStack {
                             Text(tuan.ngay.formatted(.dateTime.month().day()))
                             Spacer()
-                            VStack{
+                            VStack {
                                 Text("$ \(tuan.earn)")
                                     .font(.title2)
                                 Text("$ \(tuan.tip ?? 0)")
@@ -70,62 +76,83 @@ struct XapSep: View {
                                     .foregroundStyle(.green)
                             }
                         }
-                    }.onDelete {tuan in
-                        worker.weekEarn.remove(atOffsets: tuan)
+                    }
+                    .onDelete { tuan in
+                        tech.worker.weekEarn.remove(atOffsets: tuan)
                     }
                 }
-                
-            }//list
+            }
             .navigationTitle("Summary!")
             .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading){
-//                    Button("Reset"){
-//                        resetWarning = true
-//                    }
-//                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        hienProfile = true
-                    }, label: {Image(systemName: "person.crop.rectangle.fill")})
+                    Button { hienProfile = true } label: {
+                        Image(systemName: "person.crop.rectangle.fill")
+                    }
                 }
             }
-//            .confirmationDialog("Delete", isPresented: $resetWarning) {
-//                Button("Erase All Days Saved!", role: .destructive){ worker.weekEarn.removeAll()}
-//                Button("Cancel", role: .cancel){ resetWarning = false }}
-            .sheet(isPresented: $hienProfile){
-                NavigationView {
-                    TechView(tech: worker)
+            .sheet(isPresented: $hienProfile) {
+                NavigationStack {
+                    TechView(tech: tech.worker)
                         .navigationTitle("Info")
-                        .toolbar{
-                            ToolbarItem(placement: .navigationBarTrailing){
-                                Button("Done"){
-                                    hienProfile = false
-                                }
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Done") { hienProfile = false }
                             }
                         }
                 }
             }
-
         }
-    }//body
-//    private func binding(for khachIndex: Khach) -> Binding<Khach> {
-//        guard let clientIndex = worker.khach.firstIndex(where: {$0.id == khachIndex.id}) else {fatalError("khong the lay khach index")}
-//        return $worker.khach[clientIndex]
-//    }
+    }
+
     private func luuNgayLam() {
-        var tienTip: Int = worker.tinhTip()
-        var tienLam: Int = worker.tongNgay() - tienTip
+        let tienTip: Int = tech.worker.tinhTip()
+        let tienLam: Int = tech.worker.tongNgay() - tienTip
         var newWeek = WeekEarn(ngay: .now, earn: tienLam)
         newWeek.tip = tienTip
-        worker.weekEarn.insert(newWeek, at: 0)
+        tech.worker.weekEarn.insert(newWeek, at: 0)
         khong = true
     }
 }
 
 struct XapSep_Previews: PreviewProvider {
     static var previews: some View {
-        XapSep(worker: .constant(quang))
+        XapSep()
+            .environmentObject(KhachData())
     }
 }
 
-//when save button hitted, a work day should save in array for chart data
+struct TotalWorkingRange: View {
+    @State var fromDate: Date = Date()
+    @State var toDate: Date = Date()
+    var tech: KhachData
+    @State private var tongTien: Int = 0
+    @State private var tongTip: Int = 0
+
+    var body: some View {
+        VStack {
+            DatePicker("From", selection: $fromDate, displayedComponents: .date)
+            DatePicker("To", selection: $toDate, displayedComponents: .date)
+                .onChange(of: toDate) { ngay in
+                    recalculate(to: ngay)
+                }
+            HStack {
+                Text("Total Earnings: \(tongTien)").foregroundStyle(.yellow)
+                Text("Total tip: \(tongTip)").foregroundStyle(.green)
+            }
+        }
+        .onChange(of: fromDate) { ngay in
+            tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
+            tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
+        }
+        .onAppear {
+            fromDate = Date()
+            toDate = Date()
+            recalculate(to: toDate)
+        }
+    }
+
+    private func recalculate(to ngay: Date) {
+        tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: fromDate, toDate: ngay)
+        tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: fromDate, toDate: ngay)
+    }
+}

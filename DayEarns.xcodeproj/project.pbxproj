@@ -3,16 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B1617252B9952A800B1841E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1617242B9952A800B1841E /* Tag.swift */; };
+		8B2982382D01402C00EA429D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8B2982372D01402C00EA429D /* Localizable.xcstrings */; };
+		8B2BC7182BC773FB00869EFE /* HistoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2BC7172BC773FB00869EFE /* HistoriesView.swift */; };
 		8B39F6822AAABC3C00417807 /* Loi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39F6812AAABC3C00417807 /* Loi.swift */; };
 		8B39F6842AAABCE400417807 /* LoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39F6832AAABCE400417807 /* LoiView.swift */; };
 		8B624AEF2ABA8A1F002C8B51 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B624AEE2ABA8A1F002C8B51 /* Button.swift */; };
+		8B66FA012CE9B1B200362E27 /* ReminderUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B66FA002CE9B1B200362E27 /* ReminderUser.swift */; };
+		8B77C0982B0EEC9E00A353D8 /* HistoryVisit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B77C0972B0EEC9E00A353D8 /* HistoryVisit.swift */; };
 		8B9012962ABB49060005B50D /* HoaDon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9012952ABB49060005B50D /* HoaDon.swift */; };
 		8BAF9E862AC79A030005A77E /* AddEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAF9E852AC79A030005A77E /* AddEmailView.swift */; };
-		8BB45C3D2AC10C9B00380A2A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 8BB45C3C2AC10C9B00380A2A /* Localizable.xcstrings */; };
+		8BD0A0022F00000100B1AA01 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0A0012F00000100B1AA01 /* WidgetSnapshot.swift */; };
+		8BD0A0042F00000200B1AA01 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8BD0A0032F00000200B1AA01 /* PrivacyInfo.xcprivacy */; };
+		8BD65EB42CEED95D00479DDA /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD65EB32CEED95D00479DDA /* Address.swift */; };
+		8BD65EB62CEEDE5100479DDA /* GetAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD65EB52CEEDE5100479DDA /* GetAddressView.swift */; };
 		8BFAAF602A79F38100B14AB5 /* DayEarnsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */; };
 		8BFAAF622A79F38100B14AB5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF612A79F38100B14AB5 /* ContentView.swift */; };
 		8BFAAF642A79F38200B14AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFAAF632A79F38200B14AB5 /* Assets.xcassets */; };
@@ -40,14 +48,48 @@
 		8BFAAF9A2A79F87400B14AB5 /* AddTech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF992A79F87400B14AB5 /* AddTech.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8B9777EC2FEB28D6002FF462 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BFAAF542A79F38100B14AB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8BFAAF5B2A79F38100B14AB5;
+			remoteInfo = DayEarns;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8B76A42D2DE4DD9900705C61 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8B1617242B9952A800B1841E /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		8B2982372D01402C00EA429D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		8B2BC7172BC773FB00869EFE /* HistoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoriesView.swift; sourceTree = "<group>"; };
 		8B39F6812AAABC3C00417807 /* Loi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loi.swift; sourceTree = "<group>"; };
 		8B39F6832AAABCE400417807 /* LoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoiView.swift; sourceTree = "<group>"; };
 		8B5F2D0A2A8864C2006E4876 /* DayEarns.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DayEarns.entitlements; sourceTree = "<group>"; };
 		8B624AEE2ABA8A1F002C8B51 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		8B66FA002CE9B1B200362E27 /* ReminderUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderUser.swift; sourceTree = "<group>"; };
+		8B76A41C2DE4DD9800705C61 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8B76A41E2DE4DD9800705C61 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8B77C0972B0EEC9E00A353D8 /* HistoryVisit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVisit.swift; sourceTree = "<group>"; };
 		8B9012952ABB49060005B50D /* HoaDon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDon.swift; sourceTree = "<group>"; };
+		8B9777E82FEB28D6002FF462 /* DayEarnsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayEarnsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAF9E852AC79A030005A77E /* AddEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmailView.swift; sourceTree = "<group>"; };
-		8BB45C3C2AC10C9B00380A2A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		8BD0A0012F00000100B1AA01 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
+		8BD0A0032F00000200B1AA01 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		8BD65EB32CEED95D00479DDA /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		8BD65EB52CEEDE5100479DDA /* GetAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressView.swift; sourceTree = "<group>"; };
 		8BE96A672A79FE7400CAEDBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8BFAAF5C2A79F38100B14AB5 /* DayEarns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayEarns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEarnsApp.swift; sourceTree = "<group>"; };
@@ -77,7 +119,18 @@
 		8BFAAF992A79F87400B14AB5 /* AddTech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTech.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8B9777E92FEB28D6002FF462 /* DayEarnsTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DayEarnsTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		8B9777E52FEB28D6002FF462 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BFAAF592A79F38100B14AB5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -88,10 +141,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B2BC7162BC773BC00869EFE /* history */ = {
+			isa = PBXGroup;
+			children = (
+				8B2BC7172BC773FB00869EFE /* HistoriesView.swift */,
+			);
+			path = history;
+			sourceTree = "<group>";
+		};
+		8B76A41B2DE4DD9800705C61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B76A41C2DE4DD9800705C61 /* WidgetKit.framework */,
+				8B76A41E2DE4DD9800705C61 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8BB45C3E2AC10CB200380A2A /* Bonus */ = {
 			isa = PBXGroup;
 			children = (
-				8BB45C3C2AC10C9B00380A2A /* Localizable.xcstrings */,
+				8B2982372D01402C00EA429D /* Localizable.xcstrings */,
 			);
 			path = Bonus;
 			sourceTree = "<group>";
@@ -110,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				8BFAAF5E2A79F38100B14AB5 /* DayEarns */,
+				8B9777E92FEB28D6002FF462 /* DayEarnsTests */,
+				8B76A41B2DE4DD9800705C61 /* Frameworks */,
 				8BFAAF5D2A79F38100B14AB5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				8BFAAF5C2A79F38100B14AB5 /* DayEarns.app */,
+				8B9777E82FEB28D6002FF462 /* DayEarnsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,12 +199,14 @@
 			isa = PBXGroup;
 			children = (
 				8B5F2D0A2A8864C2006E4876 /* DayEarns.entitlements */,
+				8BD0A0032F00000200B1AA01 /* PrivacyInfo.xcprivacy */,
 				8BE96A672A79FE7400CAEDBC /* Info.plist */,
 				8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */,
 				8BD4FFB12AB1FFC700514463 /* services */,
 				8BFAAF6F2A79F5A800B14AB5 /* view */,
 				8BFAAF6E2A79F58D00B14AB5 /* tech */,
 				8BFAAF702A79F5B000B14AB5 /* model */,
+				8B2BC7162BC773BC00869EFE /* history */,
 				8BFAAF6D2A79F58600B14AB5 /* khach */,
 				8BB45C3E2AC10CB200380A2A /* Bonus */,
 				8BFAAF632A79F38200B14AB5 /* Assets.xcassets */,
@@ -157,6 +232,7 @@
 				8BFAAF8D2A79F7C200B14AB5 /* KhachRow.swift */,
 				8BFAAF8F2A79F7CD00B14AB5 /* ClientDetail.swift */,
 				8BAF9E852AC79A030005A77E /* AddEmailView.swift */,
+				8BD65EB52CEEDE5100479DDA /* GetAddressView.swift */,
 				8BFAAF912A79F7D900B14AB5 /* AddClient.swift */,
 				8BFAAF932A79F7E500B14AB5 /* ClientList.swift */,
 				8B9012952ABB49060005B50D /* HoaDon.swift */,
@@ -177,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				8BFAAF612A79F38100B14AB5 /* ContentView.swift */,
+				8B66FA002CE9B1B200362E27 /* ReminderUser.swift */,
 				8BFAAF7D2A79F6AA00B14AB5 /* XapSep.swift */,
 				8BFAAF872A79F70100B14AB5 /* DanhGiaView.swift */,
 				8B39F6832AAABCE400417807 /* LoiView.swift */,
@@ -190,12 +267,16 @@
 			isa = PBXGroup;
 			children = (
 				8BFAAF712A79F5DF00B14AB5 /* Khach.swift */,
+				8BD65EB32CEED95D00479DDA /* Address.swift */,
+				8B1617242B9952A800B1841E /* Tag.swift */,
+				8B77C0972B0EEC9E00A353D8 /* HistoryVisit.swift */,
 				8BFAAF732A79F5EF00B14AB5 /* KhachData.swift */,
 				8BFAAF752A79F5FE00B14AB5 /* Technician.swift */,
 				8BFAAF772A79F60700B14AB5 /* WeekEarn.swift */,
 				8BFAAF792A79F61000B14AB5 /* Service.swift */,
 				8BFAAF7B2A79F61B00B14AB5 /* LatVat.swift */,
 				8B39F6812AAABC3C00417807 /* Loi.swift */,
+				8BD0A0012F00000100B1AA01 /* WidgetSnapshot.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -203,6 +284,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8B9777E72FEB28D6002FF462 /* DayEarnsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B9777F02FEB28D6002FF462 /* Build configuration list for PBXNativeTarget "DayEarnsTests" */;
+			buildPhases = (
+				8B9777E42FEB28D6002FF462 /* Sources */,
+				8B9777E52FEB28D6002FF462 /* Frameworks */,
+				8B9777E62FEB28D6002FF462 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B9777ED2FEB28D6002FF462 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				8B9777E92FEB28D6002FF462 /* DayEarnsTests */,
+			);
+			name = DayEarnsTests;
+			packageProductDependencies = (
+			);
+			productName = DayEarnsTests;
+			productReference = 8B9777E82FEB28D6002FF462 /* DayEarnsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8BFAAF5B2A79F38100B14AB5 /* DayEarns */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BFAAF6A2A79F38200B14AB5 /* Build configuration list for PBXNativeTarget "DayEarns" */;
@@ -210,6 +314,7 @@
 				8BFAAF582A79F38100B14AB5 /* Sources */,
 				8BFAAF592A79F38100B14AB5 /* Frameworks */,
 				8BFAAF5A2A79F38100B14AB5 /* Resources */,
+				8B76A42D2DE4DD9900705C61 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -227,9 +332,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1500;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					8B9777E72FEB28D6002FF462 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 8BFAAF5B2A79F38100B14AB5;
+					};
 					8BFAAF5B2A79F38100B14AB5 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -250,45 +359,67 @@
 			projectRoot = "";
 			targets = (
 				8BFAAF5B2A79F38100B14AB5 /* DayEarns */,
+				8B9777E72FEB28D6002FF462 /* DayEarnsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8B9777E62FEB28D6002FF462 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BFAAF5A2A79F38100B14AB5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8BFAAF672A79F38200B14AB5 /* Preview Assets.xcassets in Resources */,
 				8BFAAF642A79F38200B14AB5 /* Assets.xcassets in Resources */,
-				8BB45C3D2AC10C9B00380A2A /* Localizable.xcstrings in Resources */,
+				8B2982382D01402C00EA429D /* Localizable.xcstrings in Resources */,
+				8BD0A0042F00000200B1AA01 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8B9777E42FEB28D6002FF462 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BFAAF582A79F38100B14AB5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8BFAAF8C2A79F7B400B14AB5 /* ClientEdit.swift in Sources */,
 				8BFAAF902A79F7CD00B14AB5 /* ClientDetail.swift in Sources */,
+				8B66FA012CE9B1B200362E27 /* ReminderUser.swift in Sources */,
 				8BFAAF8E2A79F7C200B14AB5 /* KhachRow.swift in Sources */,
 				8BFAAF962A79F7EE00B14AB5 /* BieuDoView.swift in Sources */,
 				8BFAAF9A2A79F87400B14AB5 /* AddTech.swift in Sources */,
 				8BFAAF982A79F86800B14AB5 /* TechView.swift in Sources */,
 				8BFAAF762A79F5FE00B14AB5 /* Technician.swift in Sources */,
 				8BFAAF822A79F6CB00B14AB5 /* ServiceView.swift in Sources */,
+				8BD65EB42CEED95D00479DDA /* Address.swift in Sources */,
 				8B39F6822AAABC3C00417807 /* Loi.swift in Sources */,
 				8BFAAF7A2A79F61000B14AB5 /* Service.swift in Sources */,
+				8BD65EB62CEEDE5100479DDA /* GetAddressView.swift in Sources */,
 				8BFAAF622A79F38100B14AB5 /* ContentView.swift in Sources */,
+				8B2BC7182BC773FB00869EFE /* HistoriesView.swift in Sources */,
 				8B624AEF2ABA8A1F002C8B51 /* Button.swift in Sources */,
+				8B1617252B9952A800B1841E /* Tag.swift in Sources */,
 				8BFAAF842A79F6D300B14AB5 /* ChonNgay.swift in Sources */,
 				8BFAAF8A2A79F7AA00B14AB5 /* ScheduleView.swift in Sources */,
 				8BFAAF7C2A79F61B00B14AB5 /* LatVat.swift in Sources */,
 				8BFAAF602A79F38100B14AB5 /* DayEarnsApp.swift in Sources */,
 				8BFAAF722A79F5DF00B14AB5 /* Khach.swift in Sources */,
+				8B77C0982B0EEC9E00A353D8 /* HistoryVisit.swift in Sources */,
 				8BAF9E862AC79A030005A77E /* AddEmailView.swift in Sources */,
 				8BFAAF802A79F6B900B14AB5 /* NewService.swift in Sources */,
 				8BFAAF882A79F70100B14AB5 /* DanhGiaView.swift in Sources */,
@@ -300,16 +431,84 @@
 				8BFAAF862A79F6EA00B14AB5 /* ChonDichVu.swift in Sources */,
 				8B9012962ABB49060005B50D /* HoaDon.swift in Sources */,
 				8BFAAF782A79F60700B14AB5 /* WeekEarn.swift in Sources */,
+				8BD0A0022F00000100B1AA01 /* WidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8B9777ED2FEB28D6002FF462 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8BFAAF5B2A79F38100B14AB5 /* DayEarns */;
+			targetProxy = 8B9777EC2FEB28D6002FF462 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8B9777EE2FEB28D6002FF462 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JJ6DL9848;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = quang.DayEarnsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayEarns.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DayEarns";
+			};
+			name = Debug;
+		};
+		8B9777EF2FEB28D6002FF462 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4JJ6DL9848;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = quang.DayEarnsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayEarns.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DayEarns";
+			};
+			name = Release;
+		};
 		8BFAAF682A79F38200B14AB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -340,6 +539,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4JJ6DL9848;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -362,7 +562,9 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -371,6 +573,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -401,6 +605,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4JJ6DL9848;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -416,7 +621,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -430,24 +637,23 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
-				DEVELOPMENT_TEAM = 4JJ6DL9848;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DayEarns/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DayEarns;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -468,24 +674,23 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
-				DEVELOPMENT_TEAM = 4JJ6DL9848;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DayEarns/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DayEarns;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -501,6 +706,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8B9777F02FEB28D6002FF462 /* Build configuration list for PBXNativeTarget "DayEarnsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B9777EE2FEB28D6002FF462 /* Debug */,
+				8B9777EF2FEB28D6002FF462 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8BFAAF572A79F38100B14AB5 /* Build configuration list for PBXProject "DayEarns" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

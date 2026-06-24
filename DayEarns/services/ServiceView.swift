@@ -7,48 +7,57 @@
 
 import SwiftUI
 
-//@available(iOS 17.0, *)
+
 struct ServiceView: View {
-    @Binding var worker: Technician
+    @EnvironmentObject var tech: KhachData
     @State private var themdv = Service.themDv()
-    @State private var nutThem = false
     @State var hienNutSort = false
     @State private var chonSort: DSServices = .sort
+    @State private var timService = ""
+    @State private var nutService = false
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(worker.xapxep(ds: chonSort)){ dv in
-                    HStack {
-                        Text(dv.dichVu)
-                        Spacer()
-                        Text("$\(dv.gia)")
-                    }.padding(.bottom)
-                }
-                .onDelete {xoa in
-                    worker.services.remove(atOffsets: xoa)
-                }
-                .onMove(perform: move)
-                .navigationTitle("Services")
+            ZStack {
+                List {
+                    ForEach(timService == "" ? tech.worker.xapxep(ds: chonSort) : tech.worker.timService(ten: timService)){ dv in
+                        HStack {
+                            Text(dv.dichVu)
+                            Spacer()
+                            Text("$\(dv.gia)")
+                        }.padding(.bottom)
+                    }
+                    .onDelete {xoa in
+                        tech.worker.services.remove(atOffsets: xoa)
+                    }
+                    .onMove(perform: move)
+                    .navigationTitle("Services")
+                   
+                }//list
+            }
+            .safeAreaInset(edge: .bottom) {
                 HStack {
-                    NewService(newSer: $themdv)
-                    AddServiceButton(action: {
-                        themService()
-                    }).disabled(themdv.dichVu.isEmpty)
+                    Spacer()
+                    if !nutService {
+                        Button { nutService = true } label: {
+                            Image(systemName: "scissors.circle")
+                                .shadow(radius: 3)
+                                .font(.largeTitle)
+                                .accessibilityLabel("Add Service")
+                                .foregroundStyle(.yellow)
+                        }
+                        .padding(.trailing)
+                        .padding(.bottom, 8)
+                    }
                 }
-                .onSubmit() {
-                    themdv.gia = 0
-                }
-               
-            }//list
-//            .onAppear(perform: {
-//                if chonSort != .sort {
-//                    worker.services = worker.xapxep(ds: chonSort)
-//                }
-//            })
-            
-            .onChange(of: chonSort){ _ in
-                worker.services = worker.xapxep(ds: chonSort)
+            }
+            .sheet(isPresented: $nutService) {
+                themServiceView()
+                    .presentationDetents([.medium, .large])
+            }
+            .searchable(text: $timService, placement: .automatic).textInputAutocapitalization(.words)
+            .onChange(of: chonSort) { _ in
+                tech.worker.services = tech.worker.xapxep(ds: chonSort)
             }
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing) {
@@ -66,7 +75,7 @@ struct ServiceView: View {
             }
             .listStyle(.plain)
             .overlay {
-                if worker.services.isEmpty {
+                if tech.worker.services.isEmpty {
                     VStack(alignment: .center){
                         Label("No Service", systemImage: "scissors")
                             .padding(.bottom)
@@ -81,19 +90,36 @@ struct ServiceView: View {
     }
     private func move(from: IndexSet, to: Int){
         withAnimation(.default){
-            worker.services.move(fromOffsets: from, toOffset: to)
+            tech.worker.services.move(fromOffsets: from, toOffset: to)
         }
     }
     private func themService() {
         let newSer = Service(dichVu: themdv.dichVu, gia: themdv.gia)
-        worker.services.append(newSer)
+        tech.worker.services.append(newSer)
         themdv.dichVu.removeAll()
+    }
+    private func themServiceView() -> some View {
+        HStack {
+            NewService(newSer: $themdv)
+            AddServiceButton(action: {
+                themService()
+                nutService = false
+            }).disabled(themdv.dichVu.isEmpty)
+            
+        }
+        .offset(x:0, y: 100)
+        .onSubmit() {
+            themdv.gia = 0
+            nutService = false
+        }
+        
     }
 }
 //@available(iOS 17.0, *)
 struct ServiceView_Previews: PreviewProvider {
     static var previews: some View {
-        ServiceView(worker: .constant(quang))
+        ServiceView()
+            .environmentObject(KhachData())
     }
 }
 
@@ -103,3 +129,5 @@ extension UIApplication {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
+

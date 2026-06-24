@@ -16,7 +16,7 @@ struct AddTech: View {
     @FocusState private var focusNhap: NhapThongTin?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .center) {
                 Text("Welcome to DayEarn")
                     .font(.title)

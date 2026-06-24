@@ -28,12 +28,12 @@ struct ClientEdit: View {
                 }
                 TextField("Email:", text: $client.email)
                     .keyboardType(.emailAddress)
-                    .onChange(of: client.email, perform: { chu in
+                    .onChange(of: client.email) { chu in
                         checkEmailType(email: chu)
                         if chu.count < 4 {
                             checkEmailType = ""
                         }
-                    })
+                    }
                 
                     
 //                TextField("Note :", text: $client.desc)
@@ -49,7 +49,8 @@ struct ClientEdit: View {
             
             ChonDichVu(client: $client)
         }//list
-        .onAppear{
+        .onAppear {
+            // Clear previous visit services so the tech can record what the client got today.
             client.dvDone.removeAll()
             if client.name.isEmpty {
                 focusNhap = .name
@@ -72,11 +73,11 @@ struct ClientEdit: View {
     }
 }
 
-//struct ClientEdit_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ClientEdit(worker: .constant(quang),client: .constant(khachmau[0].mau))
-//            .environmentObject(KhachData())
-//
-//    }
-//}
+struct ClientEdit_Previews: PreviewProvider {
+    static var previews: some View {
+        ClientEdit(worker: .constant(quang),client: .constant(khachmau[0].mau))
+            .environmentObject(KhachData())
+
+    }
+}
 

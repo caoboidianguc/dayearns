@@ -15,14 +15,17 @@ struct Technician: Codable {
     var email: String = ""
     var services: [Service]
     var khach: [Khach]
-    var weekEarn: [WeekEarn] = []
-    init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = []){
+    var weekEarn: [WeekEarn]
+    
+    init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = [], weekEarn:[WeekEarn] = []){
         self.id = id
         self.name = name
         self.phone = phone
         self.services = services
         self.khach = khach
+        self.weekEarn = weekEarn
     }
+    
 }
 var quang = Technician(name: "Linh", phone: "803")
 
@@ -36,7 +39,11 @@ extension Technician {
     }
     
     func clientExisted(_ client: Khach) -> Bool {
-        self.khach.contains(client)
+        khach.contains { $0.isDuplicate(of: client) }
+    }
+
+    func indexOfDuplicate(for client: Khach) -> Int? {
+        khach.firstIndex { $0.isDuplicate(of: client) }
     }
     
     func tinhTip() -> Int {
@@ -60,20 +67,12 @@ extension Technician {
         }
         return tong
     }
-    
-    func tinhTheoNgay() -> Int {
-        var tong = 0
-        for ngay in weekEarn {
-            if ngay.trongTuan {
-                tong += ngay.earn
-            }
-        }
-        return tong
-    }
-    
+        
     func tuan(quaTuan: QuaTuan) -> [Khach] {
         self.khach.filter {
             switch quaTuan {
+            case .birthday:
+                return $0.isBirthday
             case .tuan:
                 return $0.haiNgay
             case .nuaThang:
@@ -86,7 +85,13 @@ extension Technician {
     }
     
     func listDaTim(ten: String) -> [Khach] {
-        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) }
+        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) || ($0.tag ?? "").contains(ten) }
+    }
+    
+    func timService(ten: String) -> [Service]{
+        self.services.filter {
+            $0.dichVu.contains(ten)
+        }
     }
 }
 
@@ -94,15 +99,51 @@ extension Technician {
     var tuan: [Khach] {
         self.khach.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
     }
-    var motTuan: [WeekEarn] {
-        self.weekEarn.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
+//    chart
+//    var motTuan: [WeekEarn] {
+//        self.weekEarn.filter {$0.trongTuan}.sorted(by: {$0.ngay > $1.ngay})
+//    }
+//    
+//    var thangTech: [WeekEarn] {
+//        self.weekEarn.filter {$0.thang}
+//    }
+//    
+//    var namTech: [WeekEarn] {
+//        self.weekEarn.filter {$0.nam}
+//    }
+ 
+    func xapxep(ds: DSServices) -> [Service] {
+        switch ds {
+        case .sort:
+            return services
+        case .byName:
+            return services.sorted(by: {$0.dichVu < $1.dichVu})
+        case .byGia:
+            return services.sorted(by: {$0.gia > $1.gia})
+        
+        }
     }
-    var thangTech: [WeekEarn] {
-        self.weekEarn.filter {$0.thang}
-    }
-    var namTech: [WeekEarn] {
-        self.weekEarn.filter {$0.nam}
+    var motTuanHistory: [HistoryVisit] {
+        khach.flatMap(\.histories).filter(\.trongTuan)
     }
     
+    var thangHistory: [HistoryVisit] {
+        var allHistory: [HistoryVisit] = []
+        for khach in self.khach {
+            for historyV in khach.histories {
+                allHistory.append(historyV)
+            }
+        }
+        return allHistory.filter{$0.thang}
+    }
+    var namHistory: [HistoryVisit] {
+        var allHistory: [HistoryVisit] = []
+        for khach in self.khach {
+            for historyV in khach.histories {
+                allHistory.append(historyV)
+            }
+        }
+        return allHistory.filter{$0.nam}
+    }
 }
 

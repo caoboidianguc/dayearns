@@ -8,40 +8,45 @@
 import SwiftUI
 
 @main
-//@available(iOS 17.0, *)
 struct DayEarnsApp: App {
-    @StateObject var ledger = KhachData()
+    @StateObject private var ledger = KhachData()
+
     var body: some Scene {
         WindowGroup {
-                ContentView(worker: $ledger.worker) {
-                    Task {
-                        do{
-                            try await ledger.save(tech: ledger.worker)
-                        } catch {
-                            fatalError("Can't save")
-                        }
-                    }
+            ContentView {
+                Task { await ledger.persist() }
+            }
+            .environmentObject(ledger)
+            .alert(
+                "Save Error",
+                isPresented: Binding(
+                    get: { ledger.persistenceError != nil },
+                    set: { if !$0 { ledger.persistenceError = nil } }
+                )
+            ) {
+                Button("OK", role: .cancel) {
+                    ledger.persistenceError = nil
                 }
-                .environmentObject(ledger)
-                .onAppear {
-                    Task {
-                        do{
-                            try await ledger.load()
-                        } catch {
-                            fatalError("Can't load")
-                        }
-                    }
+            } message: {
+                Text(ledger.persistenceError ?? "")
+            }
+            .task {
+                requestNotificationPermission()
+                do {
+                    try await ledger.load()
+                } catch {
+                    ledger.persistenceError = "Could not load your saved data."
+                    print("Loading failed: \(error)")
                 }
-            
-                .refreshable {
-                    Task {
-                        do{
-                            try await ledger.load()
-                        } catch {
-                            fatalError("Can't load")
-                        }
-                    }
+            }
+            .refreshable {
+                do {
+                    try await ledger.load()
+                } catch {
+                    ledger.persistenceError = "Could not reload your data."
+                    print("Reload failed: \(error)")
                 }
+            }
         }
     }
 }
