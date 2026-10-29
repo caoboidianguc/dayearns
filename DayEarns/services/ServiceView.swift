@@ -56,7 +56,7 @@ struct ServiceView: View {
                     .presentationDetents([.medium, .large])
             }
             .searchable(text: $timService, placement: .automatic).textInputAutocapitalization(.words)
-            .onChange(of: chonSort) { _ in
+            .onChange(of: chonSort) {
                 tech.worker.services = tech.worker.xapxep(ds: chonSort)
             }
             .toolbar{

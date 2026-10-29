@@ -92,7 +92,7 @@ struct XapSep: View {
             }
             .sheet(isPresented: $hienProfile) {
                 NavigationStack {
-                    TechView(tech: tech.worker)
+                    TechView(tech: $tech.worker)
                         .navigationTitle("Info")
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
@@ -132,17 +132,17 @@ struct TotalWorkingRange: View {
         VStack {
             DatePicker("From", selection: $fromDate, displayedComponents: .date)
             DatePicker("To", selection: $toDate, displayedComponents: .date)
-                .onChange(of: toDate) { ngay in
-                    recalculate(to: ngay)
+                .onChange(of: toDate) {
+                    recalculate(to: toDate)
                 }
             HStack {
                 Text("Total Earnings: \(tongTien)").foregroundStyle(.yellow)
                 Text("Total tip: \(tongTip)").foregroundStyle(.green)
             }
         }
-        .onChange(of: fromDate) { ngay in
-            tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
-            tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: ngay, toDate: toDate)
+        .onChange(of: fromDate) {
+            tongTien = tech.tongTienTrongKhoangThoiGian(fromDate: fromDate, toDate: toDate)
+            tongTip = tech.tongTipTrongKhoangThoiGian(fromDate: fromDate, toDate: toDate)
         }
         .onAppear {
             fromDate = Date()

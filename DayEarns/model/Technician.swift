@@ -16,6 +16,7 @@ struct Technician: Codable {
     var services: [Service]
     var khach: [Khach]
     var weekEarn: [WeekEarn]
+    var address: Address?
     
     init(id: UUID = UUID(), name: String, phone: String,services:[Service] = [] , khach:[Khach] = [], weekEarn:[WeekEarn] = []){
         self.id = id
@@ -84,8 +85,18 @@ extension Technician {
         
     }
     
-    func listDaTim(ten: String) -> [Khach] {
-        self.khach.filter { $0.name.contains(ten) || $0.sdt.contains(ten) || ($0.tag ?? "").contains(ten) }
+    func listDaTim(ten: String, limit: Int = 50) -> [Khach] {
+        var results: [Khach] = []
+        results.reserveCapacity(limit)
+        for k in khach where !k.schedule {
+            if k.name.localizedStandardContains(ten)
+                || k.sdt.contains(ten)
+                || (k.tag?.localizedStandardContains(ten) ?? false) {
+                results.append(k)
+                if results.count >= limit { break }
+            }
+        }
+        return results
     }
     
     func timService(ten: String) -> [Service]{

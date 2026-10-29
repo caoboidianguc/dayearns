@@ -10,30 +10,42 @@ import SwiftUI
 struct HoaDon: View {
     var worker: Technician
     var khach: Khach
-    var phoneKhach: String{
+    var phoneKhach: String {
         khach.correctPhone(laySo: khach.sdt)
     }
-    var phoneTech: String{
+    var phoneTech: String {
         khach.correctPhone(laySo: worker.phone)
     }
+
     var body: some View {
         VStack {
             VStack {
-                HStack {
-                    VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text(worker.name)
                             .font(.title)
-                        Text(phoneTech)
-                        Text(worker.email)
+                        if !phoneTech.isEmpty {
+                            Text(phoneTech)
+                        }
+                        if !worker.email.isEmpty {
+                            Text(worker.email)
+                        }
+                        if let diaChi = worker.address {
+                            Text(diaChi.formattedMultiline)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                     Spacer()
-                    VStack(alignment: .trailing) {
+                    VStack(alignment: .trailing, spacing: 4) {
                         Text(khach.name).font(.title2)
-                        Text(phoneKhach)
+                        if !phoneKhach.isEmpty {
+                            Text(phoneKhach)
+                        }
                         Text("No: \(khach.ngay.formatted(.dateTime.month(.twoDigits).day()))")
                     }
                 }
-            }//tieu de
+            }
             Spacer()
             VStack(alignment: .leading) {
                 Text("Services:")
@@ -44,7 +56,7 @@ struct HoaDon: View {
                         Text("$ \(bonus)")
                     }
                 }
-                ForEach(khach.dvDone){dv in
+                ForEach(khach.dvDone) { dv in
                     HStack {
                         Text("\(dv.dichVu)")
                         Spacer()
@@ -63,16 +75,16 @@ struct HoaDon: View {
                     Label("", systemImage: "hand.point.right")
                     Text("$ \(khach.khachTra())")
                 }.font(.title3)
-                                
+
             }.padding(5)
             Spacer()
             ShareLink("Receipt", item: inHoaDon(ngLam: worker, ngMua: khach))
-        }//list
+        }
         .listStyle(.grouped)
         .padding(10)
-        
-    }//body
-    
+
+    }
+
 }
 
 #Preview {
@@ -82,10 +94,23 @@ struct HoaDon: View {
 
 
 extension HoaDon {
+    private static func receiptFileName(for client: Khach) -> String {
+        let rawName = client.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !rawName.isEmpty else { return "Receipt.pdf" }
+
+        let invalid = CharacterSet(charactersIn: "/\\:?%*|\"<>")
+        let sanitized = rawName
+            .components(separatedBy: invalid)
+            .joined()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        return sanitized.isEmpty ? "Receipt.pdf" : "\(sanitized).pdf"
+    }
+
     @MainActor
     func inHoaDon(ngLam: Technician, ngMua: Khach) -> URL {
-        
-        let renderURL = URL.documentsDirectory.appending(path: "Receipt.pdf")
+
+        let renderURL = URL.documentsDirectory.appending(path: Self.receiptFileName(for: ngMua))
         Task {
             let hoadon = HoaDon(worker: ngLam, khach: ngMua)
             let renderer = ImageRenderer(content: hoadon)

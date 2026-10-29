@@ -53,16 +53,33 @@ struct PhoneButton: View {
 
 struct AddServiceButton: View {
     var action: () -> Void = {}
+    @Environment(\.isEnabled) private var isEnabled
+
     var body: some View {
-        Button(action: action, label: {
-            RoundedRectangle(cornerRadius: 15)
-                .frame(width:100, height: 35)
-                .overlay{
-                    Text("Add Service")
-                        .font(.system(size: 14))
-                        .foregroundStyle(.background)
-                }
-        })
+        Button(action: action) {
+            Text("Add Service")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 110, height: 38)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(
+                            LinearGradient(
+                                colors: isEnabled
+                                    ? [Color.accentColor, Color.accentColor.opacity(0.72)]
+                                    : [Color.gray.opacity(0.35), Color.gray.opacity(0.22)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .shadow(
+                            color: isEnabled ? Color.accentColor.opacity(0.3) : .clear,
+                            radius: 4,
+                            y: 2
+                        )
+                )
+        }
+        .buttonStyle(.plain)
     }
 }
 

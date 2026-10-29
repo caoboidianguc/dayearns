@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KhachRow: View {
-    @Binding var khach: Khach
+    var khach: Khach
     var phone: String {
         khach.correctPhone(laySo: khach.sdt)
     }
@@ -85,7 +85,7 @@ struct KhachRow: View {
 
 struct KhachRow_Previews: PreviewProvider {
     static var previews: some View {
-        KhachRow(khach: .constant(khachmau[0]))
+        KhachRow(khach: khachmau[0])
             .previewLayout(.fixed(width: 300, height: 50))
             
     }

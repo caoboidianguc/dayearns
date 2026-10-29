@@ -24,7 +24,7 @@ struct ScheduleView: View {
                                 NavigationLink {
                                     ClientDetail(worker: $tech.worker, khach: tech.binding(for: khach))
                                 } label: {
-                                    KhachRow(khach: tech.binding(for: khach))
+                                    KhachRow(khach: khach)
                                 }
                             }
                         } header: {

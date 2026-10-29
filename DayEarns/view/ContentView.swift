@@ -42,11 +42,13 @@ struct ContentView: View {
                 AddTech(tech: $tech.worker)
             }
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .background || phase == .inactive {
+        .onChange(of: scenePhase) {
+            // Save once when leaving the app. Also firing on `.inactive` double-saves
+            // (inactive then background) and used to re-stack appointment notifications.
+            if scenePhase == .background {
                 luuThayDoi()
             }
-            if phase == .active {
+            if scenePhase == .active {
                 clearAppBadge()
             }
         }

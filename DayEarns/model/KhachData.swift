@@ -32,9 +32,14 @@ class KhachData: ObservableObject {
 
     func load() async throws {
         let fileURL = try Self.fileURL()
-        guard let data = try? Data(contentsOf: fileURL) else { return }
+        guard let data = try? Data(contentsOf: fileURL) else {
+            rescheduleNotifications()
+            return
+        }
         worker = try JSONDecoder().decode(Technician.self, from: data)
         WidgetSnapshot.make(from: worker).write()
+        // Rebuild reminders from saved data; also clears any duplicate leftovers.
+        rescheduleNotifications()
     }
 
     func persist() async {
@@ -50,6 +55,16 @@ class KhachData: ObservableObject {
 
     func delete(_ client: Khach) {
         worker.delete(client)
+    }
+
+    /// Reads a client spreadsheet and saves full name plus phone.
+    /// People already in the app are left untouched.
+    func importClients(from csv: String) async throws -> ClientImportResult {
+        let result = try ClientCSVImporter.importCSV(csv, into: &worker)
+        if result.added > 0 {
+            await persist()
+        }
+        return result
     }
 
     func clientExisted(_ client: Khach) -> Bool {

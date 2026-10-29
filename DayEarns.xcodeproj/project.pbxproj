@@ -17,10 +17,12 @@
 		8B77C0982B0EEC9E00A353D8 /* HistoryVisit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B77C0972B0EEC9E00A353D8 /* HistoryVisit.swift */; };
 		8B9012962ABB49060005B50D /* HoaDon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9012952ABB49060005B50D /* HoaDon.swift */; };
 		8BAF9E862AC79A030005A77E /* AddEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAF9E852AC79A030005A77E /* AddEmailView.swift */; };
+		8BC5A0022F10000100B1AA01 /* ClientCSVImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5A0012F10000100B1AA01 /* ClientCSVImporter.swift */; };
 		8BD0A0022F00000100B1AA01 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0A0012F00000100B1AA01 /* WidgetSnapshot.swift */; };
 		8BD0A0042F00000200B1AA01 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8BD0A0032F00000200B1AA01 /* PrivacyInfo.xcprivacy */; };
 		8BD65EB42CEED95D00479DDA /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD65EB32CEED95D00479DDA /* Address.swift */; };
 		8BD65EB62CEEDE5100479DDA /* GetAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD65EB52CEEDE5100479DDA /* GetAddressView.swift */; };
+		8BEDIT012F00000300B1AA02 /* EditTech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEDIT012F00000300B1AA01 /* EditTech.swift */; };
 		8BFAAF602A79F38100B14AB5 /* DayEarnsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */; };
 		8BFAAF622A79F38100B14AB5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFAAF612A79F38100B14AB5 /* ContentView.swift */; };
 		8BFAAF642A79F38200B14AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFAAF632A79F38200B14AB5 /* Assets.xcassets */; };
@@ -86,11 +88,13 @@
 		8B9012952ABB49060005B50D /* HoaDon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoaDon.swift; sourceTree = "<group>"; };
 		8B9777E82FEB28D6002FF462 /* DayEarnsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayEarnsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAF9E852AC79A030005A77E /* AddEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmailView.swift; sourceTree = "<group>"; };
+		8BC5A0012F10000100B1AA01 /* ClientCSVImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientCSVImporter.swift; sourceTree = "<group>"; };
 		8BD0A0012F00000100B1AA01 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
 		8BD0A0032F00000200B1AA01 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8BD65EB32CEED95D00479DDA /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		8BD65EB52CEEDE5100479DDA /* GetAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddressView.swift; sourceTree = "<group>"; };
 		8BE96A672A79FE7400CAEDBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BEDIT012F00000300B1AA01 /* EditTech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTech.swift; sourceTree = "<group>"; };
 		8BFAAF5C2A79F38100B14AB5 /* DayEarns.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayEarns.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFAAF5F2A79F38100B14AB5 /* DayEarnsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEarnsApp.swift; sourceTree = "<group>"; };
 		8BFAAF612A79F38100B14AB5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				8BFAAF972A79F86800B14AB5 /* TechView.swift */,
 				8BFAAF992A79F87400B14AB5 /* AddTech.swift */,
+				8BEDIT012F00000300B1AA01 /* EditTech.swift */,
 			);
 			path = tech;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				8BFAAF712A79F5DF00B14AB5 /* Khach.swift */,
+				8BC5A0012F10000100B1AA01 /* ClientCSVImporter.swift */,
 				8BD65EB32CEED95D00479DDA /* Address.swift */,
 				8B1617242B9952A800B1841E /* Tag.swift */,
 				8B77C0972B0EEC9E00A353D8 /* HistoryVisit.swift */,
@@ -333,7 +339,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2650;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2710;
 				TargetAttributes = {
 					8B9777E72FEB28D6002FF462 = {
 						CreatedOnToolsVersion = 26.5;
@@ -403,6 +409,7 @@
 				8BFAAF8E2A79F7C200B14AB5 /* KhachRow.swift in Sources */,
 				8BFAAF962A79F7EE00B14AB5 /* BieuDoView.swift in Sources */,
 				8BFAAF9A2A79F87400B14AB5 /* AddTech.swift in Sources */,
+				8BEDIT012F00000300B1AA02 /* EditTech.swift in Sources */,
 				8BFAAF982A79F86800B14AB5 /* TechView.swift in Sources */,
 				8BFAAF762A79F5FE00B14AB5 /* Technician.swift in Sources */,
 				8BFAAF822A79F6CB00B14AB5 /* ServiceView.swift in Sources */,
@@ -432,6 +439,7 @@
 				8B9012962ABB49060005B50D /* HoaDon.swift in Sources */,
 				8BFAAF782A79F60700B14AB5 /* WeekEarn.swift in Sources */,
 				8BD0A0022F00000100B1AA01 /* WidgetSnapshot.swift in Sources */,
+				8BC5A0022F10000100B1AA01 /* ClientCSVImporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +645,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -648,12 +656,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.2;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -674,7 +682,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = DayEarns/DayEarns.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"DayEarns/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -685,12 +693,12 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.2;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = Quang.DayEarns;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

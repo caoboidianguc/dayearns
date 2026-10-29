@@ -102,14 +102,11 @@ struct Khach: Codable, Identifiable, Equatable, Hashable {
         !schedule && ngay > Date().nam
     }
     var isBirthday: Bool {
-        let hnay = Date.now.formatted(Date.FormatStyle().month().day())
-        var sinh = false
-        if let ngay = self.birthDay {
-            if hnay == ngay.formatted(Date.FormatStyle().month().day()) {
-                sinh = true
-            }
-        }
-        return sinh
+        guard let birthDay else { return false }
+        let cal = Calendar.current
+        let today = cal.dateComponents([.month, .day], from: .now)
+        let bday = cal.dateComponents([.month, .day], from: birthDay)
+        return today.month == bday.month && today.day == bday.day
     }
 }
 

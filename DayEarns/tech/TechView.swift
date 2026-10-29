@@ -8,32 +8,59 @@
 import SwiftUI
 
 struct TechView: View {
-    var tech: Technician
-    
+    @Binding var tech: Technician
+    @State private var editing = false
+
+    private var phoneDisplay: String {
+        Khach(name: "", sdt: tech.phone, diem: 0).correctPhone(laySo: tech.phone)
+    }
+
     var body: some View {
         List {
-            Section(content: {
+            Section {
                 Text(tech.name)
+                    .font(.title3)
                 if !tech.phone.isEmpty {
-                    Text(tech.phone)
+                    Text(phoneDisplay)
                 }
                 if !tech.email.isEmpty {
                     Text(tech.email)
                 }
-            }, header: {
+                if let diaChi = tech.address {
+                    Text(diaChi.formattedMultiline)
+                        .foregroundStyle(.secondary)
+                }
+            } header: {
                 Text("profile")
-            } )
-            Section(content: {
+            }
+
+            Section {
                 Text("\(tech.khach.count)  Clients")
-            }, header: {
+            } header: {
                 Text("you gained")
-            })
-        }//list
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    editing = true
+                } label: {
+                    Image(systemName: "pencil")
+                }
+                .accessibilityLabel("Edit profile")
+            }
+        }
+        .sheet(isPresented: $editing) {
+            NavigationStack {
+                EditTech(tech: $tech)
+            }
+        }
     }
 }
 
-//struct TechView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TechView()
-//    }
-//}
+#Preview {
+    NavigationStack {
+        TechView(tech: .constant(quang))
+            .navigationTitle("Info")
+    }
+}

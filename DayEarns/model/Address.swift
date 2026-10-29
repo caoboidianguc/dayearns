@@ -22,3 +22,17 @@ struct Address: Codable {
         self.alternateStreet = alternateStreet
     }
 }
+
+extension Address {
+    var formattedMultiline: String {
+        let line1 = [street, alternateStreet]
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+        let line2 = [city, "\(state) \(zip)"]
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: ", ")
+        return [line1, line2].filter { !$0.isEmpty }.joined(separator: "\n")
+    }
+}
